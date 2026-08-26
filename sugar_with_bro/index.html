@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>WebSocket Echo Test</title>
+</head>
+<body>
+  <h2>WebSocket Echo Test</h2>
+  <input type="text" id="messageInput" placeholder="Type a message" />
+  <button id="sendBtn">Send</button>
+  <pre id="log"></pre>
+
+  <script>
+    const logEl = document.getElementById("log");
+    function log(msg) {
+      logEl.textContent += msg + "\n";
+    }
+
+    const socket = new WebSocket("ws://localhost:8080/ws/echo");
+
+    socket.onopen = () => {
+      log("Connected to server.");
+    };
+
+    socket.onmessage = (event) => {
+      log("Server said: " + event.data);
+    };
+
+    socket.onclose = () => {
+      log("Connection closed.");
+    };
+
+    socket.onerror = (err) => {
+      log("Error occurred - is the Java server running?");
+    };
+
+    document.getElementById("sendBtn").addEventListener("click", () => {
+      const text = document.getElementById("messageInput").value;
+      socket.send(text);
+      log("You sent: " + text);
+    });
+  </script>
+</body>
+</html>

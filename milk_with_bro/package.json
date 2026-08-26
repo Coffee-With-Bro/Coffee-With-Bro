@@ -1,0 +1,40 @@
+{
+  "name": "coffee_with_bro",
+  "version": "1.0.0",
+  "description": "An offline, API-key-free sign language to text translator. Uses MediaPipe Hands in the browser to extract hand landmarks from a webcam feed, and a Java Spring Boot backend with DTW (Dynamic Time Warping) matching to recognize dynamic hand signs — letting users teach the app their own custom gestures instead of relying on a fixed pretrained dataset.",
+  "keywords": [
+    "ASL",
+    "sign-language",
+    "mediapipe",
+    "hand-tracking",
+    "computer-vision",
+    "offline",
+    "dtw",
+    "accessibility"
+  ],
+  "homepage": "https://github.com/k-keshav-aggarwal/Coffee_With_Bro#readme",
+  "bugs": {
+    "url": "https://github.com/k-keshav-aggarwal/Coffee_With_Bro/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/k-keshav-aggarwal/Coffee_With_Bro.git"
+  },
+  "license": "MIT",
+  "author": "Keshav, Abhishek",
+  "type": "commonjs",
+  "main": "app.js",
+  "private": true,
+  "engines": {
+    "node": ">=18"
+  },
+  "scripts": {
+    "test": "vite build",
+    "dev": "vite",
+    "build": "vite build"
+  },
+  "dependencies": {
+    "@mediapipe/tasks-vision": "^1.0.1",
+    "vite": "^8.2.1"
+  }
+}
