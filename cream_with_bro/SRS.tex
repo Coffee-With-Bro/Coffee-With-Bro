@@ -1,0 +1,157 @@
+\documentclass{article}
+\usepackage{graphicx} % Required for inserting images
+
+\begin{document}
+\begin{titlepage}
+\centering
+
+ \includegraphics[width=0.7\textwidth]{thapar_logo.jpg}
+\rule{0pt}{3cm}
+
+\vspace{1cm}
+
+{\Large \textbf{THAPAR INSTITUTE OF ENGINEERING AND TECHNOLOGY}}\\
+{\large Department of Computer Science and Engineering}
+
+\vspace{1.5cm}
+
+{\Huge \textbf{Project Proposal}}\\[0.5cm]
+{\LARGE \textbf{Offline Hand Sign to Text Recognition System for American Sign Language}}
+
+\vspace{1.5cm}
+
+\textbf{Course Name \& Code:} UCS503 -- Software Engineering\\
+\textbf{Degree \& Year:} B.Tech (3rd Year)\\
+\textbf{Institute:} Thapar Institute of Engineering and Technology\\[0.5cm]
+
+\textbf{Submitted By:}\\
+Abhishek Srivastava \hfill - 1024030236\\
+Keshav Aggarwal \hfill - 1024030234\\
+Harshine Singh \hfill - 1024030232\\
+Bhuvaneesh Singh Grewal \hfill - 1024030235\\[1cm]
+
+
+\textbf{Academic Year:} 2026--27 ODD SEMESTER
+
+\vfill
+
+\end{titlepage}
+
+\maketitle
+
+\section{Introduction and Overview}
+
+\subsection{Purpose}
+The purpose of \textit{Coffee With Bro} is to develop an offline American Sign Language (ASL) hand-sign-to-text recognition system. The system is intended to recognize static ASL alphabet letters and numerical digits from live webcam input and display the corresponding characters as text.
+
+\subsection{Scope}
+The system will recognize the 26 ASL alphabet letters and 10 numerical digits, giving a total of 36 classes. It will capture hand-sign images through a webcam, process the captured frames, classify them using a CNN trained from scratch, and display the predicted character. The system will operate without cloud-based inference services, third-party APIs, pretrained models, or internet connectivity during inference.
+
+\subsection{Definitions and Acronyms}
+\begin{itemize}
+    \item \textbf{ASL}: American Sign Language.
+    \item \textbf{CNN}: Convolutional Neural Network.
+    \item \textbf{DL4J}: DeepLearning4j, a Java-based deep learning framework.
+    \item \textbf{API}: Application Programming Interface.
+    \item \textbf{NFR}: Non-Functional Requirement.
+    \item \textbf{UI}: User Interface.
+\end{itemize}
+
+
+\section{Overall Description}
+
+\subsection{Product Perspective}
+\textit{Coffee With Bro} is a browser-based sign recognition system consisting of three primary components: a frontend for webcam access and result display, a Spring Boot backend for serving predictions, and a CNN trained using DeepLearning4j for sign classification. The frontend captures webcam frames and communicates with the backend, which processes the frames using the trained model and returns the predicted character.
+
+\subsection{User Characteristics}
+The system is designed for users who need or wish to convert static ASL hand signs into readable text. Users are expected to have basic familiarity with using a computer, a web browser, and a webcam. No specialized technical knowledge is required to operate the system.
+
+\subsection{Constraints and Assumptions}
+\begin{itemize}
+    \item The system must operate locally without internet connectivity during inference.
+    \item No pretrained models or transfer learning will be used.
+    \item The CNN will be trained from scratch using the project's training pipeline.
+    \item The system requires a compatible webcam and local computing hardware.
+    \item The current system is limited to static ASL alphabet letters and numerical digits.
+    \item The dataset is maintained separately from the source-code repository.
+\end{itemize}
+
+
+\section{Functional Requirements}
+
+\subsection{Features and Actions}
+The system shall:
+\begin{enumerate}
+    \item Access the user's webcam through the browser.
+    \item Capture image frames containing hand signs.
+    \item Send captured frames to the backend for classification.
+    \item Process the input using the trained CNN model.
+    \item Classify the input into one of 36 ASL classes.
+    \item Return the predicted letter or digit to the frontend.
+    \item Display the predicted character to the user.
+    \item Accumulate recognized characters into a running text buffer in subsequent development.
+\end{enumerate}
+
+\subsection{Use Cases}
+The primary use case is ASL sign recognition:
+\begin{enumerate}
+    \item The user opens the web application.
+    \item The user grants access to the webcam.
+    \item The user presents an ASL hand sign to the camera.
+    \item The frontend captures a frame.
+    \item The frame is sent to the Spring Boot backend.
+    \item The trained CNN processes the frame.
+    \item The backend returns the predicted ASL character.
+    \item The frontend displays the prediction.
+\end{enumerate}
+
+\subsection{Data Requirements}
+The system uses the ASL-HG dataset containing 36,000 images across 36 classes: A--Z and 0--9. The raw images are resized to $128 \times 128$ pixels, shuffled, and divided into an 80/20 training and testing split using a fixed random seed. The trained CNN model is then used to classify live webcam frames.
+
+
+\section{Non-Functional Requirements (NFRs)}
+
+\subsection{Performance}
+\begin{itemize}
+    \item The CNN shall target at least 90\% top-1 classification accuracy on the held-out test set.
+    \item The system shall provide sufficiently low inference latency for interactive webcam-based use.
+    \item Model performance shall be evaluated using held-out test data after training.
+\end{itemize}
+
+\subsection{Security}
+\begin{itemize}
+    \item The system shall not depend on third-party cloud inference services.
+    \item No API keys shall be required for model inference.
+    \item Inference shall be performed locally on the user's hardware.
+\end{itemize}
+
+\subsection{Reliability and Usability}
+\begin{itemize}
+    \item The preprocessing pipeline shall produce a reproducible train/test split using a fixed random seed.
+    \item The frontend, backend, and preprocessing components shall be independently testable.
+    \item The user interface shall provide clear visual feedback for recognized characters.
+    \item The system shall support live webcam-based interaction at an acceptable interactive pace.
+\end{itemize}
+
+
+\section{External Interfaces}
+
+\subsection{User Interfaces}
+The system shall provide a browser-based interface that:
+\begin{itemize}
+    \item Provides access to the user's webcam.
+    \item Displays the live camera input.
+    \item Displays the predicted ASL letter or digit.
+    \item Provides a running text output as characters are recognized.
+\end{itemize}
+
+\subsection{Software and Hardware Interfaces}
+The system interfaces with:
+\begin{itemize}
+    \item A webcam through the browser's MediaDevices/getUserMedia API.
+    \item A Spring Boot backend for frame classification.
+    \item A DeepLearning4j CNN for machine-learning inference.
+    \item Local computer hardware for model training and inference.
+    \item The browser environment for frontend execution.
+\end{itemize}
+\end{document}
