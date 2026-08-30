@@ -32,7 +32,7 @@ public class AslCnnModel {
                         .stride(1, 1).padding(1, 1)
                         .build())
                 .layer(new BatchNormalization.Builder().build())
-                .layer(new ActivationLayer.Builder(Activation.RELU.getActivationFunction()).build())
+                .layer(new ActivationLayer.Builder().activation(Activation.RELU).build())
                 .layer(new SubsamplingLayer.Builder(SubsamplingLayer.PoolingType.MAX)
                         .kernelSize(2, 2).stride(2, 2).build())
 
@@ -41,7 +41,7 @@ public class AslCnnModel {
                         .stride(1, 1).padding(1, 1)
                         .build())
                 .layer(new BatchNormalization.Builder().build())
-                .layer(new ActivationLayer.Builder(Activation.RELU.getActivationFunction()).build())
+                .layer(new ActivationLayer.Builder().activation(Activation.RELU).build())
                 .layer(new SubsamplingLayer.Builder(SubsamplingLayer.PoolingType.MAX)
                         .kernelSize(2, 2).stride(2, 2).build())
 
@@ -50,7 +50,7 @@ public class AslCnnModel {
                         .stride(1, 1).padding(1, 1)
                         .build())
                 .layer(new BatchNormalization.Builder().build())
-                .layer(new ActivationLayer.Builder(Activation.RELU.getActivationFunction()).build())
+                .layer(new ActivationLayer.Builder().activation(Activation.RELU).build())
                 .layer(new SubsamplingLayer.Builder(SubsamplingLayer.PoolingType.MAX)
                         .kernelSize(2, 2).stride(2, 2).build())
 

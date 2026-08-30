@@ -42,7 +42,4 @@ public class AslPredictor {
 
         return new PredictionResult(predictedLabel, confidence);
     }
-
-    public record PredictionResult(String label, double confidence) {
-    }
 }
