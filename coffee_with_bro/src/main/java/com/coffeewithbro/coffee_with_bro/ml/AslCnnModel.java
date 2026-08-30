@@ -3,7 +3,12 @@ package com.coffeewithbro.coffee_with_bro.ml;
 import org.deeplearning4j.nn.conf.MultiLayerConfiguration;
 import org.deeplearning4j.nn.conf.NeuralNetConfiguration;
 import org.deeplearning4j.nn.conf.inputs.InputType;
-import org.deeplearning4j.nn.conf.layers.*;
+import org.deeplearning4j.nn.conf.layers.ActivationLayer;
+import org.deeplearning4j.nn.conf.layers.BatchNormalization;
+import org.deeplearning4j.nn.conf.layers.ConvolutionLayer;
+import org.deeplearning4j.nn.conf.layers.DenseLayer;
+import org.deeplearning4j.nn.conf.layers.OutputLayer;
+import org.deeplearning4j.nn.conf.layers.SubsamplingLayer;
 import org.deeplearning4j.nn.multilayer.MultiLayerNetwork;
 import org.deeplearning4j.nn.weights.WeightInit;
 import org.nd4j.linalg.activations.Activation;
@@ -27,7 +32,7 @@ public class AslCnnModel {
                         .stride(1, 1).padding(1, 1)
                         .build())
                 .layer(new BatchNormalization.Builder().build())
-                .layer(new ActivationLayer.Builder(Activation.RELU).build())
+                .layer(new ActivationLayer.Builder(Activation.RELU.getActivationFunction()).build())
                 .layer(new SubsamplingLayer.Builder(SubsamplingLayer.PoolingType.MAX)
                         .kernelSize(2, 2).stride(2, 2).build())
 
@@ -36,7 +41,7 @@ public class AslCnnModel {
                         .stride(1, 1).padding(1, 1)
                         .build())
                 .layer(new BatchNormalization.Builder().build())
-                .layer(new ActivationLayer.Builder(Activation.RELU).build())
+                .layer(new ActivationLayer.Builder(Activation.RELU.getActivationFunction()).build())
                 .layer(new SubsamplingLayer.Builder(SubsamplingLayer.PoolingType.MAX)
                         .kernelSize(2, 2).stride(2, 2).build())
 
@@ -45,7 +50,7 @@ public class AslCnnModel {
                         .stride(1, 1).padding(1, 1)
                         .build())
                 .layer(new BatchNormalization.Builder().build())
-                .layer(new ActivationLayer.Builder(Activation.RELU).build())
+                .layer(new ActivationLayer.Builder(Activation.RELU.getActivationFunction()).build())
                 .layer(new SubsamplingLayer.Builder(SubsamplingLayer.PoolingType.MAX)
                         .kernelSize(2, 2).stride(2, 2).build())
 

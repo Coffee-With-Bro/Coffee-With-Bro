@@ -5,21 +5,21 @@ import org.springframework.web.socket.config.annotation.EnableWebSocket;
 import org.springframework.web.socket.config.annotation.WebSocketConfigurer;
 import org.springframework.web.socket.config.annotation.WebSocketHandlerRegistry;
 
-import com.coffeewithbro.coffee_with_bro.websocket.EchoWebSocketHandler;
+import com.coffeewithbro.coffee_with_bro.websocket.AslWebSocketHandler;
 
 @Configuration
 @EnableWebSocket
 public class WebSocketConfig implements WebSocketConfigurer {
 
-    private final EchoWebSocketHandler echoWebSocketHandler;
+    private final AslWebSocketHandler aslWebSocketHandler;
 
-    public WebSocketConfig(EchoWebSocketHandler echoWebSocketHandler) {
-        this.echoWebSocketHandler = echoWebSocketHandler;
+    public WebSocketConfig(AslWebSocketHandler aslWebSocketHandler) {
+        this.aslWebSocketHandler = aslWebSocketHandler;
     }
 
     @Override
     public void registerWebSocketHandlers(WebSocketHandlerRegistry registry) {
-        registry.addHandler(echoWebSocketHandler, "/ws/echo")
+        registry.addHandler(aslWebSocketHandler, "/ws/echo")
                 .setAllowedOrigins("*");
     }
 }
