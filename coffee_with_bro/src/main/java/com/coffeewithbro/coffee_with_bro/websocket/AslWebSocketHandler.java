@@ -7,26 +7,37 @@ import java.util.Base64;
 
 import javax.imageio.ImageIO;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.springframework.web.socket.TextMessage;
 import org.springframework.web.socket.WebSocketSession;
 import org.springframework.web.socket.handler.TextWebSocketHandler;
 
 import com.coffeewithbro.coffee_with_bro.ml.AslPredictor;
-import com.coffeewithbro.coffee_with_bro.ml.AslPredictor.PredictionResult;
+import com.coffeewithbro.coffee_with_bro.ml.PredictionResult;
 
 @Component
 public class AslWebSocketHandler extends TextWebSocketHandler {
 
-    private static final File MODEL_FILE =
-            new File("D:\\5th_Sem\\Project_Self\\coffee_with_bro\\asl_cnn_model.zip");
-    private static final File LABELS_FILE =
-            new File("D:\\5th_Sem\\Project_Self\\coffee_with_bro\\labels.txt");
-
     private final AslPredictor predictor;
 
-    public AslWebSocketHandler() throws Exception {
-        this.predictor = new AslPredictor(MODEL_FILE, LABELS_FILE);
+    public AslWebSocketHandler(
+            @Value("${asl.model-path}") File modelFile,
+            @Value("${asl.labels-path}") File labelsFile) throws Exception {
+
+        requireFile(modelFile, "asl.model-path", "trained CNN model (asl_cnn_model.zip)");
+        requireFile(labelsFile, "asl.labels-path", "label list (labels.txt)");
+
+        this.predictor = new AslPredictor(modelFile, labelsFile);
+    }
+
+    private static void requireFile(File file, String property, String description) {
+        if (!file.isFile()) {
+            throw new IllegalStateException(
+                    "Could not find the " + description + " at " + file.getAbsolutePath()
+                    + ". Set " + property + " in application.properties, or pass --"
+                    + property + "=<path> when starting the app.");
+        }
     }
 
     @Override

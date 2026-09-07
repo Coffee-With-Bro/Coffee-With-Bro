@@ -25,17 +25,22 @@ public class TrainAslCnn {
     private static final int EPOCHS = 20;
     private static final long SEED = 42;
 
-    private static final File TRAIN_DIR =
-            new File("D:\\5th_Sem\\Project_Self\\ice_with_bro\\Processed\\train");
-    private static final File TEST_DIR =
-            new File("D:\\5th_Sem\\Project_Self\\ice_with_bro\\Processed\\test");
-    private static final File MODEL_OUTPUT =
-            new File("D:\\5th_Sem\\Project_Self\\coffee_with_bro\\asl_cnn_model.zip");
+    private static final String USAGE =
+            "Usage: TrainAslCnn <processed-train-dir> <processed-test-dir> <model-output.zip>";
 
     public static void main(String[] args) throws Exception {
 
-        DataSetIterator trainIterator = buildIterator(TRAIN_DIR);
-        DataSetIterator testIterator = buildIterator(TEST_DIR);
+        if (args.length != 3) {
+            System.err.println(USAGE);
+            System.exit(1);
+        }
+
+        File trainDir = new File(args[0]);
+        File testDir = new File(args[1]);
+        File modelOutput = new File(args[2]);
+
+        DataSetIterator trainIterator = buildIterator(trainDir);
+        DataSetIterator testIterator = buildIterator(testDir);
 
         DataNormalization scaler = new ImagePreProcessingScaler(0, 1);
         trainIterator.setPreProcessor(scaler);
@@ -65,13 +70,13 @@ public class TrainAslCnn {
 
             if (accuracy > bestAccuracy) {
                 bestAccuracy = accuracy;
-                ModelSerializer.writeModel(model, MODEL_OUTPUT, true);
+                ModelSerializer.writeModel(model, modelOutput, true);
                 System.out.println("  -> New best model saved (accuracy=" + accuracy + ")");
             }
         }
 
         System.out.println("\nTraining complete. Best test accuracy: " + bestAccuracy);
-        System.out.println("Model saved to: " + MODEL_OUTPUT);
+        System.out.println("Model saved to: " + modelOutput.getAbsolutePath());
     }
 
     private static DataSetIterator buildIterator(File dataDir) throws Exception {
