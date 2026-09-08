@@ -1,122 +1,113 @@
-import { useState } from 'react'
-import heroImg from './assets/hero.png'
-import reactLogo from './assets/react.svg'
-import viteLogo from './assets/vite.svg'
-import './App.css'
+import { useSignTranslator } from "./hooks/useSignTranslator";
+import type { ConnectionStatus } from "./lib/signTranslator";
+import "./App.css";
+
+const STATUS_COPY: Record<ConnectionStatus, string> = {
+  idle: "Camera off",
+  connecting: "Connecting to translator…",
+  open: "Reading signs",
+  reconnecting: "Connection dropped — reconnecting…",
+  closed: "Disconnected",
+  error: "Couldn't reach the translator",
+};
 
 function App() {
-  const [count, setCount] = useState(0)
+  const {
+    videoRef,
+    cameraOn,
+    cameraError,
+    status,
+    liveGuess,
+    transcript,
+    startCamera,
+    stopCamera,
+    addSpace,
+    backspace,
+    clearTranscript,
+  } = useSignTranslator();
+
+  const confidencePct = liveGuess ? Math.round(liveGuess.confidence * 100) : 0;
 
   return (
-    <>
-      <section id="center">
-        <div className="hero">
-          <img src={heroImg} className="base" width="170" height="179" alt="" />
-          <img src={reactLogo} className="framework" alt="React logo" />
-          <img src={viteLogo} className="vite" alt="Vite logo" />
-        </div>
-        <div>
-          <h1>Get started</h1>
-          <p>
-            Edit <code>src/App.tsx</code> and save to test <code>HMR</code>
-          </p>
-        </div>
-        <button
-          type="button"
-          className="counter"
-          onClick={() => setCount((count) => count + 1)}
-        >
-          Count is {count}
-        </button>
-      </section>
+    <div id="root">
+      <header className="topbar">
+        <span className="topbar-mark">Coffee with Bro</span>
+        <span className="topbar-sub">Sign language translator</span>
+      </header>
 
-      <div className="ticks"></div>
+      <main className="stage">
+        <section className="viewfinder-wrap">
+          <div className={`viewfinder ${cameraOn ? "is-live" : ""}`}>
+            <video ref={videoRef} className="viewfinder-video" muted playsInline />
 
-      <section id="next-steps">
-        <div id="docs">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#documentation-icon"></use>
-          </svg>
-          <h2>Documentation</h2>
-          <p>Your questions, answered</p>
-          <ul>
-            <li>
-              <a href="https://vite.dev/" target="_blank">
-                <img className="logo" src={viteLogo} alt="" />
-                Explore Vite
-              </a>
-            </li>
-            <li>
-              <a href="https://react.dev/" target="_blank">
-                <img className="button-icon" src={reactLogo} alt="" />
-                Learn more
-              </a>
-            </li>
-          </ul>
-        </div>
-        <div id="social">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#social-icon"></use>
-          </svg>
-          <h2>Connect with us</h2>
-          <p>Join the Vite community</p>
-          <ul>
-            <li>
-              <a href="https://github.com/vitejs/vite" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#github-icon"></use>
-                </svg>
-                GitHub
-              </a>
-            </li>
-            <li>
-              <a href="https://chat.vite.dev/" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#discord-icon"></use>
-                </svg>
-                Discord
-              </a>
-            </li>
-            <li>
-              <a href="https://x.com/vite_js" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#x-icon"></use>
-                </svg>
-                X.com
-              </a>
-            </li>
-            <li>
-              <a href="https://bsky.app/profile/vite.dev" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#bluesky-icon"></use>
-                </svg>
-                Bluesky
-              </a>
-            </li>
-          </ul>
-        </div>
-      </section>
+            {!cameraOn && (
+              <div className="viewfinder-empty">
+                <p>Turn on your camera to start signing.</p>
+              </div>
+            )}
 
-      <div className="ticks"></div>
-      <section id="spacer"></section>
-    </>
-  )
+            <span className="bracket bracket-tl" />
+            <span className="bracket bracket-tr" />
+            <span className="bracket bracket-bl" />
+            <span className="bracket bracket-br" />
+
+            {cameraOn && (
+              <div className="readout">
+                <span className="readout-letter">{liveGuess?.label ?? "–"}</span>
+                <div className="readout-meter">
+                  <div
+                    className="readout-meter-fill"
+                    style={{ width: `${confidencePct}%` }}
+                  />
+                </div>
+                <span className="readout-pct">{confidencePct}%</span>
+              </div>
+            )}
+          </div>
+
+          <div className="controls">
+            <button
+              className={cameraOn ? "btn btn-stop" : "btn btn-start"}
+              onClick={cameraOn ? stopCamera : startCamera}
+            >
+              {cameraOn ? "Turn off camera" : "Turn on camera"}
+            </button>
+            <span className={`status status-${status}`}>
+              <span className="status-dot" />
+              {STATUS_COPY[status]}
+            </span>
+          </div>
+
+          {cameraError && <p className="error">{cameraError}</p>}
+        </section>
+
+        <section className="transcript-wrap">
+          <div className="transcript">
+            {transcript.length === 0 ? (
+              <span className="transcript-placeholder">
+                Signed letters will build a sentence here.
+              </span>
+            ) : (
+              transcript
+            )}
+            <span className="cursor" />
+          </div>
+
+          <div className="transcript-controls">
+            <button className="btn btn-ghost" onClick={addSpace}>
+              Space
+            </button>
+            <button className="btn btn-ghost" onClick={backspace}>
+              Backspace
+            </button>
+            <button className="btn btn-ghost" onClick={clearTranscript}>
+              Clear
+            </button>
+          </div>
+        </section>
+      </main>
+    </div>
+  );
 }
 
-export default App
+export default App;
