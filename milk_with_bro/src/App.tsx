@@ -1,6 +1,7 @@
 import { useSignTranslator } from "./hooks/useSignTranslator";
 import type { ConnectionStatus } from "./lib/signTranslator";
 import "./App.css";
+import BoostConfetti from "./Confetti/BoostIconConfetti";
 
 const STATUS_COPY: Record<ConnectionStatus, string> = {
   idle: "Camera off",
@@ -31,8 +32,11 @@ function App() {
   return (
     <div id="root">
       <header className="topbar">
-        <span className="topbar-mark">Coffee with Bro</span>
-        <span className="topbar-sub">Sign language translator</span>
+          <BoostConfetti>
+              <span className="topbar-mark">Coffee with Bro</span>
+          </BoostConfetti>
+
+          <span className="topbar-sub">Sign language translator</span>
       </header>
 
       <main className="stage">
