@@ -8,11 +8,6 @@ type Resource = {
 
 type Group = { title: string; note: string; items: Resource[] };
 
-/**
- * Versions are taken from the files that actually pin them - coffee_with_bro/pom.xml,
- * milk_with_bro/package.json and ice_with_bro/requirements.txt - so this page
- * should be updated whenever a dependency there moves.
- */
 const GROUPS: Group[] = [
   {
     title: "Backend",

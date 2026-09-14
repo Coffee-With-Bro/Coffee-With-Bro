@@ -7,7 +7,7 @@ import mediapipe as mp
 from mediapipe.tasks import python as mp_python
 from mediapipe.tasks.python import vision
 
-BASE_DIR = Path(r"Data")
+BASE_DIR = Path(__file__).parent / "Data"
 MODEL_PATH = Path(__file__).parent / "hand_landmarker.task"
 OUTPUT_DIR = Path(__file__).parent / "landmarks_output"
 

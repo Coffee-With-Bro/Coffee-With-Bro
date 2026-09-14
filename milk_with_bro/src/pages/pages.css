@@ -1,17 +1,9 @@
-/* ==========================================================================
-   Shared styles for the nav bar, footer and the four content pages.
-   Loaded after App.css, so it reuses the tokens declared there and overrides
-   .topbar (which was a plain stacked heading before the nav existed).
-   ========================================================================== */
-
 .shell {
   display: flex;
   flex-direction: column;
   gap: 28px;
   width: 100%;
 }
-
-/* --- top bar + nav --- */
 
 .topbar {
   display: flex;
@@ -68,8 +60,6 @@
   border-color: var(--line);
   background: var(--accent-dim);
 }
-
-/* --- page scaffolding --- */
 
 .page {
   display: flex;
@@ -194,8 +184,6 @@
   color: var(--ink-dim);
 }
 
-/* --- about: numbered steps --- */
-
 .steps {
   list-style: none;
   margin: 0;
@@ -240,8 +228,6 @@
   color: var(--ink-dim);
 }
 
-/* --- callouts --- */
-
 .callout {
   border: 1px solid var(--line);
   border-left: 2px solid var(--warn);
@@ -268,8 +254,6 @@
   color: var(--ink-dim);
 }
 
-/* --- about: course facts --- */
-
 .facts {
   margin: 0;
   display: grid;
@@ -292,8 +276,6 @@
   font-size: 14px;
   color: var(--ink);
 }
-
-/* --- team --- */
 
 .team-grid {
   display: grid;
@@ -368,8 +350,6 @@
   line-height: 1.55;
   color: var(--ink-dim);
 }
-
-/* --- contact form --- */
 
 .contact-intro {
   margin-bottom: 2px !important;
@@ -465,8 +445,6 @@ textarea.field-input {
   min-width: 180px;
 }
 
-/* --- resources --- */
-
 .group-note {
   margin-top: -6px !important;
   font-size: 14px !important;
@@ -531,8 +509,6 @@ textarea.field-input {
   color: var(--ink-dim);
 }
 
-/* --- legal --- */
-
 .jump {
   display: flex;
   flex-wrap: wrap;
@@ -555,8 +531,6 @@ textarea.field-input {
   border-color: var(--ink-dim);
 }
 
-/* --- footer --- */
-
 .footer {
   margin-top: auto;
   padding-top: 18px;
@@ -570,8 +544,6 @@ textarea.field-input {
   font-size: 12px;
   color: var(--ink-dim);
 }
-
-/* --- narrow screens --- */
 
 @media (max-width: 560px) {
   .team-grid,

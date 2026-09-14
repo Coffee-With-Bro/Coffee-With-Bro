@@ -1,17 +1,3 @@
-"""
-train_cnn.py
-
-Trains a CNN from scratch to classify ASL hand signs (0-9, a-z) directly
-from images - no landmark extraction involved. Uses the existing
-train/test split in ASL_Processed_Images.
-
-Usage:
-    python train_cnn.py
-
-Before running:
-    pip install torch torchvision
-"""
-
 import torch
 import torch.nn as nn
 from torch.utils.data import DataLoader
@@ -19,10 +5,9 @@ from torchvision import datasets, transforms
 from pathlib import Path
 import time
 
-# ---- Config ----
-BASE_DIR = Path(r"D:\5th_Sem\Project_Self\ice_with_bro\ASL-HG American Sign Language Hand Gesture Image D\ASL_HG_36000\ASL_Processed_Images")
-TRAIN_DIR = BASE_DIR / "train"
-TEST_DIR = BASE_DIR / "test"
+BASE_DIR = Path(__file__).parent / "Data" / "Processed"
+TRAIN_DIR = BASE_DIR / "Train"
+TEST_DIR = BASE_DIR / "Test"
 
 IMAGE_SIZE = 128
 BATCH_SIZE = 64
@@ -33,24 +18,7 @@ CHECKPOINT_PATH = Path(__file__).parent / "asl_cnn.pt"
 
 DEVICE = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
-
 def build_transforms():
-    """
-    Train and test images go through different processing:
-
-    - Train: includes light augmentation (rotation, color jitter) so the
-      model doesn't just memorize the exact ~1000 photos per class - it
-      sees slightly varied versions each epoch. Deliberately NOT using
-      horizontal flip - flipping a hand sign can turn it into a
-      different (or nonsensical) sign, since hand shapes aren't
-      symmetric the way, say, a photo of a cat is.
-    - Test: no augmentation - we want to evaluate on the images exactly
-      as they are, for a fair, repeatable accuracy number.
-
-    Both get resized to a fixed size (the CNN needs consistent input
-    dimensions) and normalized to roughly [-1, 1], which tends to help
-    training converge faster than raw [0, 255] pixel values.
-    """
     train_transform = transforms.Compose([
         transforms.Resize((IMAGE_SIZE, IMAGE_SIZE)),
         transforms.RandomRotation(15),
@@ -67,17 +35,7 @@ def build_transforms():
 
     return train_transform, test_transform
 
-
 class ASLCnn(nn.Module):
-    """
-    A small CNN built from scratch (no pretrained backbone).
-
-    Structure: three conv blocks (conv -> batch norm -> relu -> pool),
-    each doubling the number of feature channels while halving the
-    spatial size, followed by two fully connected layers ending in
-    num_classes outputs (one score per possible letter/digit).
-    """
-
     def __init__(self, num_classes: int):
         super().__init__()
 
@@ -85,19 +43,19 @@ class ASLCnn(nn.Module):
             nn.Conv2d(3, 32, kernel_size=3, padding=1),
             nn.BatchNorm2d(32),
             nn.ReLU(),
-            nn.MaxPool2d(2),  # 128 -> 64
+            nn.MaxPool2d(2),
         )
         self.conv_block2 = nn.Sequential(
             nn.Conv2d(32, 64, kernel_size=3, padding=1),
             nn.BatchNorm2d(64),
             nn.ReLU(),
-            nn.MaxPool2d(2),  # 64 -> 32
+            nn.MaxPool2d(2),
         )
         self.conv_block3 = nn.Sequential(
             nn.Conv2d(64, 128, kernel_size=3, padding=1),
             nn.BatchNorm2d(128),
             nn.ReLU(),
-            nn.MaxPool2d(2),  # 32 -> 16
+            nn.MaxPool2d(2),
         )
 
         self.classifier = nn.Sequential(
@@ -114,7 +72,6 @@ class ASLCnn(nn.Module):
         x = self.conv_block3(x)
         x = self.classifier(x)
         return x
-
 
 def train_one_epoch(model, loader, optimizer, criterion):
     model.train()
@@ -138,7 +95,6 @@ def train_one_epoch(model, loader, optimizer, criterion):
 
     return total_loss / total, correct / total
 
-
 def evaluate(model, loader, criterion):
     model.eval()
     total_loss = 0.0
@@ -158,7 +114,6 @@ def evaluate(model, loader, criterion):
 
     return total_loss / total, correct / total
 
-
 def main():
     print(f"Using device: {DEVICE}")
 
@@ -167,9 +122,6 @@ def main():
     train_dataset = datasets.ImageFolder(TRAIN_DIR, transform=train_transform)
     test_dataset = datasets.ImageFolder(TEST_DIR, transform=test_transform)
 
-    # ImageFolder assigns each subfolder name a numeric label based on
-    # sorted order - class_to_idx shows exactly which folder maps to
-    # which number, useful later when interpreting predictions.
     print("Classes found:", train_dataset.classes)
 
     train_loader = DataLoader(train_dataset, batch_size=BATCH_SIZE, shuffle=True, num_workers=2)
@@ -202,7 +154,6 @@ def main():
 
     print(f"\nTraining complete. Best test accuracy: {best_test_accuracy:.4f}")
     print(f"Best model saved to: {CHECKPOINT_PATH}")
-
 
 if __name__ == "__main__":
     main()

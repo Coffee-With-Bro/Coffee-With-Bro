@@ -24,8 +24,6 @@ function App() {
   useEffect(() => {
     document.title = TITLES[route] ?? TITLES["/"];
 
-    // Honour an anchor if the URL carries one (e.g. /team#contact), otherwise
-    // start the page at the top rather than wherever the last one was scrolled.
     const anchor = window.location.hash.slice(1);
     const target = anchor ? document.getElementById(anchor) : null;
 

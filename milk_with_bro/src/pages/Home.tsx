@@ -1,3 +1,4 @@
+import { useState, useCallback } from "react";
 import { useSignTranslator } from "../hooks/useSignTranslator";
 import type { ConnectionStatus } from "../lib/signTranslator";
 
@@ -25,7 +26,20 @@ export function Home() {
     clearTranscript,
   } = useSignTranslator();
 
+  const [copied, setCopied] = useState(false);
+
   const confidencePct = liveGuess ? Math.round(liveGuess.confidence * 100) : 0;
+
+  const handleCopy = useCallback(async () => {
+    if (!transcript) return;
+    try {
+      await navigator.clipboard.writeText(transcript);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    } catch {
+      return;
+    }
+  }, [transcript]);
 
   return (
     <main className="stage">
@@ -95,6 +109,13 @@ export function Home() {
           </button>
           <button className="btn btn-ghost" onClick={clearTranscript}>
             Clear
+          </button>
+          <button
+            className="btn btn-ghost"
+            onClick={handleCopy}
+            disabled={!transcript}
+          >
+            {copied ? "Copied!" : "Copy"}
           </button>
         </div>
       </section>

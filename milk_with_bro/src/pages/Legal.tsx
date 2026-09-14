@@ -1,6 +1,6 @@
 import { Link } from "../components/Link";
 
-const LAST_UPDATED = "9 September 2026";
+const LAST_UPDATED = "15 September 2026";
 
 export function Legal() {
   return (

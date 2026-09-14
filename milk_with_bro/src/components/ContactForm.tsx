@@ -1,13 +1,6 @@
 import { useState } from "react";
 
-/**
- * Where the form sends to. There is no backend mail endpoint - and adding one
- * would break the project's offline-only constraint - so submitting composes a
- * message in the visitor's own mail client via a mailto: link.
- *
- * TODO: replace with the team address you actually want to receive mail on.
- */
-const TEAM_EMAIL = "your-team-address@example.com";
+const TEAM_EMAIL = "ka9812204392@gmail.com";
 
 type Field = "name" | "email" | "subject" | "message";
 
@@ -46,8 +39,6 @@ export function ContactForm() {
 
   function update(field: Field, value: string) {
     setValues((prev) => ({ ...prev, [field]: value }));
-    // Clear a field's error as soon as the visitor starts fixing it, rather
-    // than leaving red text sitting under a field they're actively editing.
     setErrors((prev) => {
       if (!prev[field]) return prev;
       const next = { ...prev };

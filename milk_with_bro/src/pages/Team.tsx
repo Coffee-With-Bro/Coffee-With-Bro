@@ -1,11 +1,13 @@
 import { ContactForm } from "../components/ContactForm";
 
-/**
- * Roll numbers come from the project proposal (cream_with_bro/Main.tex).
- * Roles are drawn from who actually owns each component in the repo - adjust
- * them if the split has shifted since.
- */
 const MEMBERS = [
+  {
+    name: "Keshav Aggarwal",
+    roll: "1024030234",
+    role: "Frontend & integration",
+    blurb:
+      "Works on the Spring Boot service and the UML models — use case and activity diagrams — that the implementation follows.",
+  },
   {
     name: "Abhishek Srivastava",
     roll: "1024030236",
@@ -14,18 +16,11 @@ const MEMBERS = [
       "Builds the Python pipeline that cleans and resizes the raw ASL dataset, and the DeepLearning4j training code that turns it into a model.",
   },
   {
-    name: "Keshav Aggarwal",
-    roll: "1024030234",
-    role: "Frontend & integration",
-    blurb:
-      "Owns the browser interface and the WebSocket link that carries frames to the backend and predictions back.",
-  },
-  {
     name: "Harshine Singh",
     roll: "1024030232",
     role: "Backend & system design",
     blurb:
-      "Works on the Spring Boot service and the UML models — use case and activity diagrams — that the implementation follows.",
+      "Owns the browser interface and the WebSocket link that carries frames to the backend and predictions back.",
   },
   {
     name: "Bhuvaneesh Singh Grewal",

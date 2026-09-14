@@ -1,0 +1,16 @@
+{
+  "name": "coffee-with-bro",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "test": "node scripts/test-all.js",
+    "check": "node scripts/test-all.js",
+    "lint": "npm --prefix milk_with_bro run lint",
+    "build": "npm --prefix milk_with_bro run build",
+    "dev:frontend": "npm --prefix milk_with_bro run dev",
+    "dev:server": "cd coffee_with_bro && .\\mvnw.cmd spring-boot:run",
+    "dev:all": "node scripts/start-both.js",
+    "start": "node scripts/start-both.js"
+  }
+}

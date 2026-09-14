@@ -20,8 +20,6 @@ export function useSignTranslator() {
   const captureTimerRef = useRef<number | null>(null);
   const reconnectTimerRef = useRef<number | null>(null);
 
-  // Commit-stability bookkeeping, kept in refs so it survives across frames
-  // without re-subscribing the socket's onmessage handler.
   const streakLabelRef = useRef<string | null>(null);
   const streakCountRef = useRef(0);
   const cooldownUntilRef = useRef(0);
@@ -61,8 +59,6 @@ export function useSignTranslator() {
       ) {
         commitLetter(prediction.label);
         cooldownUntilRef.current = now + COMMIT_COOLDOWN_MS;
-        // Require the streak to build again before the same letter can
-        // repeat, so holding a sign doesn't spam it once cooldown ends.
         streakCountRef.current = 0;
       }
     },
@@ -100,6 +96,8 @@ export function useSignTranslator() {
     captureTimerRef.current = window.setInterval(captureFrame, CAPTURE_INTERVAL_MS);
   }, [captureFrame, stopCaptureLoop]);
 
+  const connectSocketRef = useRef<() => void>(() => {});
+
   const connectSocket = useCallback(() => {
     if (reconnectTimerRef.current !== null) {
       window.clearTimeout(reconnectTimerRef.current);
@@ -121,7 +119,7 @@ export function useSignTranslator() {
         if (data.error) return;
         handlePrediction({ label: data.label, confidence: data.confidence });
       } catch {
-        // Ignore malformed frames rather than crash the UI.
+        return;
       }
     };
 
@@ -134,13 +132,19 @@ export function useSignTranslator() {
       socketRef.current = null;
       if (wantStreamingRef.current) {
         setStatus("reconnecting");
-        reconnectTimerRef.current = window.setTimeout(connectSocket, RECONNECT_DELAY_MS);
+        reconnectTimerRef.current = window.setTimeout(
+          () => connectSocketRef.current(),
+          RECONNECT_DELAY_MS,
+        );
       } else {
         setStatus("closed");
       }
     };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [handlePrediction, startCaptureLoop, stopCaptureLoop]);
+
+  useEffect(() => {
+    connectSocketRef.current = connectSocket;
+  }, [connectSocket]);
 
   const disconnectSocket = useCallback(() => {
     wantStreamingRef.current = false;

@@ -1,0 +1,37 @@
+{
+  "name": "Coffee With Bro - Project Command Reference",
+  "version": "1.0.0",
+  "description": "Ready-to-use commands to test all codes (ESLint, build) and run frontend and backend concurrently.",
+  "scripts": {
+    "test:all": {
+      "description": "Run ESLint and TypeScript production build in frontend to test all code",
+      "command": "npm --prefix milk_with_bro run lint && npm --prefix milk_with_bro run build"
+    },
+    "test:frontend:lint": {
+      "description": "Run ESLint on frontend code",
+      "command": "npm --prefix milk_with_bro run lint"
+    },
+    "test:frontend:build": {
+      "description": "Run TypeScript check and Vite production build",
+      "command": "npm --prefix milk_with_bro run build"
+    },
+    "start:frontend": {
+      "description": "Start Vite frontend development server (http://localhost:5173)",
+      "command": "npm --prefix milk_with_bro run dev"
+    },
+    "start:server": {
+      "description": "Start Spring Boot backend server (http://localhost:8080)",
+      "windows": "cd coffee_with_bro && .\\mvnw.cmd spring-boot:run",
+      "unix": "cd coffee_with_bro && ./mvnw spring-boot:run"
+    },
+    "start:both": {
+      "description": "Start both frontend and backend server concurrently",
+      "powershell": "Start-Process powershell -ArgumentList '-NoExit', '-Command', 'cd milk_with_bro; npm run dev'; Start-Process powershell -ArgumentList '-NoExit', '-Command', 'cd coffee_with_bro; .\\mvnw.cmd spring-boot:run'",
+      "npm": "npm run dev:all"
+    }
+  },
+  "vscodeTasks": {
+    "testTask": "Open Command Palette (Ctrl+Shift+P) -> 'Tasks: Run Task' -> 'Test All (Lint & Build)'",
+    "startBothTask": "Open Command Palette (Ctrl+Shift+P) -> 'Tasks: Run Task' -> 'Start Frontend & Server'"
+  }
+}

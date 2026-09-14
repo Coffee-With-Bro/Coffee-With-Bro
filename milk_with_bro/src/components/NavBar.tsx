@@ -14,8 +14,6 @@ export function NavBar({ current }: { current: Route }) {
   return (
     <header className="topbar">
       <Link className="topbar-brand" to="/">
-        {/* Confetti on hovering the wordmark - Bhuvaneesh's touch, which lived
-            in App.tsx before the brand moved into this nav bar. */}
         <BoostConfetti>
           <span className="topbar-mark">Coffee with Bro</span>
         </BoostConfetti>
