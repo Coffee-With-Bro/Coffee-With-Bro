@@ -1,4 +1,5 @@
 import { Link } from "./Link";
+import BoostConfetti from "../Confetti/BoostIconConfetti";
 import type { Route } from "../lib/useRoute";
 
 const LINKS: { route: Route; label: string }[] = [
@@ -13,7 +14,11 @@ export function NavBar({ current }: { current: Route }) {
   return (
     <header className="topbar">
       <Link className="topbar-brand" to="/">
-        <span className="topbar-mark">Coffee with Bro</span>
+        {/* Confetti on hovering the wordmark - Bhuvaneesh's touch, which lived
+            in App.tsx before the brand moved into this nav bar. */}
+        <BoostConfetti>
+          <span className="topbar-mark">Coffee with Bro</span>
+        </BoostConfetti>
         <span className="topbar-sub">Sign language translator</span>
       </Link>
 

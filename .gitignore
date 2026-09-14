@@ -1,0 +1,19 @@
+# macOS Finder metadata - recreated constantly, different on every machine.
+.DS_Store
+**/.DS_Store
+
+# Dependencies. Installed with `npm install`, never committed.
+node_modules/
+
+# Build output
+dist/
+dist-ssr/
+target/
+
+# Editor / OS noise
+.idea/
+*.swp
+Thumbs.db
+
+# draw.io crash-recovery files
+.$*.drawio.dtmp
