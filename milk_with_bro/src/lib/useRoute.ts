@@ -15,12 +15,12 @@ function subscribe(onChange: () => void) {
   };
 }
 
-function readRoute(): Route {
+function readRoute(): Route | null {
   const path = window.location.pathname.replace(/\/+$/, "") || "/";
-  return (ROUTES as readonly string[]).includes(path) ? (path as Route) : "/";
+  return (ROUTES as readonly string[]).includes(path) ? (path as Route) : null;
 }
 
-export function useRoute(): Route {
+export function useRoute(): Route | null {
   return useSyncExternalStore(subscribe, readRoute, () => "/" as Route);
 }
 

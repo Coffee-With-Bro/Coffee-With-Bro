@@ -7,6 +7,7 @@ import { About } from "./pages/About";
 import { Team } from "./pages/Team";
 import { Resources } from "./pages/Resources";
 import { Legal } from "./pages/Legal";
+import { NotFound } from "./pages/NotFound";
 import "./App.css";
 import "./pages/pages.css";
 
@@ -22,7 +23,7 @@ function App() {
   const route = useRoute();
 
   useEffect(() => {
-    document.title = TITLES[route] ?? TITLES["/"];
+    document.title = route === null ? "404 — Page not found" : TITLES[route];
 
     const anchor = window.location.hash.slice(1);
     const target = anchor ? document.getElementById(anchor) : null;
@@ -33,6 +34,10 @@ function App() {
       window.scrollTo(0, 0);
     }
   }, [route]);
+
+  if (route === null) {
+    return <NotFound />;
+  }
 
   return (
     <div className="shell">
