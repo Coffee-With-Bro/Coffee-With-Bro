@@ -35,10 +35,6 @@ function App() {
     }
   }, [route]);
 
-  if (route === null) {
-    return <NotFound />;
-  }
-
   return (
     <div className="shell">
       <NavBar current={route} />
@@ -48,6 +44,7 @@ function App() {
       {route === "/team" && <Team />}
       {route === "/resources" && <Resources />}
       {route === "/legal" && <Legal />}
+      {route === null && <NotFound />}
 
       <footer className="footer">
         <span>UCS503 Software Engineering · Thapar Institute · 2026–27</span>

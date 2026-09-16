@@ -5,6 +5,7 @@
   "type": "module",
   "scripts": {
     "test": "node scripts/test-all.js",
+    "test:ui": "node scripts/playwright-ui-check.js",
     "check": "node scripts/test-all.js",
     "lint": "npm --prefix milk_with_bro run lint",
     "build": "npm --prefix milk_with_bro run build",
@@ -12,5 +13,8 @@
     "dev:server": "cd coffee_with_bro && .\\mvnw.cmd spring-boot:run",
     "dev:all": "node scripts/start-both.js",
     "start": "node scripts/start-both.js"
+  },
+  "devDependencies": {
+    "playwright": "^1.63.0"
   }
 }

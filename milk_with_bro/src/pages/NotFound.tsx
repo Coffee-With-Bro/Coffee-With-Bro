@@ -56,47 +56,43 @@ export function NotFound(): React.ReactElement {
   }
 
   return (
-    <main className={styles.page404}>
-      <div className={styles.container}>
-        <div className={styles.row}>
-          <div className={styles.outerColumn}>
-            <div className={styles.innerColumn}>
-              <div className={styles.fourZeroFourBg}>
-                <h1>404</h1>
+    <main className={`page ${styles.notFoundPage}`}>
+      <div className={styles.stage}>
+        <h1 className={styles.code}>404</h1>
 
-                <div className={styles.cavemanVectorContainer}>
-                  <svg
-                    ref={svgRef}
-                    viewBox="0 0 900 420"
-                    className={styles.cavemanSvg}
-                    xmlns="http://www.w3.org/2000/svg"
-                    role="img"
-                    aria-label="Vector illustration of a caveman attempting to connect broken electric cables"
-                    onClick={handleCavemanClick}
-                  >
-                    <defs>
-                      <filter
-                        id="spark-glow"
-                        x="-60%"
-                        y="-60%"
-                        width="220%"
-                        height="220%"
-                      >
-                        <feGaussianBlur
-                          in="SourceGraphic"
-                          stdDeviation="3.5"
-                          result="blur"
-                        />
-                        <feMerge>
-                          <feMergeNode in="blur" />
-                          <feMergeNode in="SourceGraphic" />
-                        </feMerge>
-                      </filter>
-                    </defs>
+        <div className={styles.cavemanVectorContainer}>
+          <svg
+            ref={svgRef}
+            viewBox="0 0 900 420"
+            className={styles.cavemanSvg}
+            xmlns="http://www.w3.org/2000/svg"
+            role="img"
+            aria-label="Vector illustration of a caveman attempting to connect broken electric cables"
+            onClick={handleCavemanClick}
+          >
+            <defs>
+              <filter
+                id="spark-glow"
+                x="-60%"
+                y="-60%"
+                width="220%"
+                height="220%"
+              >
+                <feGaussianBlur
+                  in="SourceGraphic"
+                  stdDeviation="3.5"
+                  result="blur"
+                />
+                <feMerge>
+                  <feMergeNode in="blur" />
+                  <feMergeNode in="SourceGraphic" />
+                </feMerge>
+              </filter>
+            </defs>
 
-                    <ellipse cx="205" cy="382" rx="55" ry="6" fill="#eef0f3" />
-                    <ellipse cx="695" cy="382" rx="90" ry="7" fill="#eef0f3" />
-                    <ellipse cx="450" cy="382" rx="68" ry="6" fill="#eef0f3" />
+            <ellipse cx="205" cy="382" rx="55" ry="6" fill="#252a30" />
+            <ellipse cx="695" cy="382" rx="90" ry="7" fill="#252a30" />
+            <ellipse cx="450" cy="382" rx="68" ry="6" fill="#252a30" />
 
                     <g id="left-stones">
                       <path
@@ -487,18 +483,14 @@ export function NotFound(): React.ReactElement {
                       />
                     </g>
                   </svg>
-                </div>
-              </div>
+        </div>
 
-              <div className={styles.contentBox404}>
-                <h2>Look like you're lost</h2>
-                <p>the page you are looking for not available!</p>
-                <Link to="/" className={styles.link404}>
-                  Go to Home
-                </Link>
-              </div>
-            </div>
-          </div>
+        <div className={styles.contentBox}>
+          <h2 className={styles.title}>Looks like you're lost</h2>
+          <p className={styles.subtitle}>The page you are looking for doesn't exist or has moved.</p>
+          <Link to="/" className="btn btn-start">
+            Back to Translator
+          </Link>
         </div>
       </div>
     </main>

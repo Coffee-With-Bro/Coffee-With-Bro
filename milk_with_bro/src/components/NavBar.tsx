@@ -10,7 +10,7 @@ const LINKS: { route: Route; label: string }[] = [
   { route: "/legal", label: "Legal" },
 ];
 
-export function NavBar({ current }: { current: Route }) {
+export function NavBar({ current }: { current: Route | null }) {
   return (
     <header className="topbar">
       <Link className="topbar-brand" to="/">
@@ -23,7 +23,7 @@ export function NavBar({ current }: { current: Route }) {
       <nav className="nav" aria-label="Main">
         <ul className="nav-list">
           {LINKS.map(({ route, label }) => {
-            const isCurrent = route === current;
+            const isCurrent = current !== null && route === current;
             return (
               <li key={route}>
                 <Link

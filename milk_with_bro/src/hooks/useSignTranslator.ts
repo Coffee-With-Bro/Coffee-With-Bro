@@ -14,7 +14,7 @@ import {
 
 export function useSignTranslator() {
   const videoRef = useRef<HTMLVideoElement | null>(null);
-  const canvasRef = useRef<HTMLCanvasElement>(document.createElement("canvas"));
+  const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const socketRef = useRef<WebSocket | null>(null);
   const streamRef = useRef<MediaStream | null>(null);
   const captureTimerRef = useRef<number | null>(null);
@@ -79,7 +79,11 @@ export function useSignTranslator() {
     if (video.readyState < HTMLMediaElement.HAVE_CURRENT_DATA) return;
 
     const aspect = video.videoHeight / video.videoWidth || 3 / 4;
-    const canvas = canvasRef.current;
+    let canvas = canvasRef.current;
+    if (!canvas) {
+      canvas = document.createElement("canvas");
+      canvasRef.current = canvas;
+    }
     canvas.width = CAPTURE_WIDTH;
     canvas.height = Math.round(CAPTURE_WIDTH * aspect);
 

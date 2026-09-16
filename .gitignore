@@ -10,10 +10,13 @@ dist/
 dist-ssr/
 target/
 
-# Editor / OS noise
+# Editor / OS / Local Agent noise
 .idea/
 *.swp
 Thumbs.db
+.agents/
+AGENTS.md
+*.agent.md
 
 # draw.io crash-recovery files
 .$*.drawio.dtmp

@@ -1,71 +1,35 @@
-@import url("https://fonts.googleapis.com/css?family=Arvo");
-
-.page404 {
-  position: fixed;
-  inset: 0;
-  z-index: 1000;
-  min-height: 100vh;
-  min-height: 100svh;
-  padding: 40px 0;
-  overflow-x: hidden;
-  overflow-y: auto;
-  color: #333;
-  background: #fff;
-  font-family: "Arvo", serif;
-  line-height: 1.42857143;
-  text-align: center;
-}
-
-.container {
-  width: 100%;
-  margin: 0 auto;
-  padding: 0 15px;
-}
-
-.row {
-  margin: 0 -15px;
-}
-
-.row::before,
-.row::after {
-  display: table;
-  content: " ";
-}
-
-.row::after {
-  clear: both;
-}
-
-.outerColumn,
-.innerColumn {
-  position: relative;
-  min-height: 1px;
-  padding: 0 15px;
-}
-
-.fourZeroFourBg {
-  position: relative;
+.notFoundPage {
   display: flex;
-  min-height: 420px;
   flex-direction: column;
   align-items: center;
-  justify-content: flex-start;
+  text-align: center;
+  padding: 10px 0 24px;
 }
 
-.fourZeroFourBg h1 {
+.stage {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  max-width: 640px;
+  margin: 0 auto;
+}
+
+.code {
   margin: 0 0 10px;
-  color: #1a1a1a;
-  font-size: 80px;
+  color: var(--ink);
+  font-family: var(--sans);
+  font-size: 72px;
   font-weight: 700;
   letter-spacing: 2px;
-  line-height: 1.1;
+  line-height: 1;
   user-select: none;
 }
 
 .cavemanVectorContainer {
   position: relative;
   width: 100%;
-  max-width: 780px;
+  max-width: 640px;
   margin: 0 auto;
 }
 
@@ -503,82 +467,25 @@
   }
 }
 
-.contentBox404 {
-  margin-top: 25px;
+.contentBox {
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
-.contentBox404 h2 {
-  margin: 20px 0 10px;
-  color: #222;
-  font-size: 28px;
-  font-weight: 700;
-  line-height: 1.1;
-}
-
-.contentBox404 p {
-  margin: 0 0 25px;
-  color: #666;
-  font-size: 16px;
-}
-
-.link404 {
-  display: inline-block;
-  padding: 12px 28px;
-  border-radius: 6px;
-  color: #fff;
-  background: #39ac31;
-  box-shadow: 0 4px 14px rgba(57, 172, 49, 0.35);
-  font-size: 15px;
+.title {
+  margin: 0 0 8px;
+  color: var(--ink);
+  font-family: var(--sans);
+  font-size: 24px;
   font-weight: 600;
-  text-decoration: none;
-  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  line-height: 1.2;
 }
 
-.link404:hover {
-  color: #fff;
-  background: #2e8d27;
-  box-shadow: 0 6px 20px rgba(57, 172, 49, 0.45);
-  text-decoration: none;
-  transform: translateY(-2px);
-}
-
-.link404:active {
-  transform: translateY(0);
-}
-
-.link404:focus-visible {
-  outline: 3px solid #1a1a1a;
-  outline-offset: 3px;
-}
-
-@media (min-width: 768px) {
-  .container {
-    width: 750px;
-  }
-
-  .outerColumn,
-  .innerColumn {
-    float: left;
-  }
-
-  .outerColumn {
-    width: 100%;
-  }
-
-  .innerColumn {
-    width: 83.33333333%;
-    margin-left: 8.33333333%;
-  }
-}
-
-@media (min-width: 992px) {
-  .container {
-    width: 970px;
-  }
-}
-
-@media (min-width: 1200px) {
-  .container {
-    width: 1170px;
-  }
+.subtitle {
+  margin: 0 0 20px;
+  color: var(--ink-dim);
+  font-size: 15px;
+  line-height: 1.5;
 }
