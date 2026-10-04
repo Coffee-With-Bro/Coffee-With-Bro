@@ -4,9 +4,9 @@ const MEMBERS = [
   {
     name: "Keshav Aggarwal",
     roll: "1024030234",
-    role: "Frontend & integration",
+    role: "Frontend & WebSocket Integration",
     blurb:
-      "Works on the Spring Boot service and the UML models — use case and activity diagrams — that the implementation follows.",
+      "Builds the responsive React interface, live camera viewfinder, confidence meters, and client-side WebSocket streaming.",
   },
   {
     name: "Abhishek Srivastava",
@@ -18,9 +18,9 @@ const MEMBERS = [
   {
     name: "Harshine Singh",
     roll: "1024030232",
-    role: "Backend & system design",
+    role: "Backend & System Architecture",
     blurb:
-      "Owns the browser interface and the WebSocket link that carries frames to the backend and predictions back.",
+      "Architects the Spring Boot inference backend, WebSocket streaming handlers, REST telemetry APIs, and local data persistence.",
   },
   {
     name: "Bhuvaneesh Singh Grewal",

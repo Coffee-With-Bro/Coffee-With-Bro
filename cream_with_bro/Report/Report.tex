@@ -147,13 +147,13 @@ The CNN model consists of three convolution blocks with filter sizes 32, 64 and 
 
 The input image size is 128x128 RGB. Images are normalized before being passed to the CNN. The final layers consist of a dense layer followed by dropout and a softmax classifier.
 
-\subsection{Frontend Recognition Module}
+\subsection{Frontend Recognition and Accessibility Module}
 
-The frontend captures webcam frames continuously. Frames are processed and transmitted to the backend through WebSocket communication. Received predictions contain the recognized label and confidence score.
+The frontend captures webcam frames continuously. Frames are processed and transmitted to the backend through WebSocket communication. Received predictions contain the recognized label and confidence score. The interface features a real-time HUD with confidence meters, an offline Speech Synthesis engine (Text-to-Speech) for acoustic readout of recognized signs, an interactive 36-class ASL sign reference guide, and session history management.
 
-\subsection{Backend Prediction Module}
+\subsection{Backend Prediction and Telemetry Module}
 
-The Spring Boot backend loads the trained CNN model and label mapping. The predictor converts received images into tensors, performs inference and returns the predicted sign.
+The Spring Boot backend loads the trained CNN model and label mapping. The predictor converts received images into tensors, performs inference and returns the predicted sign over WebSocket. Additionally, a REST API layer (`/api/status`, `/api/supported-signs`, `/api/sessions`) provides live telemetry and persists translation history into an embedded H2 database via Spring Data JPA.
 
 \subsection{Custom Dictionary Extension}
 

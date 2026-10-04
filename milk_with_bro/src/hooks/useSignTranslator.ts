@@ -215,5 +215,8 @@ export function useSignTranslator() {
     addSpace,
     backspace,
     clearTranscript,
+    setTranscript,
+    commitLetter,
+    simulatePrediction: handlePrediction,
   };
 }

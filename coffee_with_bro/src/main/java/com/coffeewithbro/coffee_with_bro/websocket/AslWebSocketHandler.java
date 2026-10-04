@@ -100,4 +100,12 @@ public class AslWebSocketHandler extends TextWebSocketHandler {
 
         session.sendMessage(new TextMessage(response));
     }
+
+    public boolean isPredictorLoaded() {
+        return predictor != null;
+    }
+
+    public AslPredictor getPredictor() {
+        return predictor;
+    }
 }

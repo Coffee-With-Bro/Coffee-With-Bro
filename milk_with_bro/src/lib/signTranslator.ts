@@ -2,6 +2,10 @@ export const WS_URL =
   (import.meta.env.VITE_WS_URL as string | undefined) ??
   `ws://${window.location.hostname}:8080/ws/echo`;
 
+export const API_URL =
+  (import.meta.env.VITE_API_URL as string | undefined) ??
+  `http://${window.location.hostname}:8080/api`;
+
 export const CAPTURE_INTERVAL_MS = 350;
 export const CAPTURE_WIDTH = 240;
 export const CAPTURE_QUALITY = 0.7;
@@ -21,4 +25,26 @@ export type ConnectionStatus =
 export interface Prediction {
   label: string;
   confidence: number;
+}
+
+export interface TranslationSessionRecord {
+  id?: number;
+  transcript: string;
+  letterCount: number;
+  avgConfidence: number;
+  durationSeconds: number;
+  createdAt?: string;
+}
+
+export interface SystemStatusResponse {
+  status: string;
+  appName: string;
+  modelLoaded: boolean;
+  modelPath: string;
+  labelsPath: string;
+  supportedClassesCount: number;
+  sampleClasses: string[];
+  offlineOnly: boolean;
+  totalSessionsRecorded: number;
+  timestamp: string;
 }
