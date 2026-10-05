@@ -1,5 +1,6 @@
 import { useRef, type ReactNode } from "react";
 import confetti from "canvas-confetti";
+import { getThemeColor } from "../lib/theme";
 
 type BoostConfettiProps = {
   children: ReactNode;
@@ -25,6 +26,7 @@ function BoostConfetti({ children }: BoostConfettiProps) {
         y,
       },
       scalar: 0.8,
+      colors: ["--accent", "--dark-walnut", "--midnight-violet", "--grey", "--mint-cream"].map(getThemeColor),
     });
   };
 

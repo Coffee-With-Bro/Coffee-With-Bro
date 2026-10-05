@@ -8,6 +8,8 @@ import { Team } from "./pages/Team";
 import { Resources } from "./pages/Resources";
 import { Legal } from "./pages/Legal";
 import { NotFound } from "./pages/NotFound";
+import { getThemeColor } from "./lib/theme";
+import favicon from "./assets/favicon.svg?raw";
 import "./App.css";
 import "./pages/pages.css";
 
@@ -21,6 +23,17 @@ const TITLES: Record<string, string> = {
 
 function App() {
   const route = useRoute();
+
+  useEffect(() => {
+    const icon = document.querySelector<HTMLLinkElement>('link[rel="icon"]');
+    if (!icon) return;
+
+    // A favicon is a separate document and cannot inherit the app's CSS tokens.
+    const svg = favicon.replace(/var\((--[\w-]+)\)/g, (_, token: string) => getThemeColor(token));
+    const url = URL.createObjectURL(new Blob([svg], { type: "image/svg+xml" }));
+    icon.href = url;
+    return () => URL.revokeObjectURL(url);
+  }, []);
 
   useEffect(() => {
     document.title = route === null ? "404 — Page not found" : TITLES[route];

@@ -130,7 +130,7 @@ export function HistoryModal({ isOpen, onClose, onRestoreTranscript }: HistoryMo
 
         <div className="modal-footer">
           {sessions.length > 0 && (
-            <button className="btn btn-ghost" onClick={handleClearAll} style={{ color: "#f87171" }}>
+            <button className="btn btn-ghost btn-danger" onClick={handleClearAll}>
               Clear Database
             </button>
           )}
