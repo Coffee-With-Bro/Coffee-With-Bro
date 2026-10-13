@@ -14,12 +14,17 @@ const LINKS: { route: Route; label: string }[] = [
 export function NavBar({ current }: { current: Route | null }) {
   return (
     <header className="topbar">
+      
       <Link className="topbar-brand" to="/">
         <BoostConfetti>
-          <span className="topbar-mark">Coffee with Bro</span>
+          <span className="topbar-brand-title">
+            <span className="topbar-mug" aria-hidden="true">☕</span>
+            <span className="topbar-mark">Coffee with Bro</span>
+          </span>
         </BoostConfetti>
         <span className="topbar-sub">Offline sign language translator</span>
       </Link>
+
 
       <nav className="nav" aria-label="Main Navigation">
         <ul className="nav-list">
