@@ -732,3 +732,37 @@
     justify-content: flex-start;
   }
 }
+
+
+.topbar-brand-title {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.topbar-mug {
+  display: inline-block;
+  font-size: 1.8rem;
+  line-height: 1;
+  transform-origin: bottom center;
+  transition: transform 220ms ease;
+}
+
+.topbar-brand:hover .topbar-mug {
+  transform: rotate(-12deg) translateY(-2px);
+}
+
+.topbar-mug:active {
+  transform: rotate(12deg) scale(1.12);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .topbar-mug {
+    transition: none;
+  }
+
+  .topbar-brand:hover .topbar-mug,
+  .topbar-mug:active {
+    transform: none;
+  }
+}
