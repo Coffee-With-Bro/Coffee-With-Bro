@@ -49,8 +49,8 @@ export function HistoryModal({ isOpen, onClose, onRestoreTranscript }: HistoryMo
     try {
       await fetch(`${API_URL}/sessions`, { method: "DELETE" });
       setSessions([]);
-    } catch (e) {
-      console.error("Failed to clear sessions", e);
+    } catch {
+      setError("Failed to clear sessions from database.");
     }
   }
 

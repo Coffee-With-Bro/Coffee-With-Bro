@@ -3,6 +3,7 @@ import { useSignTranslator } from "../hooks/useSignTranslator";
 import { API_URL, type ConnectionStatus } from "../lib/signTranslator";
 import { AslGuideModal } from "../components/AslGuideModal";
 import { HistoryModal } from "../components/HistoryModal";
+import { trackEvent } from "../lib/analytics";
 
 const STATUS_COPY: Record<ConnectionStatus, string> = {
   idle: "Camera off",
@@ -13,7 +14,17 @@ const STATUS_COPY: Record<ConnectionStatus, string> = {
   error: "Model standby / Disconnected",
 };
 
-export function Home() {
+interface HomeProps {
+  onStateChange?: (state: {
+    cameraOn: boolean;
+    liveGuessLabel?: string;
+    confidencePct: number;
+    toggleCamera: () => void;
+    openGuide: () => void;
+  }) => void;
+}
+
+export function Home({ onStateChange }: HomeProps = {}) {
   const {
     videoRef,
     cameraOn,
@@ -42,8 +53,10 @@ export function Home() {
   useEffect(() => {
     if (cameraOn && sessionStartRef.current === null) {
       sessionStartRef.current = Date.now();
+      trackEvent("camera_start");
     } else if (!cameraOn) {
       sessionStartRef.current = null;
+      trackEvent("camera_stop");
     }
   }, [cameraOn]);
 
@@ -51,16 +64,43 @@ export function Home() {
   const wordCount = transcript.trim() ? transcript.trim().split(/\s+/).length : 0;
   const charCount = transcript.length;
 
+  const toggleCamera = useCallback(() => {
+    if (cameraOn) {
+      stopCamera();
+    } else {
+      startCamera();
+    }
+  }, [cameraOn, startCamera, stopCamera]);
+
+  const openGuide = useCallback(() => {
+    setGuideOpen(true);
+    trackEvent("open_guide");
+  }, []);
+
+  // Sync state to parent for mobile sticky CTA
+  useEffect(() => {
+    if (onStateChange) {
+      onStateChange({
+        cameraOn,
+        liveGuessLabel: liveGuess?.label,
+        confidencePct,
+        toggleCamera,
+        openGuide,
+      });
+    }
+  }, [cameraOn, liveGuess?.label, confidencePct, toggleCamera, openGuide, onStateChange]);
+
   const handleCopy = useCallback(async () => {
     if (!transcript) return;
     try {
       await navigator.clipboard.writeText(transcript);
       setCopied(true);
+      trackEvent("transcript_copy", { charCount });
       setTimeout(() => setCopied(false), 2000);
     } catch {
       return;
     }
-  }, [transcript]);
+  }, [transcript, charCount]);
 
   // Offline Web Speech API - Speak out loud
   const handleSpeak = useCallback(() => {
@@ -85,8 +125,9 @@ export function Home() {
     utterance.onerror = () => setIsSpeaking(false);
 
     setIsSpeaking(true);
+    trackEvent("transcript_speak", { charCount });
     window.speechSynthesis.speak(utterance);
-  }, [transcript, isSpeaking]);
+  }, [transcript, isSpeaking, charCount]);
 
   // Save session to backend H2 database
   const handleSaveSession = useCallback(async () => {
@@ -111,13 +152,13 @@ export function Home() {
 
       if (res.ok) {
         setSaved(true);
+        trackEvent("session_saved", { durationSeconds });
         setTimeout(() => setSaved(false), 2500);
       } else {
         alert("Failed to save session to local backend. Make sure the Spring Boot service is active.");
       }
-    } catch (e) {
-      console.warn("Backend not reachable", e);
-      alert("Could not reach backend service at " + API_URL);
+    } catch {
+      alert("Could not reach local backend service at " + API_URL);
     } finally {
       setSaving(false);
     }
@@ -133,32 +174,99 @@ export function Home() {
     link.download = `asl-transcript-${new Date().toISOString().slice(0, 10)}.txt`;
     link.click();
     URL.revokeObjectURL(url);
+    trackEvent("transcript_export_txt");
   }, [transcript]);
 
   return (
     <main className="stage">
-      <section className="viewfinder-wrap">
+      {/* ABOVE THE FOLD HERO & CALL-TO-ACTION */}
+      <section className="hero-cta-section" aria-label="Translator introduction and call to action">
+        <p className="eyebrow">100% Offline · Privacy-First ASL Recognition</p>
+        <h1 className="hero-cta-title">Turn Webcam Hand Signs into Live Text.</h1>
+        <p className="hero-cta-desc">
+          Translate 36 American Sign Language gestures (A–Z, 0–9) directly in your
+          browser. Zero cloud latency, zero trackers, and your webcam video never leaves
+          your machine.
+        </p>
+
+        <div className="hero-cta-actions">
+          <button
+            type="button"
+            className={`btn ${cameraOn ? "btn-stop" : "btn-start"} hero-btn-primary`}
+            onClick={toggleCamera}
+            aria-label={cameraOn ? "Turn off camera" : "Turn on camera and start signing"}
+          >
+            {cameraOn ? "⏹ Turn Off Camera" : "⚡ Turn On Camera & Start Signing"}
+          </button>
+          <button
+            type="button"
+            className="btn btn-ghost"
+            onClick={openGuide}
+            aria-label="Open ASL sign guide modal"
+          >
+            📖 ASL Sign Guide
+          </button>
+          <button
+            type="button"
+            className="btn btn-ghost"
+            onClick={() => {
+              setHistoryOpen(true);
+              trackEvent("open_history");
+            }}
+            aria-label="Open translation session history"
+          >
+            🕒 Session History
+          </button>
+        </div>
+
+        <div className="hero-badges" aria-label="System features">
+          <span className="hero-badge">🔒 100% In-Memory</span>
+          <span className="hero-badge">⚡ Low-Latency Local WS</span>
+          <span className="hero-badge">🎯 36 Static Signs</span>
+          <span className="hero-badge">🎓 UCS503 TIET</span>
+        </div>
+      </section>
+
+      {/* VIEWFINDER & LIVE CAMERA SECTION */}
+      <section className="viewfinder-wrap" aria-label="Live camera viewfinder">
         <div className={`viewfinder ${cameraOn ? "is-live" : ""}`}>
-          <video ref={videoRef} className="viewfinder-video" muted playsInline />
+          <video
+            ref={videoRef}
+            className="viewfinder-video"
+            muted
+            playsInline
+            aria-label="Live webcam feed for sign language recognition"
+          />
 
           {!cameraOn && (
             <div className="viewfinder-empty">
               <p>Turn on your camera to start signing.</p>
-              <button className="btn btn-tiny" onClick={() => setGuideOpen(true)} style={{ marginTop: "12px" }}>
+              <button
+                className="btn btn-tiny"
+                onClick={openGuide}
+                style={{ marginTop: "12px" }}
+              >
                 📖 View ASL Sign Guide
               </button>
             </div>
           )}
 
-          <span className="bracket bracket-tl" />
-          <span className="bracket bracket-tr" />
-          <span className="bracket bracket-bl" />
-          <span className="bracket bracket-br" />
+          <span className="bracket bracket-tl" aria-hidden="true" />
+          <span className="bracket bracket-tr" aria-hidden="true" />
+          <span className="bracket bracket-bl" aria-hidden="true" />
+          <span className="bracket bracket-br" aria-hidden="true" />
 
           {cameraOn && (
-            <div className="readout">
+            <div className="readout" aria-live="polite">
               <span className="readout-letter">{liveGuess?.label ?? "–"}</span>
-              <div className="readout-meter">
+              <div
+                className="readout-meter"
+                role="progressbar"
+                aria-valuenow={confidencePct}
+                aria-valuemin={0}
+                aria-valuemax={100}
+                aria-label="Model prediction confidence"
+              >
                 <div
                   className="readout-meter-fill"
                   style={{ width: `${confidencePct}%` }}
@@ -172,7 +280,7 @@ export function Home() {
         <div className="controls">
           <button
             className={cameraOn ? "btn btn-stop" : "btn btn-start"}
-            onClick={cameraOn ? stopCamera : startCamera}
+            onClick={toggleCamera}
           >
             {cameraOn ? "Turn off camera" : "Turn on camera"}
           </button>
@@ -185,7 +293,7 @@ export function Home() {
           <div className="aux-controls">
             <button
               className="btn btn-ghost btn-sm"
-              onClick={() => setGuideOpen(true)}
+              onClick={openGuide}
               title="Open American Sign Language gesture reference"
             >
               📖 Sign Guide
@@ -200,16 +308,19 @@ export function Home() {
           </div>
         </div>
 
-        {cameraError && <p className="error">{cameraError}</p>}
+        {cameraError && <p className="error" role="alert">{cameraError}</p>}
 
         {/* Quick sign simulator bar for evaluation & testing */}
-        <div className="simulator-bar">
+        <div className="simulator-bar" aria-label="Sign test simulator bar">
           <span className="simulator-label">Quick Sign Test:</span>
           {["H", "E", "L", "L", "O", "1", "2"].map((ch, idx) => (
             <button
               key={`${ch}-${idx}`}
               className="btn-pill"
-              onClick={() => commitLetter(ch)}
+              onClick={() => {
+                commitLetter(ch);
+                trackEvent("simulate_letter", { letter: ch });
+              }}
               title={`Simulate recognition of sign '${ch}'`}
             >
               {ch}
@@ -218,7 +329,8 @@ export function Home() {
         </div>
       </section>
 
-      <section className="transcript-wrap">
+      {/* TRANSCRIPT & ACTION CONTROLS SECTION */}
+      <section className="transcript-wrap" aria-label="Live Recognition Transcript">
         <div className="transcript-header-bar">
           <span className="transcript-label">Live Recognition Transcript</span>
           <span className="transcript-stats">
@@ -226,7 +338,7 @@ export function Home() {
           </span>
         </div>
 
-        <div className="transcript">
+        <div className="transcript" aria-live="polite">
           {transcript.length === 0 ? (
             <span className="transcript-placeholder">
               Signed letters will build a sentence here.
@@ -234,7 +346,7 @@ export function Home() {
           ) : (
             transcript
           )}
-          <span className="cursor" />
+          <span className="cursor" aria-hidden="true" />
         </div>
 
         <div className="transcript-controls">
@@ -291,6 +403,7 @@ export function Home() {
         onClose={() => setGuideOpen(false)}
         onTestSign={(ch) => {
           commitLetter(ch);
+          trackEvent("test_sign_from_guide", { letter: ch });
         }}
       />
 
@@ -300,6 +413,7 @@ export function Home() {
         onClose={() => setHistoryOpen(false)}
         onRestoreTranscript={(text) => {
           setTranscript(text);
+          trackEvent("restore_transcript");
         }}
       />
     </main>

@@ -15,7 +15,8 @@ export function Legal() {
         </p>
         <nav className="jump" aria-label="On this page">
           <a href="#terms">Terms of use</a>
-          <a href="#privacy">Privacy policy</a>
+          <a href="#privacy">Privacy summary</a>
+          <Link to="/privacy">Dedicated Privacy Policy Page →</Link>
         </nav>
       </header>
 

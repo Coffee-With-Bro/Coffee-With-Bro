@@ -533,6 +533,190 @@ textarea.field-input {
   border-color: var(--ink-dim);
 }
 
+.about-media-wrap {
+  margin-top: 12px;
+  border-radius: 4px;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  background: var(--midnight-violet);
+}
+
+.about-system-img {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 1200 / 630;
+  display: block;
+  object-fit: cover;
+}
+
+/* ==========================================================================
+   Breadcrumbs Navigation
+   ========================================================================== */
+.breadcrumbs {
+  margin-top: -12px;
+  margin-bottom: 2px;
+  font-family: var(--mono);
+  font-size: 12px;
+  min-height: 20px;
+}
+
+.breadcrumbs-list {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 6px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.breadcrumb-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.breadcrumb-link {
+  color: var(--ink-dim);
+  text-decoration: none;
+  transition: color 0.15s ease;
+}
+
+.breadcrumb-link:hover {
+  color: var(--ink);
+  text-decoration: underline;
+}
+
+.breadcrumb-separator {
+  color: var(--grey);
+  user-select: none;
+}
+
+.breadcrumb-current {
+  color: var(--accent-text);
+  font-weight: 500;
+}
+
+/* ==========================================================================
+   Author Bios & Skills
+   ========================================================================== */
+.author-card {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.author-bio-text {
+  font-size: 13px !important;
+  line-height: 1.55 !important;
+  color: var(--ink-dim) !important;
+}
+
+.author-skills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  margin-top: 4px;
+}
+
+.skill-pill {
+  font-family: var(--mono);
+  font-size: 11px;
+  padding: 2px 6px;
+  border-radius: 2px;
+  background: var(--surface-muted);
+  color: var(--ink-dim);
+  border: 1px solid var(--line);
+}
+
+.author-links {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 6px;
+  padding-top: 8px;
+  border-top: 1px dashed var(--line);
+  font-family: var(--mono);
+  font-size: 11px;
+}
+
+.author-email-link,
+.author-github-link {
+  color: var(--accent-text);
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.author-email-link:hover,
+.author-github-link:hover {
+  text-decoration: underline;
+}
+
+/* ==========================================================================
+   FAQ Accordion Section
+   ========================================================================== */
+.faq-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.faq-item {
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  background: var(--bg);
+  overflow: hidden;
+  transition: border-color 0.15s ease;
+}
+
+.faq-item.is-open {
+  border-color: var(--accent-text);
+}
+
+.faq-question {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 16px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  text-align: left;
+  font-family: var(--sans);
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--ink);
+  transition: background 0.15s ease;
+}
+
+.faq-question:hover {
+  background: var(--surface-muted);
+}
+
+.faq-toggle {
+  font-family: var(--mono);
+  font-size: 18px;
+  font-weight: bold;
+  color: var(--accent-text);
+  flex-shrink: 0;
+}
+
+.faq-answer {
+  padding: 0 16px 14px;
+  font-family: var(--sans);
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--ink-dim);
+  border-top: 1px solid var(--line);
+  padding-top: 10px;
+}
+
+.faq-answer p {
+  margin: 0;
+}
+
 .footer {
   margin-top: auto;
   padding-top: 18px;
@@ -562,3 +746,4 @@ textarea.field-input {
     padding: 18px 16px;
   }
 }
+

@@ -9,6 +9,8 @@
     "check": "node scripts/test-all.js",
     "lint": "npm --prefix milk_with_bro run lint",
     "build": "npm --prefix milk_with_bro run build",
+    "prerender": "node scripts/prerender.js",
+    "serve:ssr": "npm --prefix milk_with_bro run serve:ssr",
     "dev:frontend": "npm --prefix milk_with_bro run dev",
     "dev:server": "cd coffee_with_bro && .\\mvnw.cmd spring-boot:run",
     "dev:all": "node scripts/start-both.js",

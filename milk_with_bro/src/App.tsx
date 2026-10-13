@@ -1,28 +1,41 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { NavBar } from "./components/NavBar";
+import { Breadcrumbs } from "./components/Breadcrumbs";
 import { Link } from "./components/Link";
-import { useRoute } from "./lib/useRoute";
+import { useRoute, type Route } from "./lib/useRoute";
 import { Home } from "./pages/Home";
 import { About } from "./pages/About";
 import { Team } from "./pages/Team";
 import { Resources } from "./pages/Resources";
 import { Legal } from "./pages/Legal";
+import { Privacy } from "./pages/Privacy";
+import { ThankYou } from "./pages/ThankYou";
 import { NotFound } from "./pages/NotFound";
+import { CookieBanner } from "./components/CookieBanner";
+import { StickyMobileCta } from "./components/StickyMobileCta";
+import { updatePageMetadata } from "./lib/seo";
+import { trackPageView } from "./lib/analytics";
 import { getThemeColor } from "./lib/theme";
 import favicon from "./assets/favicon.svg?raw";
 import "./App.css";
 import "./pages/pages.css";
 
-const TITLES: Record<string, string> = {
-  "/": "Coffee with Bro — Sign language translator",
-  "/about": "About — Coffee with Bro",
-  "/team": "Team & Contact — Coffee with Bro",
-  "/resources": "Resources used — Coffee with Bro",
-  "/legal": "Terms & Privacy — Coffee with Bro",
-};
+interface HomeMobileSyncState {
+  cameraOn: boolean;
+  liveGuessLabel?: string;
+  confidencePct: number;
+  toggleCamera: () => void;
+  openGuide: () => void;
+}
 
-function App() {
-  const route = useRoute();
+interface AppProps {
+  ssrRoute?: Route | null;
+}
+
+export function App({ ssrRoute }: AppProps = {}) {
+  const clientRoute = useRoute();
+  const route = ssrRoute !== undefined ? ssrRoute : clientRoute;
+  const [homeSync, setHomeSync] = useState<HomeMobileSyncState | null>(null);
 
   useEffect(() => {
     const icon = document.querySelector<HTMLLinkElement>('link[rel="icon"]');
@@ -36,7 +49,10 @@ function App() {
   }, []);
 
   useEffect(() => {
-    document.title = route === null ? "404 — Page not found" : TITLES[route];
+    // Update SEO meta title, description, and Open Graph tags
+    updatePageMetadata(route);
+    // Track page view event
+    trackPageView(route || "/404");
 
     const anchor = window.location.hash.slice(1);
     const target = anchor ? document.getElementById(anchor) : null;
@@ -52,17 +68,52 @@ function App() {
     <div className="shell">
       <NavBar current={route} />
 
-      {route === "/" && <Home />}
+      {/* Breadcrumbs with JSON-LD Schema on all subpages */}
+      <Breadcrumbs currentRoute={route} />
+
+      {route === "/" && <Home onStateChange={setHomeSync} />}
       {route === "/about" && <About />}
       {route === "/team" && <Team />}
       {route === "/resources" && <Resources />}
       {route === "/legal" && <Legal />}
+      {route === "/privacy" && <Privacy />}
+      {route === "/thank-you" && <ThankYou />}
       {route === null && <NotFound />}
 
-      <footer className="footer">
-        <span>UCS503 Software Engineering · Thapar Institute · 2026–27</span>
-        <Link to="/legal">Terms &amp; Privacy</Link>
+      {/* Complete Footer Navigation — Eliminates all orphan pages */}
+      <footer className="footer" role="contentinfo">
+        <div className="footer-line">
+          <span>UCS503 Software Engineering · Thapar Institute · 2026–27</span>
+        </div>
+        <div className="footer-links">
+          <Link to="/">Translator</Link>
+          <span aria-hidden="true">·</span>
+          <Link to="/about">About</Link>
+          <span aria-hidden="true">·</span>
+          <Link to="/team">Team &amp; Contact</Link>
+          <span aria-hidden="true">·</span>
+          <Link to="/resources">Resources</Link>
+          <span aria-hidden="true">·</span>
+          <Link to="/legal">Terms of Use</Link>
+          <span aria-hidden="true">·</span>
+          <Link to="/privacy">Privacy Policy</Link>
+          <span aria-hidden="true">·</span>
+          <Link to="/thank-you">Status</Link>
+        </div>
       </footer>
+
+      {/* Floating Privacy Notice / Cookie Banner */}
+      <CookieBanner />
+
+      {/* Responsive Sticky Mobile Call-to-Action Bar */}
+      <StickyMobileCta
+        currentRoute={route}
+        cameraOn={homeSync?.cameraOn}
+        onToggleCamera={homeSync?.toggleCamera}
+        onOpenGuide={homeSync?.openGuide}
+        liveGuessLabel={homeSync?.liveGuessLabel}
+        confidencePct={homeSync?.confidencePct}
+      />
     </div>
   );
 }

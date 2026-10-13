@@ -5,9 +5,10 @@ import type { Route } from "../lib/useRoute";
 const LINKS: { route: Route; label: string }[] = [
   { route: "/", label: "Translator" },
   { route: "/about", label: "About" },
-  { route: "/team", label: "Team" },
+  { route: "/team", label: "Team & Contact" },
   { route: "/resources", label: "Resources" },
   { route: "/legal", label: "Legal" },
+  { route: "/privacy", label: "Privacy" },
 ];
 
 export function NavBar({ current }: { current: Route | null }) {
@@ -17,10 +18,10 @@ export function NavBar({ current }: { current: Route | null }) {
         <BoostConfetti>
           <span className="topbar-mark">Coffee with Bro</span>
         </BoostConfetti>
-        <span className="topbar-sub">Sign language translator</span>
+        <span className="topbar-sub">Offline sign language translator</span>
       </Link>
 
-      <nav className="nav" aria-label="Main">
+      <nav className="nav" aria-label="Main Navigation">
         <ul className="nav-list">
           {LINKS.map(({ route, label }) => {
             const isCurrent = current !== null && route === current;

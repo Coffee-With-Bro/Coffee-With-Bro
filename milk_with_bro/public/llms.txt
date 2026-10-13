@@ -1,0 +1,33 @@
+# Coffee With Bro
+
+> Real-time, 100% offline American Sign Language (ASL) to written text recognition system built with React, Spring Boot, and DeepLearning4j.
+
+Coffee With Bro is an academic software engineering project developed for UCS503 Software Engineering at Thapar Institute of Engineering and Technology (Odd Semester 2026–27). It enables live webcam-based hand sign classification across 36 static ASL classes (A–Z, 0–9) without cloud APIs, remote inference endpoints, or telemetry.
+
+## System Architecture
+
+The platform follows a modular, decoupled architecture:
+- **`coffee_with_bro`**: Java 17 backend hosting a Spring Boot WebSocket service (`ws://localhost:8080/ws/echo`) and an onboard DeepLearning4j (DL4J) Convolutional Neural Network (CNN).
+- **`milk_with_bro`**: Client web application built with React 19, TypeScript, and Vite. Streams JPEG frame snapshots every ~350ms, receives predictions with confidence scores, and builds a transcript buffer.
+- **`ice_with_bro`**: Python data engineering pipeline for dataset image normalization (128x128), MediaPipe 21-joint 3D landmark extraction, and baseline PyTorch neural network training.
+- **`cream_with_bro`**: Software engineering documentation including IEEE 830 SRS specifications, UML activity and use-case diagrams, and LaTeX reports.
+- **`sugar_with_bro`**: Standalone HTML/JS WebSocket diagnostic test bench for isolated backend validation.
+
+## Core Pages & Resources
+
+- [Live ASL Translator](https://coffeewithbro.local/): Main interface with camera viewfinder, alignment brackets, recognition meter, and speech synthesis transcript buffer.
+- [About the System](https://coffeewithbro.local/about): Technical explanation of capture, WebSocket streaming, 128x128 CNN classification, and FAQ.
+- [Team & Contact Details](https://coffeewithbro.local/team): Engineering contributors, university affiliation, and direct author bios.
+- [Open Source Resources](https://coffeewithbro.local/resources): Attribution of software libraries, models, and open source licenses (Spring Boot, DL4J, ND4J, MediaPipe, React 19).
+- [Terms of Use](https://coffeewithbro.local/legal): Academic assessment disclaimer and acceptable use terms.
+- [Privacy Policy](https://coffeewithbro.local/privacy): 100% on-device memory guarantee; no video disk persistence, no cookies, zero external telemetry.
+- [XML Sitemap](https://coffeewithbro.local/sitemap.xml): Machine-readable index of all canonical routes.
+
+## Technical Specifications
+
+- **Inference Mode**: Local JVM CNN (DeepLearning4j MultiLayerNetwork)
+- **Input Resolution**: 128x128 pixels, 3 channels (RGB)
+- **Classes**: 36 classes (A–Z, 0–9)
+- **Sampling Frequency**: ~350 ms per frame snapshot
+- **WebSocket Route**: `ws://localhost:8080/ws/echo`
+- **Data Privacy**: Frames held exclusively in volatile memory for the duration of inference, then discarded immediately.

@@ -1,0 +1,50 @@
+# Coffee With Bro — Full Architecture & Documentation for LLMs
+
+> Real-time, 100% offline American Sign Language (ASL) to written text recognition system built with React, Spring Boot, and DeepLearning4j.
+
+Course: UCS503 Software Engineering  
+Institution: Department of Computer Science & Engineering, Thapar Institute of Engineering & Technology  
+Academic Year: 2026–2027 (Odd Semester, 5th Semester)  
+
+## Table of Contents
+1. Executive Summary & Purpose
+2. Privacy & Offline Engineering Model
+3. Directory & Module Blueprint
+4. Network Protocol & WebSocket Specification
+5. Deep Learning & CNN Architecture
+6. Dataset & Preprocessing Pipeline
+7. Frontend Architecture & State Management
+8. Software Verification & Quality Assurance
+
+---
+
+### 1. Executive Summary & Purpose
+Coffee With Bro translates live webcam hand gestures into written sentences completely offline. The motivation stems from personal privacy: standard computer vision APIs upload continuous camera frames to commercial cloud providers. Coffee With Bro processes video entirely in local memory on the user's host machine.
+
+### 2. Privacy & Offline Engineering Model
+- Zero Cloud APIs: Neither Google Cloud, AWS Rekognition, nor external models are queried.
+- Memory Deallocation: Webcam video frames converted to base64 snapshots are resized to 128x128 in JVM RAM, classified, and instantly garbage collected.
+- Zero Tracking: Zero advertising scripts, zero analytics cookies, and zero telemetry.
+
+### 3. Directory Blueprint
+- `coffee_with_bro/`: Spring Boot Java 17 backend hosting DeepLearning4j CNN at `/ws/echo`.
+- `milk_with_bro/`: React 19, TypeScript, and Vite single-page application with webcam viewfinder and transcript buffer.
+- `ice_with_bro/`: Python 3.10+ data preparation suite for landmark extraction (MediaPipe) and CNN baseline training (PyTorch).
+- `cream_with_bro/`: Coursework artifacts including IEEE 830 SRS, UML diagrams, and LaTeX reports.
+- `sugar_with_bro/`: Native HTML5/JavaScript WebSocket test client for isolated backend verification.
+
+### 4. WebSocket Protocol
+- Endpoint: `ws://localhost:8080/ws/echo`
+- Frame Payload: Base64-encoded JPEG image string (`data:image/jpeg;base64,...`) sent every 350ms.
+- Inference Response: JSON payload formatted as:
+  ```json
+  {
+    "label": "A",
+    "confidence": 0.942
+  }
+  ```
+
+### 5. Neural Network Specifications
+- Supported Classes: 36 static ASL characters (A-Z, 0-9).
+- Input Matrix: 128x128x3 RGB normalized values.
+- Framework: DeepLearning4j 1.0.0-M2.1 with ND4J execution backend.
