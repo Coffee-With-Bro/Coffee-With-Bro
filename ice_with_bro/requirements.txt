@@ -1,4 +1,12 @@
+opencv-python>=4.10.0
+albumentations>=2.0.0
 mediapipe>=0.10.14
-opencv-python>=4.9.0
+pillow>=10.3.0
+numpy>=1.26.0
 pandas>=2.2.0
+scikit-learn>=1.5.0
+torch>=2.2.0
+torchvision>=0.17.0
 tqdm>=4.66.0
+requests>=2.31.0
+kaggle>=1.6.0
