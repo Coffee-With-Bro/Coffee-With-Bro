@@ -13,11 +13,13 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.coffeewithbro.coffee_with_bro.dto.SessionStatsDto;
 import com.coffeewithbro.coffee_with_bro.dto.SystemStatusDto;
 import com.coffeewithbro.coffee_with_bro.entity.TranslationSession;
 import com.coffeewithbro.coffee_with_bro.repository.TranslationSessionRepository;
@@ -25,7 +27,7 @@ import com.coffeewithbro.coffee_with_bro.websocket.AslWebSocketHandler;
 
 /**
  * REST API Controller providing system health, ASL model diagnostics,
- * supported signs metadata, and translation session history.
+ * supported signs metadata, and translation session history with analytics.
  */
 @RestController
 @RequestMapping("/api")
@@ -108,6 +110,33 @@ public class SystemApiController {
     }
 
     /**
+     * Retrieve aggregate diagnostic metrics across all saved sessions.
+     */
+    @GetMapping("/sessions/stats")
+    public ResponseEntity<SessionStatsDto> getSessionStats() {
+        long totalSessions = sessionRepository.count();
+        if (totalSessions == 0) {
+            return ResponseEntity.ok(new SessionStatsDto(0L, 0L, 0.0, 0.0, null));
+        }
+
+        Long totalLetters = sessionRepository.sumTotalLetters();
+        Double avgConf = sessionRepository.averageConfidence();
+        Double avgDuration = sessionRepository.averageDurationSeconds();
+        LocalDateTime mostRecent = sessionRepository.findMostRecentCreatedAt();
+
+        String formattedRecent = mostRecent != null ? mostRecent.toString() : null;
+
+        SessionStatsDto stats = new SessionStatsDto(
+                totalSessions,
+                totalLetters != null ? totalLetters : 0L,
+                avgConf != null ? Math.round(avgConf * 1000.0) / 1000.0 : 0.0,
+                avgDuration != null ? Math.round(avgDuration * 10.0) / 10.0 : 0.0,
+                formattedRecent
+        );
+        return ResponseEntity.ok(stats);
+    }
+
+    /**
      * Record a new completed translation session.
      */
     @PostMapping("/sessions")
@@ -123,6 +152,19 @@ public class SystemApiController {
 
         TranslationSession saved = sessionRepository.save(session);
         return ResponseEntity.status(HttpStatus.CREATED).body(saved);
+    }
+
+    /**
+     * Delete an individual session by ID.
+     */
+    @DeleteMapping("/sessions/{id}")
+    public ResponseEntity<?> deleteSessionById(@PathVariable("id") Long id) {
+        if (!sessionRepository.existsById(id)) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                    .body(Map.of("error", "Translation session with ID " + id + " not found"));
+        }
+        sessionRepository.deleteById(id);
+        return ResponseEntity.ok(Map.of("message", "Session " + id + " deleted successfully"));
     }
 
     /**

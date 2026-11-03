@@ -8,6 +8,7 @@ interface BreadcrumbItem {
 
 const ROUTE_NAMES: Record<string, string> = {
   "/": "Home",
+  "/diagnostics": "Diagnostics",
   "/about": "About",
   "/team": "Team & Contact",
   "/resources": "Resources",

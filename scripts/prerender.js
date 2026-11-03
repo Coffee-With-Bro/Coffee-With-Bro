@@ -9,9 +9,14 @@ const frontendDir = path.join(rootDir, "milk_with_bro");
 const distDir = path.join(frontendDir, "dist");
 const serverDistDir = path.join(distDir, "server");
 
+const isWindows = process.platform === "win32";
+const npmCmd = isWindows ? "npm.cmd" : "npm";
+const npxCmd = isWindows ? "npx.cmd" : "npx";
+
 const ROUTES = 
 [
   "/",
+  "/diagnostics",
   "/about",
   "/team",
   "/resources",
@@ -23,13 +28,13 @@ const ROUTES =
 
 async function main()
 {
-  execSync("npm run build", 
+  execSync(`${npmCmd} run build`, 
   { 
     cwd: frontendDir, 
     stdio: "inherit" 
   });
 
-  execSync("npx vite build --ssr src/entry-server.tsx --outDir dist/server", 
+  execSync(`${npxCmd} vite build --ssr src/entry-server.tsx --outDir dist/server`, 
   {
     cwd: frontendDir,
     stdio: "inherit",
@@ -153,5 +158,6 @@ async function main()
 
 main().catch((err) => 
 {
+  console.error("Prerender failed:", err);
   process.exit(1);
 });

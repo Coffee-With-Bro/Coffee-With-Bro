@@ -3,6 +3,8 @@ import { useSignTranslator } from "../hooks/useSignTranslator";
 import { API_URL, type ConnectionStatus } from "../lib/signTranslator";
 import { AslGuideModal } from "../components/AslGuideModal";
 import { HistoryModal } from "../components/HistoryModal";
+import { DictionaryAutocomplete } from "../components/DictionaryAutocomplete";
+import { Link } from "../components/Link";
 import { trackEvent } from "../lib/analytics";
 
 const STATUS_COPY: Record<ConnectionStatus, string> = {
@@ -217,12 +219,20 @@ export function Home({ onStateChange }: HomeProps = {}) {
           >
             🕒 Session History
           </button>
+          <Link
+            to="/diagnostics"
+            className="btn btn-ghost"
+            aria-label="Open System Diagnostics Dashboard"
+          >
+            🩺 Diagnostics
+          </Link>
         </div>
 
         <div className="hero-badges" aria-label="System features">
           <span className="hero-badge">🔒 100% In-Memory</span>
           <span className="hero-badge">⚡ Low-Latency Local WS</span>
           <span className="hero-badge">🎯 36 Static Signs</span>
+          <span className="hero-badge">📚 Dictionary Assist</span>
           <span className="hero-badge">🎓 UCS503 TIET</span>
         </div>
       </section>
@@ -305,6 +315,13 @@ export function Home({ onStateChange }: HomeProps = {}) {
             >
               🕒 History
             </button>
+            <Link
+              to="/diagnostics"
+              className="btn btn-ghost btn-sm"
+              title="Open System Diagnostics Dashboard"
+            >
+              🩺 Diagnostics
+            </Link>
           </div>
         </div>
 
@@ -348,6 +365,17 @@ export function Home({ onStateChange }: HomeProps = {}) {
           )}
           <span className="cursor" aria-hidden="true" />
         </div>
+
+        {/* Dictionary Word Autocomplete & Validation Subsystem */}
+        <DictionaryAutocomplete
+          transcript={transcript}
+          onSelectWord={(word) => {
+            const lastSpaceIndex = transcript.lastIndexOf(" ");
+            const base = lastSpaceIndex === -1 ? "" : transcript.slice(0, lastSpaceIndex + 1);
+            setTranscript(base + word + " ");
+            trackEvent("dictionary_autocomplete_select", { word });
+          }}
+        />
 
         <div className="transcript-controls">
           <button className="btn btn-ghost" onClick={addSpace}>

@@ -10,6 +10,7 @@ import { Resources } from "./pages/Resources";
 import { Legal } from "./pages/Legal";
 import { Privacy } from "./pages/Privacy";
 import { ThankYou } from "./pages/ThankYou";
+import { Diagnostics } from "./pages/Diagnostics";
 import { NotFound } from "./pages/NotFound";
 import { CookieBanner } from "./components/CookieBanner";
 import { StickyMobileCta } from "./components/StickyMobileCta";
@@ -72,6 +73,7 @@ export function App({ ssrRoute }: AppProps = {}) {
       <Breadcrumbs currentRoute={route} />
 
       {route === "/" && <Home onStateChange={setHomeSync} />}
+      {route === "/diagnostics" && <Diagnostics />}
       {route === "/about" && <About />}
       {route === "/team" && <Team />}
       {route === "/resources" && <Resources />}
@@ -87,6 +89,8 @@ export function App({ ssrRoute }: AppProps = {}) {
         </div>
         <div className="footer-links">
           <Link to="/">Translator</Link>
+          <span aria-hidden="true">·</span>
+          <Link to="/diagnostics">System Diagnostics</Link>
           <span aria-hidden="true">·</span>
           <Link to="/about">About</Link>
           <span aria-hidden="true">·</span>

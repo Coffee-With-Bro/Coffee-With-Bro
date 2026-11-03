@@ -40,6 +40,11 @@ export const ROUTE_METADATA: Record<string, PageMetadata> = {
     description:
       "Thank you for contacting the Coffee with Bro team. We have received your submission and will respond promptly.",
   },
+  "/diagnostics": {
+    title: "System Diagnostics & Telemetry — Coffee with Bro",
+    description:
+      "Inspect live Spring Boot backend health, DL4J CNN inference engine state, WebSocket responsiveness, and database persistence metrics.",
+  },
 };
 
 export function updatePageMetadata(route: string | null) {

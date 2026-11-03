@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { API_URL, type TranslationSessionRecord } from "../lib/signTranslator";
+import { TranslationAnalytics } from "./TranslationAnalytics";
 
 interface HistoryModalProps {
   isOpen: boolean;
@@ -69,6 +70,11 @@ export function HistoryModal({ isOpen, onClose, onRestoreTranscript }: HistoryMo
           <button className="btn btn-ghost modal-close" onClick={onClose} aria-label="Close modal">
             ✕
           </button>
+        </div>
+
+        {/* Aggregated Analytics Banner */}
+        <div style={{ marginBottom: "16px" }}>
+          <TranslationAnalytics compact={true} />
         </div>
 
         <div className="history-content">

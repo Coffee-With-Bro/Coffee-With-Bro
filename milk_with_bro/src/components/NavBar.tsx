@@ -4,6 +4,7 @@ import type { Route } from "../lib/useRoute";
 
 const LINKS: { route: Route; label: string }[] = [
   { route: "/", label: "Translator" },
+  { route: "/diagnostics", label: "Diagnostics" },
   { route: "/about", label: "About" },
   { route: "/team", label: "Team & Contact" },
   { route: "/resources", label: "Resources" },
@@ -14,7 +15,6 @@ const LINKS: { route: Route; label: string }[] = [
 export function NavBar({ current }: { current: Route | null }) {
   return (
     <header className="topbar">
-      
       <Link className="topbar-brand" to="/">
         <BoostConfetti>
           <span className="topbar-brand-title">
@@ -24,7 +24,6 @@ export function NavBar({ current }: { current: Route | null }) {
         </BoostConfetti>
         <span className="topbar-sub">Offline sign language translator</span>
       </Link>
-
 
       <nav className="nav" aria-label="Main Navigation">
         <ul className="nav-list">
