@@ -1,0 +1,23 @@
+# Backend & Java runtime files
+coffee_with_bro/
+.mvn/
+*.jar
+*.class
+
+# Python ML pipeline & large datasets
+ice_with_bro/
+data/
+*.pyc
+__pycache__/
+
+# Course reports & LaTeX documentation
+cream_with_bro/
+
+# Standalone diagnostic benches & developer tools
+sugar_with_bro/
+.github/
+.vscode/
+
+# Local logs & OS metadata
+*.log
+.DS_Store

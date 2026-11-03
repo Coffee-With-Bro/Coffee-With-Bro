@@ -3,12 +3,16 @@
   "private": true,
   "version": "1.0.0",
   "type": "module",
+  "workspaces": [
+    "milk_with_bro"
+  ],
   "scripts": {
     "test": "node scripts/test-all.js",
     "test:ui": "node scripts/playwright-ui-check.js",
     "check": "node scripts/test-all.js",
     "lint": "npm --prefix milk_with_bro run lint",
-    "build": "npm --prefix milk_with_bro run build",
+    "build": "node scripts/prerender.js",
+    "vercel-build": "node scripts/prerender.js",
     "prerender": "node scripts/prerender.js",
     "serve:ssr": "npm --prefix milk_with_bro run serve:ssr",
     "dev:frontend": "npm --prefix milk_with_bro run dev",
