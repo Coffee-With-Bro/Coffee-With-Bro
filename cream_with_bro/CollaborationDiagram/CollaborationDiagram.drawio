@@ -1,208 +1,167 @@
-<mxfile host="app.diagrams.net">
-  <diagram name="Collaboration Diagram" id="TSf2wWuRdyrMI1vWGxjp">
-    <mxGraphModel dx="978" dy="651" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+<mxfile host="app.diagrams.net" version="24.7.17">
+  <diagram id="collab-diag" name="Collaboration Diagram">
+    <mxGraphModel dx="1600" dy="1200" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1600" pageHeight="1200" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
-        <mxCell id="Yl9mu2ppZ2WHnawpnAzJ-45" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#000000;fontColor=#000000;fontSize=12;" value="&lt;b&gt;Camera&lt;/b&gt;" vertex="1">
-          <mxGeometry height="50" width="140" x="259" y="144" as="geometry" />
+
+        <!-- Title -->
+        <mxCell id="c_ttl" value="Collaboration Diagram (Communication Diagram) — Coffee With Bro System" style="text;html=1;align=center;verticalAlign=middle;fontSize=20;fontStyle=1;fillColor=#dae8fc;strokeColor=#6c8ebf;rounded=1;" vertex="1" parent="1">
+          <mxGeometry x="50" y="25" width="1500" height="40" as="geometry" />
         </mxCell>
-        <mxCell id="Yl9mu2ppZ2WHnawpnAzJ-46" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#000000;fontColor=#000000;fontSize=12;" value="&lt;b&gt;ReactFrontend&lt;/b&gt;" vertex="1">
-          <mxGeometry height="84" width="140" x="259" y="311" as="geometry" />
+
+        <!-- Subsystem Boundaries -->
+        <!-- Client Boundary -->
+        <mxCell id="b_client" value="Client Layer (Browser &amp; Webcam)" style="rounded=1;dashed=1;fillColor=#f8f9fa;strokeColor=#6c8ebf;verticalAlign=top;fontStyle=1;fontSize=13;spacingTop=8;html=1;" vertex="1" parent="1">
+          <mxGeometry x="50" y="85" width="460" height="680" as="geometry" />
         </mxCell>
-        <mxCell id="Yl9mu2ppZ2WHnawpnAzJ-47" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#000000;fontColor=#000000;fontSize=12;" value="&lt;b&gt;WebSocketService&lt;/b&gt;" vertex="1">
-          <mxGeometry height="84" width="161" x="581" y="311" as="geometry" />
+        <!-- Backend Boundary -->
+        <mxCell id="b_backend" value="Spring Boot In-Process Backend (coffee_with_bro)" style="rounded=1;dashed=1;fillColor=#f8f9fa;strokeColor=#82b366;verticalAlign=top;fontStyle=1;fontSize=13;spacingTop=8;html=1;" vertex="1" parent="1">
+          <mxGeometry x="560" y="85" width="990" height="680" as="geometry" />
         </mxCell>
-        <mxCell id="Yl9mu2ppZ2WHnawpnAzJ-48" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#000000;fontColor=#000000;fontSize=12;" value="&lt;b&gt;PredictionController&lt;br&gt;(Spring Boot)&lt;/b&gt;" vertex="1">
-          <mxGeometry height="84" width="245" x="903" y="311" as="geometry" />
+        <!-- Offline Pipeline Boundary -->
+        <mxCell id="b_offline" value="Offline Training Pipeline (ice_with_bro &amp; DL4J TrainAslCnn)" style="rounded=1;dashed=1;fillColor=#fdfdfe;strokeColor=#d79b00;verticalAlign=top;fontStyle=1;fontSize=13;spacingTop=8;html=1;" vertex="1" parent="1">
+          <mxGeometry x="50" y="800" width="1500" height="340" as="geometry" />
         </mxCell>
-        <mxCell id="Yl9mu2ppZ2WHnawpnAzJ-49" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#000000;fontColor=#000000;fontSize=12;" value="&lt;b&gt;CNNModel&lt;/b&gt;" vertex="1">
-          <mxGeometry height="50" width="245" x="903" y="115" as="geometry" />
+
+        <!-- Objects: Client -->
+        <!-- :User -->
+        <mxCell id="obj_user" value=":User (Signer)" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;fontStyle=1;fontSize=12;fillColor=#f5f5f5;strokeColor=#666666;" vertex="1" parent="1">
+          <mxGeometry x="110" y="150" width="45" height="90" as="geometry" />
         </mxCell>
-        <mxCell id="Yl9mu2ppZ2WHnawpnAzJ-50" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#000000;fontColor=#000000;fontSize=12;" value="&lt;b&gt;ImagePreprocessor&lt;/b&gt;" vertex="1">
-          <mxGeometry height="84" width="161" x="1295" y="311" as="geometry" />
+        <!-- :Webcam -->
+        <mxCell id="obj_cam" value="«device»&#xa;:Webcam" style="rounded=1;whiteSpace=wrap;html=1;fontSize=12;fontStyle=1;fillColor=#e1d5e7;strokeColor=#9673a6;" vertex="1" parent="1">
+          <mxGeometry x="270" y="165" width="160" height="60" as="geometry" />
         </mxCell>
-        <mxCell id="Yl9mu2ppZ2WHnawpnAzJ-51" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#000000;fontColor=#000000;fontSize=12;" value="&lt;b&gt;FeatureExtractor&lt;br&gt;(CNN Feature)&lt;/b&gt;" vertex="1">
-          <mxGeometry height="56" width="133" x="931" y="483" as="geometry" />
+        <!-- :ReactFrontend -->
+        <mxCell id="obj_fe" value=":ReactFrontend&#xa;(milk_with_bro)" style="rounded=1;whiteSpace=wrap;html=1;fontSize=12;fontStyle=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="1">
+          <mxGeometry x="170" y="360" width="230" height="80" as="geometry" />
         </mxCell>
-        <mxCell id="Yl9mu2ppZ2WHnawpnAzJ-52" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#000000;fontColor=#000000;fontSize=12;" value="&lt;b&gt;GestureClassifier&lt;/b&gt;" vertex="1">
-          <mxGeometry height="56" width="175" x="1232" y="483" as="geometry" />
+
+        <!-- Objects: Backend -->
+        <!-- :AslWebSocketHandler -->
+        <mxCell id="obj_ws" value=":AslWebSocketHandler&#xa;(/ws/echo)" style="rounded=1;whiteSpace=wrap;html=1;fontSize=12;fontStyle=1;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="1">
+          <mxGeometry x="610" y="240" width="220" height="75" as="geometry" />
         </mxCell>
-        <mxCell id="Yl9mu2ppZ2WHnawpnAzJ-53" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#000000;fontColor=#000000;fontSize=12;" value="&lt;b&gt;PredictionEvaluator&lt;/b&gt;" vertex="1">
-          <mxGeometry height="56" width="175" x="900" y="612" as="geometry" />
+        <!-- :AslPredictor -->
+        <mxCell id="obj_pred" value=":AslPredictor&#xa;(In-Process JVM Engine)" style="rounded=1;whiteSpace=wrap;html=1;fontSize=12;fontStyle=1;fillColor=#ffe6cc;strokeColor=#d79b00;" vertex="1" parent="1">
+          <mxGeometry x="960" y="240" width="220" height="75" as="geometry" />
         </mxCell>
-        <mxCell id="Yl9mu2ppZ2WHnawpnAzJ-54" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#000000;fontColor=#000000;fontSize=12;" value="&lt;b&gt;CustomDictionary&lt;br&gt;Manager&lt;/b&gt;" vertex="1">
-          <mxGeometry height="63" width="175" x="900" y="721" as="geometry" />
+        <!-- :DL4JModel -->
+        <mxCell id="obj_model" value=":DL4JModel&#xa;(MultiLayerNetwork 36 classes)" style="rounded=1;whiteSpace=wrap;html=1;fontSize=12;fontStyle=1;fillColor=#ffe6cc;strokeColor=#d79b00;" vertex="1" parent="1">
+          <mxGeometry x="1290" y="240" width="220" height="75" as="geometry" />
         </mxCell>
-        <mxCell id="Yl9mu2ppZ2WHnawpnAzJ-55" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#000000;fontColor=#000000;fontSize=12;" value="&lt;b&gt;CustomDictionary&lt;br&gt;DB&lt;/b&gt;" vertex="1">
-          <mxGeometry height="63" width="140" x="1267" y="721" as="geometry" />
+
+        <!-- :DictionaryService & Controller -->
+        <mxCell id="obj_dict" value=":DictionaryService &amp;&#xa;:DictionaryController" style="rounded=1;whiteSpace=wrap;html=1;fontSize=12;fontStyle=1;fillColor=#fff2cc;strokeColor=#d6b656;" vertex="1" parent="1">
+          <mxGeometry x="610" y="480" width="220" height="75" as="geometry" />
         </mxCell>
-        <mxCell id="Yl9mu2ppZ2WHnawpnAzJ-56" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#000000;fontColor=#000000;fontSize=12;" value="&lt;b&gt;TrainedModel&lt;br&gt;Storage&lt;/b&gt;" vertex="1">
-          <mxGeometry height="70" width="154" x="574" y="837" as="geometry" />
+
+        <!-- :SystemApiController -->
+        <mxCell id="obj_sys" value=":SystemApiController&#xa;(/api/sessions, /api/status)" style="rounded=1;whiteSpace=wrap;html=1;fontSize=12;fontStyle=1;fillColor=#e1d5e7;strokeColor=#9673a6;" vertex="1" parent="1">
+          <mxGeometry x="960" y="480" width="220" height="75" as="geometry" />
         </mxCell>
-        <mxCell id="Yl9mu2ppZ2WHnawpnAzJ-57" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#000000;fontColor=#000000;fontSize=12;" value="&lt;b&gt;TrainingService&lt;/b&gt;" vertex="1">
-          <mxGeometry height="70" width="126" x="984" y="837" as="geometry" />
+        <!-- :SessionRepository -->
+        <mxCell id="obj_repo" value=":TranslationSessionRepository&#xa;(Spring Data JPA)" style="rounded=1;whiteSpace=wrap;html=1;fontSize=12;fontStyle=1;fillColor=#e1d5e7;strokeColor=#9673a6;" vertex="1" parent="1">
+          <mxGeometry x="960" y="640" width="220" height="75" as="geometry" />
         </mxCell>
-        <mxCell id="Yl9mu2ppZ2WHnawpnAzJ-58" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#000000;fontColor=#000000;fontSize=12;" value="&lt;b&gt;DatasetManager&lt;br&gt;(ASL-HG Dataset)&lt;/b&gt;" vertex="1">
-          <mxGeometry height="70" width="140" x="1281" y="830" as="geometry" />
+        <!-- :H2Database -->
+        <mxCell id="obj_db" value="«system»&#xa;:H2Database (Embedded)" style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=15;fontSize=12;fontStyle=1;fillColor=#f5f5f5;strokeColor=#666666;" vertex="1" parent="1">
+          <mxGeometry x="1310" y="550" width="180" height="110" as="geometry" />
         </mxCell>
-        <mxCell id="Yl9mu2ppZ2WHnawpnAzJ-59" parent="1" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;fillColor=#ffffff;strokeColor=#000000;fontColor=#000000;fontSize=12;" value=":User" vertex="1">
-          <mxGeometry height="84" width="42" x="42" y="302" as="geometry" />
+
+        <!-- Objects: Offline Pipeline -->
+        <!-- :DatasetStore -->
+        <mxCell id="obj_ds" value=":DatasetStore&#xa;(ASL-HG 36 Classes)" style="rounded=1;whiteSpace=wrap;html=1;fontSize=12;fontStyle=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="1">
+          <mxGeometry x="150" y="930" width="220" height="70" as="geometry" />
         </mxCell>
-        <mxCell id="Yl9mu2ppZ2WHnawpnAzJ-60" edge="1" parent="1" source="Yl9mu2ppZ2WHnawpnAzJ-59" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;strokeColor=#000000;fontColor=#000000;fontSize=11;labelBackgroundColor=#ffffff;exitX=1;exitY=0.3;exitDx=0;exitDy=0;entryX=0;entryY=0.2;entryDx=0;entryDy=0;" target="Yl9mu2ppZ2WHnawpnAzJ-46" value="1: presentHandGesture()">
+        <!-- :Preprocessor -->
+        <mxCell id="obj_prep" value=":Preprocessor&#xa;(Resize 128x128 RGB, 80/20 split)" style="rounded=1;whiteSpace=wrap;html=1;fontSize=12;fontStyle=1;fillColor=#ffe6cc;strokeColor=#d79b00;" vertex="1" parent="1">
+          <mxGeometry x="510" y="930" width="240" height="70" as="geometry" />
+        </mxCell>
+        <!-- :TrainAslCnn -->
+        <mxCell id="obj_trainer" value=":TrainAslCnn&#xa;(DL4J 20 Epochs, batchSize 64)" style="rounded=1;whiteSpace=wrap;html=1;fontSize=12;fontStyle=1;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="1">
+          <mxGeometry x="890" y="930" width="240" height="70" as="geometry" />
+        </mxCell>
+        <!-- :ModelArtifactStore -->
+        <mxCell id="obj_art" value=":ModelArtifactStore&#xa;(asl_cnn_model.zip, labels.txt)" style="rounded=1;whiteSpace=wrap;html=1;fontSize=12;fontStyle=1;fillColor=#e1d5e7;strokeColor=#9673a6;" vertex="1" parent="1">
+          <mxGeometry x="1260" y="930" width="240" height="70" as="geometry" />
+        </mxCell>
+
+        <!-- Links and Message Flows -->
+        <!-- User to Webcam -->
+        <mxCell id="l_u_cam" value="1: presentHandSign() &gt;" style="endArrow=none;html=1;strokeColor=#000000;fontSize=11;fontStyle=1;" edge="1" parent="1" source="obj_user" target="obj_cam">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- Webcam to ReactFrontend -->
+        <mxCell id="l_cam_fe" value="1.1: captureFrame(350ms) &gt;" style="endArrow=none;html=1;strokeColor=#000000;fontSize=11;fontStyle=1;" edge="1" parent="1" source="obj_cam" target="obj_fe">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- ReactFrontend to AslWebSocketHandler -->
+        <mxCell id="l_fe_ws" value="1.2: sendWebSocketFrame(base64) &gt;&#xa;&lt; 1.6: returnJsonPayload(label, confidence)" style="endArrow=none;html=1;strokeColor=#000000;fontSize=11;fontStyle=1;" edge="1" parent="1" source="obj_fe" target="obj_ws">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- ReactFrontend self-calls: streak and commit -->
+        <mxCell id="l_fe_self" value="1.7: evaluateStreak(threshold=0.85, stableCount=4)&#xa;1.8: commitLetterToTranscript(label)" style="text;html=1;align=center;fontSize=10;fontStyle=2;fontColor=#0066cc;" vertex="1" parent="1">
+          <mxGeometry x="120" y="470" width="310" height="35" as="geometry" />
+        </mxCell>
+
+        <!-- AslWebSocketHandler to AslPredictor -->
+        <mxCell id="l_ws_pred" value="1.3: decodeBase64()&#xa;1.4: predict(image) &gt;&#xa;&lt; 1.5: predictionResult(label, confidence)" style="endArrow=none;html=1;strokeColor=#000000;fontSize=11;fontStyle=1;" edge="1" parent="1" source="obj_ws" target="obj_pred">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- AslPredictor to DL4JModel -->
+        <mxCell id="l_pred_mod" value="1.4.1: scaleAndNormalize(128x128x3)&#xa;1.4.2: model.output(input) &gt;&#xa;&lt; 1.4.3: softmaxProbabilities" style="endArrow=none;html=1;strokeColor=#000000;fontSize=11;fontStyle=1;" edge="1" parent="1" source="obj_pred" target="obj_model">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- ReactFrontend to DictionaryService -->
+        <mxCell id="l_fe_dict" value="2: requestWordSuggestions(prefix) &gt;&#xa;&lt; 2.2: returnSuggestions(matchingWords)" style="endArrow=none;html=1;strokeColor=#000000;fontSize=11;fontStyle=1;" edge="1" parent="1" source="obj_fe" target="obj_dict">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- ReactFrontend to SystemApiController -->
+        <mxCell id="l_fe_sys" value="3: saveSession(transcript, metrics) &gt;&#xa;&lt; 3.3: returnSessionSummaryDto" style="endArrow=none;html=1;strokeColor=#000000;fontSize=11;fontStyle=1;" edge="1" parent="1" source="obj_fe" target="obj_sys">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- SystemApiController to SessionRepository -->
+        <mxCell id="l_sys_repo" value="3.1: save(translationSession) &gt;" style="endArrow=none;html=1;strokeColor=#000000;fontSize=11;fontStyle=1;" edge="1" parent="1" source="obj_sys" target="obj_repo">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- SessionRepository to H2Database -->
+        <mxCell id="l_repo_db" value="3.2: executeInsert() &gt;" style="endArrow=none;html=1;strokeColor=#000000;fontSize=11;fontStyle=1;" edge="1" parent="1" source="obj_repo" target="obj_db">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- Offline Pipeline Links -->
+        <mxCell id="l_ds_prep" value="4: loadRawImages() &gt;" style="endArrow=none;html=1;strokeColor=#000000;fontSize=11;fontStyle=1;" edge="1" parent="1" source="obj_ds" target="obj_prep">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <mxCell id="l_prep_trn" value="4.1: supplyTrainAndTestSplits(80/20, seed=42) &gt;" style="endArrow=none;html=1;strokeColor=#000000;fontSize=11;fontStyle=1;" edge="1" parent="1" source="obj_prep" target="obj_trainer">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <mxCell id="l_trn_art" value="4.2: fitEpochs(20) &amp; evaluate()&#xa;4.3: serializeModelZip() &gt;" style="endArrow=none;html=1;strokeColor=#000000;fontSize=11;fontStyle=1;" edge="1" parent="1" source="obj_trainer" target="obj_art">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- Model artifact fed to AslPredictor at startup -->
+        <mxCell id="l_art_pred" value="5: restoreMultiLayerNetwork() [Startup]" style="endArrow=classic;dashed=1;html=1;strokeColor=#d79b00;fontSize=11;fontStyle=2;" edge="1" parent="1" source="obj_art" target="obj_pred">
           <mxGeometry relative="1" as="geometry">
-            <mxPoint y="-13" as="offset" />
-          </mxGeometry>
-        </mxCell>
-        <mxCell id="Yl9mu2ppZ2WHnawpnAzJ-61" edge="1" parent="1" source="Yl9mu2ppZ2WHnawpnAzJ-46" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;strokeColor=#000000;fontColor=#000000;fontSize=11;labelBackgroundColor=#ffffff;exitX=0;exitY=0.6;exitDx=0;exitDy=0;entryX=1;entryY=0.7;entryDx=0;entryDy=0;" target="Yl9mu2ppZ2WHnawpnAzJ-59" value="15: displayPrediction()">
-          <mxGeometry relative="1" as="geometry">
-            <mxPoint y="13" as="offset" />
-          </mxGeometry>
-        </mxCell>
-        <mxCell id="Yl9mu2ppZ2WHnawpnAzJ-62" edge="1" parent="1" source="Yl9mu2ppZ2WHnawpnAzJ-46" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;strokeColor=#000000;fontColor=#000000;fontSize=11;labelBackgroundColor=#ffffff;exitX=0.25;exitY=0;exitDx=0;exitDy=0;entryX=0.25;entryY=1;entryDx=0;entryDy=0;" target="Yl9mu2ppZ2WHnawpnAzJ-45" value="1.1: captureFrame()">
-          <mxGeometry relative="1" as="geometry">
-            <mxPoint x="-67" as="offset" />
-          </mxGeometry>
-        </mxCell>
-        <mxCell id="Yl9mu2ppZ2WHnawpnAzJ-63" edge="1" parent="1" source="Yl9mu2ppZ2WHnawpnAzJ-45" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;strokeColor=#000000;fontColor=#000000;fontSize=11;labelBackgroundColor=#ffffff;exitX=0.75;exitY=1;exitDx=0;exitDy=0;entryX=0.75;entryY=0;entryDx=0;entryDy=0;" target="Yl9mu2ppZ2WHnawpnAzJ-46" value="1.2: frame">
-          <mxGeometry relative="1" as="geometry">
-            <mxPoint x="39" as="offset" />
-          </mxGeometry>
-        </mxCell>
-        <mxCell id="Yl9mu2ppZ2WHnawpnAzJ-64" edge="1" parent="1" source="Yl9mu2ppZ2WHnawpnAzJ-46" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;strokeColor=#000000;fontColor=#000000;fontSize=11;labelBackgroundColor=#ffffff;exitX=1;exitY=0.2;exitDx=0;exitDy=0;entryX=0;entryY=0.2;entryDx=0;entryDy=0;" target="Yl9mu2ppZ2WHnawpnAzJ-47" value="2: sendCameraFrame()">
-          <mxGeometry relative="1" as="geometry">
-            <mxPoint y="-13" as="offset" />
-          </mxGeometry>
-        </mxCell>
-        <mxCell id="Yl9mu2ppZ2WHnawpnAzJ-65" edge="1" parent="1" source="Yl9mu2ppZ2WHnawpnAzJ-47" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;strokeColor=#000000;fontColor=#000000;fontSize=11;labelBackgroundColor=#ffffff;exitX=0;exitY=0.6;exitDx=0;exitDy=0;entryX=1;entryY=0.6;entryDx=0;entryDy=0;" target="Yl9mu2ppZ2WHnawpnAzJ-46" value="14: sendResult(predictedSymbol,&lt;br&gt;confidence)">
-          <mxGeometry relative="1" as="geometry">
-            <mxPoint y="20" as="offset" />
-          </mxGeometry>
-        </mxCell>
-        <mxCell id="Yl9mu2ppZ2WHnawpnAzJ-66" edge="1" parent="1" source="Yl9mu2ppZ2WHnawpnAzJ-47" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;strokeColor=#000000;fontColor=#000000;fontSize=11;labelBackgroundColor=#ffffff;exitX=1;exitY=0.2;exitDx=0;exitDy=0;entryX=0;entryY=0.2;entryDx=0;entryDy=0;" target="Yl9mu2ppZ2WHnawpnAzJ-48" value="3: forwardFrame(image)">
-          <mxGeometry relative="1" as="geometry">
-            <mxPoint y="-13" as="offset" />
-          </mxGeometry>
-        </mxCell>
-        <mxCell id="Yl9mu2ppZ2WHnawpnAzJ-67" edge="1" parent="1" source="Yl9mu2ppZ2WHnawpnAzJ-48" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;strokeColor=#000000;fontColor=#000000;fontSize=11;labelBackgroundColor=#ffffff;exitX=0;exitY=0.6;exitDx=0;exitDy=0;entryX=1;entryY=0.6;entryDx=0;entryDy=0;" target="Yl9mu2ppZ2WHnawpnAzJ-47" value="13: predictionResult&lt;br&gt;(symbol, confidence)">
-          <mxGeometry relative="1" as="geometry">
-            <mxPoint y="20" as="offset" />
-          </mxGeometry>
-        </mxCell>
-        <mxCell id="Yl9mu2ppZ2WHnawpnAzJ-68" edge="1" parent="1" source="Yl9mu2ppZ2WHnawpnAzJ-48" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;strokeColor=#000000;fontColor=#000000;fontSize=11;labelBackgroundColor=#ffffff;exitX=0.25;exitY=0;exitDx=0;exitDy=0;entryX=0.25;entryY=1;entryDx=0;entryDy=0;" target="Yl9mu2ppZ2WHnawpnAzJ-49" value="4: loadModel()">
-          <mxGeometry relative="1" as="geometry">
-            <mxPoint x="-51" as="offset" />
-          </mxGeometry>
-        </mxCell>
-        <mxCell id="Yl9mu2ppZ2WHnawpnAzJ-69" edge="1" parent="1" source="Yl9mu2ppZ2WHnawpnAzJ-49" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;strokeColor=#000000;fontColor=#000000;fontSize=11;labelBackgroundColor=#ffffff;exitX=0.75;exitY=1;exitDx=0;exitDy=0;entryX=0.75;entryY=0;entryDx=0;entryDy=0;" target="Yl9mu2ppZ2WHnawpnAzJ-48" value="5: modelReady()">
-          <mxGeometry relative="1" as="geometry">
-            <mxPoint x="54" as="offset" />
-          </mxGeometry>
-        </mxCell>
-        <mxCell id="Yl9mu2ppZ2WHnawpnAzJ-70" edge="1" parent="1" source="Yl9mu2ppZ2WHnawpnAzJ-48" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;strokeColor=#000000;fontColor=#000000;fontSize=11;labelBackgroundColor=#ffffff;exitX=1;exitY=0.2;exitDx=0;exitDy=0;entryX=0;entryY=0.2;entryDx=0;entryDy=0;" target="Yl9mu2ppZ2WHnawpnAzJ-50" value="6: preprocess(image)">
-          <mxGeometry relative="1" as="geometry">
-            <mxPoint y="-13" as="offset" />
-          </mxGeometry>
-        </mxCell>
-        <mxCell id="Yl9mu2ppZ2WHnawpnAzJ-71" edge="1" parent="1" source="Yl9mu2ppZ2WHnawpnAzJ-50" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;strokeColor=#000000;fontColor=#000000;fontSize=11;labelBackgroundColor=#ffffff;exitX=0;exitY=0.6;exitDx=0;exitDy=0;entryX=1;entryY=0.6;entryDx=0;entryDy=0;" target="Yl9mu2ppZ2WHnawpnAzJ-48" value="7: processedImage&lt;br&gt;(128x128)">
-          <mxGeometry relative="1" as="geometry">
-            <mxPoint y="20" as="offset" />
-          </mxGeometry>
-        </mxCell>
-        <mxCell id="Yl9mu2ppZ2WHnawpnAzJ-72" edge="1" parent="1" source="Yl9mu2ppZ2WHnawpnAzJ-48" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;strokeColor=#000000;fontColor=#000000;fontSize=11;labelBackgroundColor=#ffffff;exitX=0.3;exitY=1;exitDx=0;exitDy=0;entryX=0.263;entryY=0;entryDx=0;entryDy=0;" target="Yl9mu2ppZ2WHnawpnAzJ-51" value="8: extractFeatures()">
-          <mxGeometry relative="1" as="geometry">
-            <mxPoint x="-70" as="offset" />
-          </mxGeometry>
-        </mxCell>
-        <mxCell id="Yl9mu2ppZ2WHnawpnAzJ-73" edge="1" parent="1" source="Yl9mu2ppZ2WHnawpnAzJ-51" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;strokeColor=#000000;fontColor=#000000;fontSize=11;labelBackgroundColor=#ffffff;exitX=0.789;exitY=0;exitDx=0;exitDy=0;entryX=0.633;entryY=1;entryDx=0;entryDy=0;" target="Yl9mu2ppZ2WHnawpnAzJ-48" value="9: featureVector">
-          <mxGeometry relative="1" as="geometry">
-            <mxPoint x="58" as="offset" />
-          </mxGeometry>
-        </mxCell>
-        <mxCell id="Yl9mu2ppZ2WHnawpnAzJ-74" edge="1" parent="1" source="Yl9mu2ppZ2WHnawpnAzJ-48" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;strokeColor=#000000;fontColor=#000000;fontSize=11;labelBackgroundColor=#ffffff;exitX=0.943;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" target="Yl9mu2ppZ2WHnawpnAzJ-52" value="10: classifyGesture()">
-          <mxGeometry relative="1" x="0.35" as="geometry">
-            <mxPoint y="-12" as="offset" />
             <Array as="points">
-              <mxPoint x="1134" y="448" />
-              <mxPoint x="1319" y="448" />
+              <mxPoint x="1440" y="860" />
+              <mxPoint x="1100" y="860" />
             </Array>
           </mxGeometry>
         </mxCell>
-        <mxCell id="Yl9mu2ppZ2WHnawpnAzJ-75" edge="1" parent="1" source="Yl9mu2ppZ2WHnawpnAzJ-52" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;strokeColor=#000000;fontColor=#000000;fontSize=11;labelBackgroundColor=#ffffff;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" target="Yl9mu2ppZ2WHnawpnAzJ-51" value="11: prediction(symbol,&lt;br&gt;confidence)">
-          <mxGeometry relative="1" as="geometry">
-            <mxPoint y="-20" as="offset" />
-          </mxGeometry>
-        </mxCell>
-        <mxCell id="Yl9mu2ppZ2WHnawpnAzJ-76" edge="1" parent="1" source="Yl9mu2ppZ2WHnawpnAzJ-48" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;strokeColor=#000000;fontColor=#000000;fontSize=11;labelBackgroundColor=#ffffff;exitX=0.886;exitY=1;exitDx=0;exitDy=0;entryX=0.776;entryY=0;entryDx=0;entryDy=0;" target="Yl9mu2ppZ2WHnawpnAzJ-53" value="12: checkConfidence(prediction)">
-          <mxGeometry relative="1" x="0.3" as="geometry">
-            <mxPoint x="112" y="-14" as="offset" />
-            <Array as="points">
-              <mxPoint x="1120" y="574" />
-              <mxPoint x="1036" y="574" />
-            </Array>
-          </mxGeometry>
-        </mxCell>
-        <mxCell id="Yl9mu2ppZ2WHnawpnAzJ-77" edge="1" parent="1" source="Yl9mu2ppZ2WHnawpnAzJ-53" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;strokeColor=#000000;fontColor=#000000;fontSize=11;labelBackgroundColor=#ffffff;exitX=0;exitY=0.3;exitDx=0;exitDy=0;entryX=0.8;entryY=1;entryDx=0;entryDy=0;" target="Yl9mu2ppZ2WHnawpnAzJ-47" value="12.1: lowConfidence /&lt;br&gt;rejectPrediction()">
-          <mxGeometry relative="1" x="-0.55" as="geometry">
-            <mxPoint y="-20" as="offset" />
-            <Array as="points">
-              <mxPoint x="710" y="629" />
-            </Array>
-          </mxGeometry>
-        </mxCell>
-        <mxCell id="Yl9mu2ppZ2WHnawpnAzJ-78" edge="1" parent="1" source="Yl9mu2ppZ2WHnawpnAzJ-53" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;strokeColor=#000000;fontColor=#000000;fontSize=11;labelBackgroundColor=#ffffff;exitX=0;exitY=0.75;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" target="Yl9mu2ppZ2WHnawpnAzJ-54" value="12.2: highConfidence /&lt;br&gt;acceptPrediction()">
-          <mxGeometry relative="1" x="-0.65" as="geometry">
-            <mxPoint y="20" as="offset" />
-            <Array as="points">
-              <mxPoint x="763" y="654" />
-              <mxPoint x="763" y="752" />
-            </Array>
-          </mxGeometry>
-        </mxCell>
-        <mxCell id="Yl9mu2ppZ2WHnawpnAzJ-79" edge="1" parent="1" source="Yl9mu2ppZ2WHnawpnAzJ-54" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;strokeColor=#000000;fontColor=#000000;fontSize=11;labelBackgroundColor=#ffffff;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" target="Yl9mu2ppZ2WHnawpnAzJ-53" value="12.3: lookupSymbol(symbol)">
-          <mxGeometry relative="1" as="geometry">
-            <mxPoint x="89" as="offset" />
-          </mxGeometry>
-        </mxCell>
-        <mxCell id="Yl9mu2ppZ2WHnawpnAzJ-80" edge="1" parent="1" source="Yl9mu2ppZ2WHnawpnAzJ-54" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;strokeColor=#000000;fontColor=#000000;fontSize=11;labelBackgroundColor=#ffffff;exitX=1;exitY=0.25;exitDx=0;exitDy=0;entryX=0;entryY=0.25;entryDx=0;entryDy=0;" target="Yl9mu2ppZ2WHnawpnAzJ-55" value="12.3.1: getCustomSymbols()">
-          <mxGeometry relative="1" as="geometry">
-            <mxPoint y="-13" as="offset" />
-          </mxGeometry>
-        </mxCell>
-        <mxCell id="Yl9mu2ppZ2WHnawpnAzJ-81" edge="1" parent="1" source="Yl9mu2ppZ2WHnawpnAzJ-55" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;strokeColor=#000000;fontColor=#000000;fontSize=11;labelBackgroundColor=#ffffff;exitX=0;exitY=0.75;exitDx=0;exitDy=0;entryX=1;entryY=0.75;entryDx=0;entryDy=0;" target="Yl9mu2ppZ2WHnawpnAzJ-54" value="12.3.2: symbolList">
-          <mxGeometry relative="1" as="geometry">
-            <mxPoint y="13" as="offset" />
-          </mxGeometry>
-        </mxCell>
-        <mxCell id="Yl9mu2ppZ2WHnawpnAzJ-82" edge="1" parent="1" source="Yl9mu2ppZ2WHnawpnAzJ-58" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;strokeColor=#000000;fontColor=#000000;fontSize=11;labelBackgroundColor=#ffffff;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" target="Yl9mu2ppZ2WHnawpnAzJ-57" value="16: provideDataset()">
-          <mxGeometry relative="1" as="geometry">
-            <mxPoint y="-13" as="offset" />
-          </mxGeometry>
-        </mxCell>
-        <mxCell id="Yl9mu2ppZ2WHnawpnAzJ-83" edge="1" parent="1" source="Yl9mu2ppZ2WHnawpnAzJ-57" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;strokeColor=#000000;fontColor=#000000;fontSize=11;labelBackgroundColor=#ffffff;exitX=0;exitY=0.25;exitDx=0;exitDy=0;entryX=1;entryY=0.25;entryDx=0;entryDy=0;" target="Yl9mu2ppZ2WHnawpnAzJ-56" value="17: preprocessAndTrain()">
-          <mxGeometry relative="1" as="geometry">
-            <mxPoint y="-13" as="offset" />
-          </mxGeometry>
-        </mxCell>
-        <mxCell id="Yl9mu2ppZ2WHnawpnAzJ-84" edge="1" parent="1" source="Yl9mu2ppZ2WHnawpnAzJ-56" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;strokeColor=#000000;fontColor=#000000;fontSize=11;labelBackgroundColor=#ffffff;exitX=1;exitY=0.75;exitDx=0;exitDy=0;entryX=0;entryY=0.75;entryDx=0;entryDy=0;" target="Yl9mu2ppZ2WHnawpnAzJ-57" value="18: trainedModel">
-          <mxGeometry relative="1" as="geometry">
-            <mxPoint y="13" as="offset" />
-          </mxGeometry>
-        </mxCell>
-        <mxCell id="Yl9mu2ppZ2WHnawpnAzJ-85" edge="1" parent="1" source="Yl9mu2ppZ2WHnawpnAzJ-56" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;strokeColor=#000000;fontColor=#000000;fontSize=11;labelBackgroundColor=#ffffff;exitX=0.25;exitY=0;exitDx=0;exitDy=0;entryX=0.2;entryY=1;entryDx=0;entryDy=0;" target="Yl9mu2ppZ2WHnawpnAzJ-47" value="19: loadTrainedModel()">
-          <mxGeometry relative="1" as="geometry">
-            <mxPoint x="-76" as="offset" />
-          </mxGeometry>
-        </mxCell>
-        <mxCell id="Yl9mu2ppZ2WHnawpnAzJ-86" edge="1" parent="1" source="Yl9mu2ppZ2WHnawpnAzJ-58" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;strokeColor=#000000;fontColor=#000000;fontSize=11;labelBackgroundColor=#ffffff;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" target="Yl9mu2ppZ2WHnawpnAzJ-49" value="">
-          <mxGeometry relative="1" as="geometry">
-            <mxPoint as="offset" />
-            <Array as="points">
-              <mxPoint x="1463" y="865" />
-              <mxPoint x="1463" y="140" />
-            </Array>
-          </mxGeometry>
-        </mxCell>
+
       </root>
     </mxGraphModel>
   </diagram>

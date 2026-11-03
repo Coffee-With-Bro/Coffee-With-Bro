@@ -3,6 +3,7 @@
 
 \usepackage[a4paper,margin=1in]{geometry}
 \usepackage{graphicx}
+\graphicspath{{../}{../ActivityDiagram/}{../UseCaseDiagram/}{../ClassDiagram/}{../SequenceDiagram/}{../CollaborationDiagram/}{../StateDiagram/}{../ComponentDiagram/}{../DeploymentDiagram/}{../ObjectDiagram/}}
 \usepackage{hyperref}
 \usepackage{titlesec}
 \usepackage{enumitem}
@@ -105,20 +106,12 @@ The system is divided into multiple layers:
 \end{itemize}
 
 
-\section{Activity Diagram}
+\section{UML System Design and Architectural Modeling}
 
-The activity diagram represents the complete workflow of the system, beginning from gesture capture and ending at prediction display or model update.
+The system architecture and behavior are formally specified using the complete suite of Unified Modeling Language (UML) design models conforming to IEEE and software engineering standards.
 
-\begin{figure}[H]
-\centering
-\includegraphics[width=\textwidth]{ActivityDiagram.png}
-\caption{Activity Diagram of Offline Hand Sign to Text Recognition System}
-\end{figure}
-
-
-\section{Use Case Diagram}
-
-The use case diagram identifies interactions between different actors and the system. The main actors include the end user, webcam device, data engineer, developer and ML engineer.
+\subsection{Use Case Diagram}
+The Use Case Diagram defines actor interactions, system boundaries, and functional requirements across three operational packages: runtime live recognition, REST API word assistance, and offline dataset training. The primary actors include the end user (signer), webcam device, ML engineer, data engineer, and local storage systems.
 
 \begin{figure}[H]
 \centering
@@ -126,12 +119,88 @@ The use case diagram identifies interactions between different actors and the sy
 \caption{Use Case Diagram of Sign-to-Text Recognition System}
 \end{figure}
 
+\subsection{Activity Diagrams}
+The Activity Diagrams model concurrent workflows and decision logic across two distinct lifecycles:
+\begin{enumerate}
+    \item \textbf{Live ASL Recognition:} Swimlane-partitioned workflow across User, React Frontend, and Spring Boot Backend, illustrating 350~ms canvas capture, Base64 decoding, in-process DL4J inference, confidence thresholding ($\ge 0.85$), and 4-frame streak commit.
+    \item \textbf{Model Training Pipeline:} Offline training workflow detailing image preprocessing, 80/20 train-test splitting (seed 42), DL4J CNN epoch iterations, validation evaluation, and model artifact serialization.
+\end{enumerate}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=\textwidth]{ActivityDiagram.png}
+\caption{Activity Diagram: Real-Time Live Recognition and Offline Training Workflows}
+\end{figure}
+
+\subsection{Class Diagram}
+The Class Diagram models all object-oriented structures, class hierarchies, interfaces, fields, methods, and layer boundaries across the Spring Boot backend. It includes configuration classes (\texttt{WebSocketConfig}), boundaries (\texttt{AslWebSocketHandler}, \texttt{SystemApiController}, \texttt{DictionaryController}), services (\texttt{TranscriptStabilizerService}, \texttt{DictionaryService}), machine learning wrappers (\texttt{AslPredictor}, \texttt{AslCnnModel}), persistence entities and repositories (\texttt{TranslationSession}, \texttt{TranslationSessionRepository}), and immutable DTO records.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=\textwidth]{ClassDiagram.png}
+\caption{UML Class Diagram of Backend Service Architecture}
+\end{figure}
+
+\subsection{Sequence Diagram}
+The Sequence Diagram details the chronological message protocols between participating lifelines during live execution and offline model generation. It explicitly details the 350~ms frame grab loop, Base64 transmission over \texttt{ws://localhost:8080/ws/echo}, in-process ND4J matrix normalization, prediction response handling, consecutive streak accumulation, prefix autocomplete queries, and H2 database session persistence.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=\textwidth]{SequenceDiagram.png}
+\caption{Sequence Diagram of Real-Time Recognition and Offline Training Lifelines}
+\end{figure}
+
+\subsection{Collaboration / Communication Diagram}
+The Collaboration Diagram illustrates object associations, structural links, and numbered message flows among collaborating runtime instances, demonstrating the decoupled relationship between client-side capture, in-process DL4J neural computation, and embedded database storage.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=\textwidth]{CollaborationDiagram.png}
+\caption{Collaboration Diagram (Communication Diagram) of System Instances}
+\end{figure}
+
+\subsection{State Machine Diagram}
+The State Machine Diagram formalizes system states, transitions, guard conditions, and actions throughout the client application lifecycle, from initial standby and WebSocket handshakes, through the streaming/inference superstate, streak accumulation, and transcript letter commit, to dictionary queries and session persistence.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=\textwidth]{StateDiagram.png}
+\caption{State Machine Diagram of Recognition and Client Lifecycle}
+\end{figure}
+
+\subsection{Component Diagram}
+The Component Diagram details the modular decomposition of the architecture into the React 19 Frontend (viewfinder, WebSocket client, transcript builder, HUD), Spring Boot Backend (WebSocket handler, DL4J inference engine, lexicon service, REST controllers), Data Tier (embedded H2 database, local model store), and Offline Training Pipeline, highlighting provided and required interface ports.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=\textwidth]{ComponentDiagram.png}
+\caption{Component Diagram of Modular Subsystem Architecture and Ports}
+\end{figure}
+
+\subsection{Deployment Diagram}
+The Deployment Diagram models the physical workstation device, execution environments (V8 Browser, JDK 17 JVM, Host File System), and deployed artifacts. It formally documents the 100\% offline, zero-cloud execution model that ensures total privacy and instant local inference.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=\textwidth]{DeploymentDiagram.png}
+\caption{Deployment Diagram of 100\% Offline Local Workstation Architecture}
+\end{figure}
+
+\subsection{Object Diagram}
+The Object Diagram provides a concrete runtime snapshot captured one frame after classification of a gesture, showing live instance memory allocations, attribute values, and inter-object references across WebSocket sessions, handler instances, prediction records, client streak buffers, and JPA repositories.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=\textwidth]{ObjectDiagram.png}
+\caption{Object Diagram Runtime Snapshot One Frame After Classification}
+\end{figure}
+
 
 \section{Technical Stack}
 
 \begin{itemize}
 \item Frontend: React, TypeScript, Vite
-\item Backend: Java 25, Spring Boot
+\item Backend: Java 17 (LTS), Spring Boot 4.x
 \item Machine Learning: DeepLearning4J, ND4J, DataVec
 \item Communication: WebSocket
 \item Build System: Maven

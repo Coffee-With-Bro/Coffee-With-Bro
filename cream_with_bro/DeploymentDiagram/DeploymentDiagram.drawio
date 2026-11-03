@@ -1,1 +1,145 @@
-<mxfile host="app.diagrams.net"><diagram name="Deployment Diagram" id="dep1"><mxGraphModel dx="1500" dy="1100" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1500" pageHeight="1120" math="0" shadow="0"><root><mxCell id="0"/><mxCell id="1" parent="0"/><mxCell id="d1" value="Deployment Diagram – ASL Hand Gesture Recognition System" style="text;whiteSpace=wrap;align=center;verticalAlign=middle;fillColor=none;strokeColor=none;fontSize=24;fontStyle=1;html=1;fontColor=#000000;" vertex="1" parent="1"><mxGeometry x="120" y="5" width="1210" height="45" as="geometry"/></mxCell><mxCell id="d2" value="«device»&lt;br&gt;&lt;b&gt;User Device / Camera&lt;/b&gt;" style="shape=cube;size=25;whiteSpace=wrap;boundedLbl=1;backgroundOutline=1;darkOpacity=0;fillColor=#ffffff;verticalAlign=top;fontSize=14;spacingTop=2;html=1;strokeColor=#000000;fontColor=#000000;" vertex="1" parent="1"><mxGeometry x="20" y="100" width="400" height="485" as="geometry"/></mxCell><mxCell id="d3" value="«execution environment»&lt;br&gt;&lt;b&gt;Web Browser&lt;/b&gt;" style="rounded=0;whiteSpace=wrap;fillColor=#ffffff;fontSize=13;verticalAlign=top;spacingTop=6;html=1;strokeColor=#000000;fontColor=#000000;" vertex="1" parent="d2"><mxGeometry x="17" y="125" width="342" height="222" as="geometry"/></mxCell><mxCell id="d4" value="«artifact»&lt;br&gt;&lt;b&gt;React Frontend&lt;/b&gt;" style="rounded=0;whiteSpace=wrap;fillColor=#ffffff;fontSize=13;html=1;strokeColor=#000000;fontColor=#000000;" vertex="1" parent="d3"><mxGeometry x="25" y="102" width="296" height="90" as="geometry"/></mxCell><mxCell id="d5" value="Camera / Webcam Input" style="rounded=0;whiteSpace=wrap;fillColor=#ffffff;fontSize=13;html=1;strokeColor=#000000;fontColor=#000000;" vertex="1" parent="d2"><mxGeometry x="37" y="372" width="306" height="85" as="geometry"/></mxCell><mxCell id="d6" value="«node»&lt;br&gt;&lt;b&gt;Spring Boot&lt;br&gt;Backend Server&lt;/b&gt;" style="shape=cube;size=25;whiteSpace=wrap;boundedLbl=1;backgroundOutline=1;darkOpacity=0;fillColor=#ffffff;verticalAlign=top;fontSize=14;spacingTop=2;html=1;strokeColor=#000000;fontColor=#000000;" vertex="1" parent="1"><mxGeometry x="538" y="103" width="336" height="477" as="geometry"/></mxCell><mxCell id="d7" value="«artifact»&lt;br&gt;&lt;b&gt;WebSocket API /&lt;br&gt;Prediction Controller&lt;/b&gt;" style="rounded=0;whiteSpace=wrap;fillColor=#ffffff;fontSize=13;html=1;strokeColor=#000000;fontColor=#000000;" vertex="1" parent="d6"><mxGeometry x="24" y="199" width="267" height="143" as="geometry"/></mxCell><mxCell id="d8" value="«node»&lt;br&gt;&lt;b&gt;CNN / DL4J&lt;br&gt;Inference Engine&lt;/b&gt;" style="shape=cube;size=25;whiteSpace=wrap;boundedLbl=1;backgroundOutline=1;darkOpacity=0;fillColor=#ffffff;verticalAlign=top;fontSize=14;spacingTop=2;html=1;strokeColor=#000000;fontColor=#000000;" vertex="1" parent="1"><mxGeometry x="1010" y="98" width="422" height="486" as="geometry"/></mxCell><mxCell id="d9" value="«artifact»&lt;br&gt;&lt;b&gt;Trained CNN Model&lt;/b&gt;" style="rounded=0;whiteSpace=wrap;fillColor=#ffffff;fontSize=13;html=1;strokeColor=#000000;fontColor=#000000;" vertex="1" parent="d8"><mxGeometry x="32" y="145" width="342" height="70" as="geometry"/></mxCell><mxCell id="d10" value="«artifact»&lt;br&gt;&lt;b&gt;Feature Extraction&lt;/b&gt;" style="rounded=0;whiteSpace=wrap;fillColor=#ffffff;fontSize=13;html=1;strokeColor=#000000;fontColor=#000000;" vertex="1" parent="d8"><mxGeometry x="32" y="230" width="342" height="64" as="geometry"/></mxCell><mxCell id="d11" value="«artifact»&lt;br&gt;&lt;b&gt;Gesture Classifier&lt;/b&gt;" style="rounded=0;whiteSpace=wrap;fillColor=#ffffff;fontSize=13;html=1;strokeColor=#000000;fontColor=#000000;" vertex="1" parent="d8"><mxGeometry x="32" y="310" width="342" height="70" as="geometry"/></mxCell><mxCell id="d12" value="«artifact»&lt;br&gt;&lt;b&gt;Confidence Evaluation&lt;/b&gt;" style="rounded=0;whiteSpace=wrap;fillColor=#ffffff;fontSize=13;html=1;strokeColor=#000000;fontColor=#000000;" vertex="1" parent="d8"><mxGeometry x="32" y="394" width="342" height="68" as="geometry"/></mxCell><mxCell id="d13" value="«node»&lt;br&gt;&lt;b&gt;Training &amp; Dataset Environment&lt;/b&gt;" style="shape=cube;size=25;whiteSpace=wrap;boundedLbl=1;backgroundOutline=1;darkOpacity=0;fillColor=#ffffff;verticalAlign=top;fontSize=14;spacingTop=2;html=1;strokeColor=#000000;fontColor=#000000;" vertex="1" parent="1"><mxGeometry x="33" y="730" width="622" height="340" as="geometry"/></mxCell><mxCell id="d14" value="«artifact»&lt;br&gt;&lt;b&gt;ASL-HG&lt;br&gt;Dataset&lt;/b&gt;" style="rounded=0;whiteSpace=wrap;fillColor=#ffffff;fontSize=13;html=1;strokeColor=#000000;fontColor=#000000;" vertex="1" parent="d13"><mxGeometry x="27" y="118" width="265" height="90" as="geometry"/></mxCell><mxCell id="d15" value="«artifact»&lt;br&gt;&lt;b&gt;Python&lt;br&gt;Preprocessing&lt;/b&gt;" style="rounded=0;whiteSpace=wrap;fillColor=#ffffff;fontSize=13;html=1;strokeColor=#000000;fontColor=#000000;" vertex="1" parent="d13"><mxGeometry x="310" y="118" width="265" height="90" as="geometry"/></mxCell><mxCell id="d16" value="«artifact»&lt;br&gt;&lt;b&gt;Model Training&lt;br&gt;Pipeline&lt;/b&gt;" style="rounded=0;whiteSpace=wrap;fillColor=#ffffff;fontSize=13;html=1;strokeColor=#000000;fontColor=#000000;" vertex="1" parent="d13"><mxGeometry x="27" y="225" width="265" height="90" as="geometry"/></mxCell><mxCell id="d17" value="«artifact»&lt;br&gt;&lt;b&gt;Trained Model&lt;br&gt;with Labels&lt;/b&gt;" style="rounded=0;whiteSpace=wrap;fillColor=#ffffff;fontSize=13;html=1;strokeColor=#000000;fontColor=#000000;" vertex="1" parent="d13"><mxGeometry x="310" y="225" width="265" height="90" as="geometry"/></mxCell><mxCell id="d18" value="«database»&lt;br&gt;&lt;b&gt;Custom Symbol Database&lt;/b&gt;" style="shape=cube;size=25;whiteSpace=wrap;boundedLbl=1;backgroundOutline=1;darkOpacity=0;fillColor=#ffffff;verticalAlign=top;fontSize=14;spacingTop=2;html=1;strokeColor=#000000;fontColor=#000000;" vertex="1" parent="1"><mxGeometry x="952" y="757" width="477" height="292" as="geometry"/></mxCell><mxCell id="d19" value="«artifact»&lt;br&gt;&lt;b&gt;Custom Library /&lt;br&gt;Symbol Data&lt;/b&gt;" style="rounded=0;whiteSpace=wrap;fillColor=#ffffff;fontSize=13;html=1;strokeColor=#000000;fontColor=#000000;" vertex="1" parent="d18"><mxGeometry x="46" y="129" width="367" height="122" as="geometry"/></mxCell><mxCell id="d20" style="edgeStyle=none;rounded=0;endArrow=block;endFill=1;startArrow=block;startFill=1;strokeWidth=1.5;html=1;strokeColor=#000000;fontColor=#000000;" edge="1" parent="1"><mxGeometry relative="1" as="geometry"><mxPoint x="425" y="375" as="sourcePoint"/><mxPoint x="538" y="375" as="targetPoint"/></mxGeometry></mxCell><mxCell id="d21" value="HTTP /&lt;br&gt;WebSocket" style="text;whiteSpace=wrap;align=center;verticalAlign=middle;fillColor=none;strokeColor=none;fontSize=13;fontStyle=0;html=1;fontColor=#000000;" vertex="1" parent="1"><mxGeometry x="425" y="300" width="115" height="60" as="geometry"/></mxCell><mxCell id="d22" style="edgeStyle=none;rounded=0;endArrow=block;endFill=1;startArrow=block;startFill=1;strokeWidth=1.5;html=1;strokeColor=#000000;fontColor=#000000;" edge="1" parent="1"><mxGeometry relative="1" as="geometry"><mxPoint x="878" y="375" as="sourcePoint"/><mxPoint x="1010" y="375" as="targetPoint"/></mxGeometry></mxCell><mxCell id="d23" value="Prediction&lt;br&gt;Request /&lt;br&gt;Result" style="text;whiteSpace=wrap;align=center;verticalAlign=middle;fillColor=none;strokeColor=none;fontSize=13;fontStyle=0;html=1;fontColor=#000000;" vertex="1" parent="1"><mxGeometry x="878" y="275" width="130" height="90" as="geometry"/></mxCell><mxCell id="d24" style="edgeStyle=none;rounded=0;endArrow=block;endFill=1;strokeWidth=1.5;html=1;strokeColor=#000000;fontColor=#000000;" edge="1" parent="1"><mxGeometry relative="1" as="geometry"><mxPoint x="375" y="730" as="sourcePoint"/><mxPoint x="1034" y="585" as="targetPoint"/><Array as="points"><mxPoint x="375" y="655"/><mxPoint x="1034" y="655"/></Array></mxGeometry></mxCell><mxCell id="d25" value="Deploy Trained Model" style="text;whiteSpace=wrap;align=center;verticalAlign=middle;fillColor=none;strokeColor=none;fontSize=13;fontStyle=0;html=1;fontColor=#000000;" vertex="1" parent="1"><mxGeometry x="560" y="605" width="350" height="40" as="geometry"/></mxCell><mxCell id="d26" style="edgeStyle=none;rounded=0;endArrow=block;endFill=1;startArrow=block;startFill=1;strokeWidth=1.5;html=1;strokeColor=#000000;fontColor=#000000;" edge="1" parent="1"><mxGeometry relative="1" as="geometry"><mxPoint x="1187" y="587" as="sourcePoint"/><mxPoint x="1187" y="757" as="targetPoint"/></mxGeometry></mxCell><mxCell id="d27" value="Custom Symbol&lt;br&gt;Lookup / Update" style="text;whiteSpace=wrap;align=center;verticalAlign=middle;fillColor=none;strokeColor=none;fontSize=13;fontStyle=0;html=1;fontColor=#000000;" vertex="1" parent="1"><mxGeometry x="1200" y="635" width="230" height="60" as="geometry"/></mxCell><mxCell id="d28" style="edgeStyle=none;rounded=0;endArrow=block;endFill=1;strokeWidth=1.5;html=1;strokeColor=#000000;fontColor=#000000;" edge="1" parent="1"><mxGeometry relative="1" as="geometry"><mxPoint x="657" y="930" as="sourcePoint"/><mxPoint x="950" y="930" as="targetPoint"/></mxGeometry></mxCell><mxCell id="d29" value="Store / Update&lt;br&gt;New Symbol Data" style="text;whiteSpace=wrap;align=center;verticalAlign=middle;fillColor=none;strokeColor=none;fontSize=13;fontStyle=0;html=1;fontColor=#000000;" vertex="1" parent="1"><mxGeometry x="680" y="850" width="250" height="70" as="geometry"/></mxCell></root></mxGraphModel></diagram></mxfile>
+<mxfile host="app.diagrams.net" version="24.7.17">
+  <diagram id="dep-diag" name="Deployment Diagram">
+    <mxGraphModel dx="1600" dy="1200" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1500" pageHeight="1150" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+
+        <!-- Title -->
+        <mxCell id="dp_ttl" value="Deployment Diagram — 100% Offline Local Architecture (Coffee With Bro)" style="text;html=1;align=center;verticalAlign=middle;fontSize=20;fontStyle=1;fillColor=#dae8fc;strokeColor=#6c8ebf;rounded=1;" vertex="1" parent="1">
+          <mxGeometry x="50" y="25" width="1400" height="40" as="geometry" />
+        </mxCell>
+
+        <!-- Main Host Device Node -->
+        <mxCell id="nd_host" value="«device»&#xa;&lt;b style=&quot;font-size:15px;&quot;&gt;User Host Workstation / PC (localhost / 127.0.0.1)&lt;/b&gt;&#xa;OS: Windows / Linux / macOS — 100% Local Execution (Zero Cloud Dependency)" style="shape=cube;size=25;whiteSpace=wrap;boundedLbl=1;backgroundOutline=1;darkOpacity=0;fillColor=#f8f9fa;verticalAlign=top;fontSize=13;spacingTop=6;html=1;strokeColor=#4d4d4d;fontStyle=0;" vertex="1" parent="1">
+          <mxGeometry x="50" y="85" width="1400" height="980" as="geometry" />
+        </mxCell>
+
+        <!-- Attached Hardware Device: Webcam -->
+        <mxCell id="nd_cam" value="«device»&#xa;&lt;b&gt;USB / Integrated Webcam&lt;/b&gt;&#xa;• 30+ FPS optical capture&#xa;• Direct hardware driver access" style="shape=cube;size=15;whiteSpace=wrap;boundedLbl=1;backgroundOutline=1;darkOpacity=0;fillColor=#e1d5e7;strokeColor=#9673a6;verticalAlign=top;fontSize=11;spacingTop=4;html=1;" vertex="1" parent="nd_host">
+          <mxGeometry x="30" y="90" width="230" height="110" as="geometry" />
+        </mxCell>
+
+        <!-- Execution Environment 1: Modern Web Browser -->
+        <mxCell id="ee_browser" value="«execution environment»&#xa;&lt;b style=&quot;font-size:13px;&quot;&gt;Modern Web Browser (V8 / Chromium / Gecko Engine)&lt;/b&gt;" style="shape=cube;size=18;whiteSpace=wrap;boundedLbl=1;backgroundOutline=1;darkOpacity=0;fillColor=#dae8fc;strokeColor=#6c8ebf;verticalAlign=top;fontSize=12;spacingTop=4;html=1;" vertex="1" parent="nd_host">
+          <mxGeometry x="30" y="240" width="450" height="480" as="geometry" />
+        </mxCell>
+
+        <!-- Artifacts inside Browser -->
+        <mxCell id="art_react" value="«artifact»&#xa;&lt;b style=&quot;font-size:12px;&quot;&gt;milk_with_bro Web Client&lt;/b&gt;&#xa;(React 19 + TypeScript + Vite)" style="shape=note;whiteSpace=wrap;html=1;size=14;verticalAlign=top;align=left;spacingLeft=10;fontSize=11;fillColor=#ffffff;strokeColor=#6c8ebf;" vertex="1" parent="ee_browser">
+          <mxGeometry x="25" y="60" width="395" height="395" as="geometry" />
+        </mxCell>
+
+        <mxCell id="sub_art1" value="• HTML5 Video &amp; Canvas Capture: downscales frame to 240px every 350 ms" style="text;html=1;fontSize=10;fontColor=#333333;" vertex="1" parent="art_react">
+          <mxGeometry x="15" y="70" width="370" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="sub_art2" value="• WebSocket Client: manages persistent duplex stream over ws://localhost:8080/ws/echo" style="text;html=1;fontSize=10;fontColor=#333333;" vertex="1" parent="art_react">
+          <mxGeometry x="15" y="110" width="370" height="35" as="geometry" />
+        </mxCell>
+        <mxCell id="sub_art3" value="• Prediction HUD: displays live label, confidence meter, and ASL reference chart" style="text;html=1;fontSize=10;fontColor=#333333;" vertex="1" parent="art_react">
+          <mxGeometry x="15" y="155" width="370" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="sub_art4" value="• Stability Filter &amp; Streak Buffer: commits letter on 4 consecutive matching frames (&gt;= 0.85)" style="text;html=1;fontSize=10;fontColor=#333333;" vertex="1" parent="art_react">
+          <mxGeometry x="15" y="195" width="370" height="35" as="geometry" />
+        </mxCell>
+        <mxCell id="sub_art5" value="• Offline Speech Synthesis: invokes window.speechSynthesis (TTS) on committed letter" style="text;html=1;fontSize=10;fontColor=#333333;" vertex="1" parent="art_react">
+          <mxGeometry x="15" y="240" width="370" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="sub_art6" value="• REST Client: queries /api/dictionary/suggest and /api/sessions" style="text;html=1;fontSize=10;fontColor=#333333;" vertex="1" parent="art_react">
+          <mxGeometry x="15" y="280" width="370" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="sub_art7" value="• Session History &amp; Diagnostics UI: modal viewing past session accuracy and records" style="text;html=1;fontSize=10;fontColor=#333333;" vertex="1" parent="art_react">
+          <mxGeometry x="15" y="320" width="370" height="30" as="geometry" />
+        </mxCell>
+
+        <!-- Execution Environment 2: Java Virtual Machine -->
+        <mxCell id="ee_jvm" value="«execution environment»&#xa;&lt;b style=&quot;font-size:13px;&quot;&gt;Java Virtual Machine (JDK 17+)&lt;/b&gt;" style="shape=cube;size=18;whiteSpace=wrap;boundedLbl=1;backgroundOutline=1;darkOpacity=0;fillColor=#d5e8d4;strokeColor=#82b366;verticalAlign=top;fontSize=12;spacingTop=4;html=1;" vertex="1" parent="nd_host">
+          <mxGeometry x="540" y="240" width="460" height="480" as="geometry" />
+        </mxCell>
+
+        <!-- Artifact inside JVM -->
+        <mxCell id="art_spring" value="«artifact»&#xa;&lt;b style=&quot;font-size:12px;&quot;&gt;coffee_with_bro Backend Service&lt;/b&gt;&#xa;(Spring Boot 4.x + DeepLearning4j + ND4J)" style="shape=note;whiteSpace=wrap;html=1;size=14;verticalAlign=top;align=left;spacingLeft=10;fontSize=11;fillColor=#ffffff;strokeColor=#82b366;" vertex="1" parent="ee_jvm">
+          <mxGeometry x="25" y="60" width="405" height="395" as="geometry" />
+        </mxCell>
+
+        <mxCell id="s_art1" value="• Embedded Tomcat Server: HTTP (Port 8080) &amp; WebSocket (/ws/echo)" style="text;html=1;fontSize=10;fontColor=#333333;" vertex="1" parent="art_spring">
+          <mxGeometry x="15" y="70" width="380" height="25" as="geometry" />
+        </mxCell>
+        <mxCell id="s_art2" value="• AslWebSocketHandler: decodes Base64 JPEG into in-memory BufferedImage" style="text;html=1;fontSize=10;fontColor=#333333;" vertex="1" parent="art_spring">
+          <mxGeometry x="15" y="105" width="380" height="25" as="geometry" />
+        </mxCell>
+        <mxCell id="s_art3" value="• In-Process DL4J Inference Engine:&#xa;  - NativeImageLoader (128x128x3 RGB)&#xa;  - ImagePreProcessingScaler [0, 1]&#xa;  - MultiLayerNetwork forward pass (36 classes)&#xa;  - In-process JVM execution (no network call)" style="text;html=1;fontSize=10;fontColor=#333333;" vertex="1" parent="art_spring">
+          <mxGeometry x="15" y="135" width="380" height="75" as="geometry" />
+        </mxCell>
+        <mxCell id="s_art4" value="• DictionaryService: in-memory lexicon (NavigableSet&lt;String&gt;)" style="text;html=1;fontSize=10;fontColor=#333333;" vertex="1" parent="art_spring">
+          <mxGeometry x="15" y="220" width="380" height="25" as="geometry" />
+        </mxCell>
+        <mxCell id="s_art5" value="• SystemApiController: telemetry endpoints (/api/status, /api/supported-signs)" style="text;html=1;fontSize=10;fontColor=#333333;" vertex="1" parent="art_spring">
+          <mxGeometry x="15" y="255" width="380" height="25" as="geometry" />
+        </mxCell>
+        <mxCell id="s_art6" value="• TranslationSessionRepository: Spring Data JPA session management" style="text;html=1;fontSize=10;fontColor=#333333;" vertex="1" parent="art_spring">
+          <mxGeometry x="15" y="290" width="380" height="25" as="geometry" />
+        </mxCell>
+        <mxCell id="s_art7" value="• Embedded H2 Engine: in-process SQL relational database" style="text;html=1;fontSize=10;fontColor=#333333;" vertex="1" parent="art_spring">
+          <mxGeometry x="15" y="325" width="380" height="25" as="geometry" />
+        </mxCell>
+
+        <!-- Execution Environment 3: Local File System -->
+        <mxCell id="ee_fs" value="«execution environment»&#xa;&lt;b style=&quot;font-size:13px;&quot;&gt;Host File System (Local Disk Storage)&lt;/b&gt;" style="shape=cube;size=18;whiteSpace=wrap;boundedLbl=1;backgroundOutline=1;darkOpacity=0;fillColor=#ffe6cc;strokeColor=#d79b00;verticalAlign=top;fontSize=12;spacingTop=4;html=1;" vertex="1" parent="nd_host">
+          <mxGeometry x="1050" y="240" width="310" height="480" as="geometry" />
+        </mxCell>
+
+        <mxCell id="art_m1" value="«artifact»&#xa;&lt;b&gt;asl_cnn_model.zip&lt;/b&gt;&#xa;Serialized DL4J weights" style="shape=note;whiteSpace=wrap;html=1;size=12;verticalAlign=top;align=left;spacingLeft=8;fontSize=10;fillColor=#ffffff;strokeColor=#d79b00;" vertex="1" parent="ee_fs">
+          <mxGeometry x="25" y="60" width="260" height="65" as="geometry" />
+        </mxCell>
+        <mxCell id="art_m2" value="«artifact»&#xa;&lt;b&gt;labels.txt&lt;/b&gt;&#xa;36 class labels (A-Z, 0-9)" style="shape=note;whiteSpace=wrap;html=1;size=12;verticalAlign=top;align=left;spacingLeft=8;fontSize=10;fillColor=#ffffff;strokeColor=#d79b00;" vertex="1" parent="ee_fs">
+          <mxGeometry x="25" y="140" width="260" height="65" as="geometry" />
+        </mxCell>
+        <mxCell id="art_m3" value="«artifact»&#xa;&lt;b&gt;Embedded H2 Database File&lt;/b&gt;&#xa;Persistent SQL session table" style="shape=note;whiteSpace=wrap;html=1;size=12;verticalAlign=top;align=left;spacingLeft=8;fontSize=10;fillColor=#ffffff;strokeColor=#d79b00;" vertex="1" parent="ee_fs">
+          <mxGeometry x="25" y="220" width="260" height="65" as="geometry" />
+        </mxCell>
+        <mxCell id="art_m4" value="«artifact»&#xa;&lt;b&gt;ASL-HG Image Dataset&lt;/b&gt;&#xa;36 alphanumeric sign classes" style="shape=note;whiteSpace=wrap;html=1;size=12;verticalAlign=top;align=left;spacingLeft=8;fontSize=10;fillColor=#ffffff;strokeColor=#d79b00;" vertex="1" parent="ee_fs">
+          <mxGeometry x="25" y="300" width="260" height="65" as="geometry" />
+        </mxCell>
+        <mxCell id="art_m5" value="«artifact»&#xa;&lt;b&gt;TrainAslCnn &amp; Scripts&lt;/b&gt;&#xa;DL4J training &amp; preprocessing" style="shape=note;whiteSpace=wrap;html=1;size=12;verticalAlign=top;align=left;spacingLeft=8;fontSize=10;fillColor=#ffffff;strokeColor=#d79b00;" vertex="1" parent="ee_fs">
+          <mxGeometry x="25" y="380" width="260" height="65" as="geometry" />
+        </mxCell>
+
+        <!-- Communication Paths -->
+        <!-- Webcam to Browser -->
+        <mxCell id="cp_cam_br" value="getUserMedia API&#xa;Video Stream" style="endArrow=classic;html=1;strokeColor=#9673a6;fontSize=11;fontStyle=1;" edge="1" parent="nd_host" source="nd_cam" target="ee_browser">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- Browser to Spring Boot WebSocket -->
+        <mxCell id="cp_br_sb_ws" value="«WebSocket»&#xa;ws://localhost:8080/ws/echo&#xa;• Base64 frame snapshots (350 ms)&#xa;• JSON prediction response" style="endArrow=classic;startArrow=classic;html=1;strokeColor=#0066cc;fontSize=11;fontStyle=1;" edge="1" parent="nd_host" source="ee_browser" target="ee_jvm">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="510" y="380" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+
+        <!-- Browser to Spring Boot REST -->
+        <mxCell id="cp_br_sb_rest" value="«HTTP / REST»&#xa;http://localhost:8080/api/*&#xa;• Autocomplete &amp; validation&#xa;• Telemetry &amp; Session CRUD" style="endArrow=classic;startArrow=classic;html=1;strokeColor=#007a33;fontSize=11;fontStyle=1;" edge="1" parent="nd_host" source="ee_browser" target="ee_jvm">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="510" y="580" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+
+        <!-- Spring Boot to File System -->
+        <mxCell id="cp_sb_fs" value="«File I/O»&#xa;• Model restore (ModelSerializer)&#xa;• labels.txt reading&#xa;• H2 disk storage" style="endArrow=classic;startArrow=classic;html=1;strokeColor=#d79b00;fontSize=11;fontStyle=1;" edge="1" parent="nd_host" source="ee_jvm" target="ee_fs">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- Explanatory Privacy Callout -->
+        <mxCell id="callout_priv" value="100% OFFLINE PRIVACY GUARANTEE:&#xa;All video frames, tensors, classification inferences, and transcript sessions remain strictly within the local host memory.&#xa;Zero cloud transmission, zero external API keys, zero third-party telemetry." style="shape=callout;whiteSpace=wrap;html=1;perimeter=calloutPerimeter;position=0.2;base=20;fontSize=11;fontStyle=1;fillColor=#d5e8d4;strokeColor=#82b366;fontColor=#274e13;" vertex="1" parent="nd_host">
+          <mxGeometry x="30" y="770" width="1330" height="70" as="geometry" />
+        </mxCell>
+
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
