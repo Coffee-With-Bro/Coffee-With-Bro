@@ -31,7 +31,7 @@ function getLocalIp() {
 const localIp = getLocalIp();
 const localUrl = "http://localhost:5173/";
 const networkUrl = `http://${localIp}:5173/`;
-const backendWsUrl = `ws://${localIp}:8080/ws/echo`;
+const backendWsUrl = `ws://${localIp}:8081/ws/echo`;
 
 console.clear?.();
 console.log("===============================================================");
@@ -39,7 +39,7 @@ console.log("  ☕  COFFEE WITH BRO — FULL-STACK DEVELOPMENT RUNNER");
 console.log("===============================================================");
 console.log(`  ➜  Local Browser URL:   \x1b[36m${localUrl}\x1b[0m`);
 console.log(`  ➜  Network Device URL:  \x1b[32m${networkUrl}\x1b[0m`);
-console.log(`  ➜  Spring Boot Server:  \x1b[33mhttp://localhost:8080/\x1b[0m`);
+console.log(`  ➜  Spring Boot Server:  \x1b[33mhttp://localhost:8081/\x1b[0m`);
 console.log(`  ➜  WebSocket Endpoint:  \x1b[35m${backendWsUrl}\x1b[0m`);
 console.log("===============================================================");
 console.log("  Starting backend and frontend services...\n");

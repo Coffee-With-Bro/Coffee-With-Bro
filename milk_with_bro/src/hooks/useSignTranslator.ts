@@ -5,6 +5,7 @@ import {
   CAPTURE_WIDTH,
   COMMIT_COOLDOWN_MS,
   CONFIDENCE_THRESHOLD,
+  FALLBACK_WS_URL,
   RECONNECT_DELAY_MS,
   STABLE_FRAMES_TO_COMMIT,
   WS_URL,
@@ -100,51 +101,78 @@ export function useSignTranslator() {
     captureTimerRef.current = window.setInterval(captureFrame, CAPTURE_INTERVAL_MS);
   }, [captureFrame, stopCaptureLoop]);
 
-  const connectSocketRef = useRef<() => void>(() => {});
+  const connectSocketRef = useRef<(useFallback?: boolean) => void>(() => {});
 
-  const connectSocket = useCallback(() => {
-    if (reconnectTimerRef.current !== null) {
-      window.clearTimeout(reconnectTimerRef.current);
-      reconnectTimerRef.current = null;
-    }
-
-    setStatus((prev) => (prev === "open" ? prev : "connecting"));
-    const socket = new WebSocket(WS_URL);
-    socketRef.current = socket;
-
-    socket.onopen = () => {
-      setStatus("open");
-      if (wantStreamingRef.current) startCaptureLoop();
-    };
-
-    socket.onmessage = (event) => {
-      try {
-        const data = JSON.parse(event.data) as Prediction & { error?: string };
-        if (data.error) return;
-        handlePrediction({ label: data.label, confidence: data.confidence });
-      } catch {
-        return;
+  const connectSocket = useCallback(
+    (useFallback = false) => {
+      if (reconnectTimerRef.current !== null) {
+        window.clearTimeout(reconnectTimerRef.current);
+        reconnectTimerRef.current = null;
       }
-    };
 
-    socket.onerror = () => {
-      setStatus("error");
-    };
+      setStatus((prev) => (prev === "open" ? prev : "connecting"));
+      const targetUrl = useFallback ? FALLBACK_WS_URL : WS_URL;
+      const socket = new WebSocket(targetUrl);
+      socketRef.current = socket;
 
-    socket.onclose = () => {
-      stopCaptureLoop();
-      socketRef.current = null;
-      if (wantStreamingRef.current) {
-        setStatus("reconnecting");
-        reconnectTimerRef.current = window.setTimeout(
-          () => connectSocketRef.current(),
-          RECONNECT_DELAY_MS,
-        );
-      } else {
-        setStatus("closed");
-      }
-    };
-  }, [handlePrediction, startCaptureLoop, stopCaptureLoop]);
+      socket.onopen = () => {
+        setStatus("open");
+        if (wantStreamingRef.current) startCaptureLoop();
+      };
+
+      socket.onmessage = (event) => {
+        try {
+          const data = JSON.parse(event.data) as Prediction & {
+            type?: string;
+            status?: string;
+            modelLoaded?: boolean;
+            error?: string;
+          };
+
+          // Connection handshake response
+          if (data.type === "connection_status" || data.status === "online") {
+            setStatus("open");
+            return;
+          }
+
+          // Active frame prediction or standby label
+          if (data.label !== undefined) {
+            handlePrediction({
+              label: data.label,
+              confidence:
+                typeof data.confidence === "number" ? data.confidence : 0,
+            });
+          }
+        } catch {
+          return;
+        }
+      };
+
+      socket.onerror = () => {
+        if (!useFallback && targetUrl !== FALLBACK_WS_URL) {
+          // Attempt fallback port (e.g. fallback between 8081 and 8080)
+          connectSocketRef.current(true);
+          return;
+        }
+        setStatus("error");
+      };
+
+      socket.onclose = () => {
+        stopCaptureLoop();
+        socketRef.current = null;
+        if (wantStreamingRef.current) {
+          setStatus("reconnecting");
+          reconnectTimerRef.current = window.setTimeout(
+            () => connectSocketRef.current(false),
+            RECONNECT_DELAY_MS,
+          );
+        } else {
+          setStatus("closed");
+        }
+      };
+    },
+    [handlePrediction, startCaptureLoop, stopCaptureLoop],
+  );
 
   useEffect(() => {
     connectSocketRef.current = connectSocket;
@@ -176,7 +204,7 @@ export function useSignTranslator() {
       }
       setCameraOn(true);
       wantStreamingRef.current = true;
-      connectSocket();
+      connectSocket(false);
     } catch (err) {
       setCameraError(
         err instanceof DOMException && err.name === "NotAllowedError"
