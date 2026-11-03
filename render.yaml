@@ -1,0 +1,17 @@
+services:
+  - type: web
+    name: coffee-with-bro-backend
+    runtime: docker
+    dockerfilePath: ./coffee_with_bro/Dockerfile
+    dockerContext: ./coffee_with_bro
+    plan: starter
+    region: oregon
+    envVars:
+      - key: PORT
+        value: 8080
+      - key: SPRING_PROFILES_ACTIVE
+        value: prod
+      - key: JAVA_OPTS
+        value: "-XX:+UseContainerSupport -XX:MaxRAMPercentage=75.0"
+    healthCheckPath: /api/system/status
+

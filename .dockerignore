@@ -1,0 +1,22 @@
+# Version control & IDE
+.git/
+.gitignore
+.vscode/
+.idea/
+
+# Large datasets & documentation
+data/
+cream_with_bro/
+sugar_with_bro/
+ice_with_bro/
+
+# Frontend dependencies & builds
+milk_with_bro/node_modules/
+milk_with_bro/dist/
+milk_with_bro/.vite/
+
+# Backend targets
+coffee_with_bro/target/
+target/
+*.log
+
