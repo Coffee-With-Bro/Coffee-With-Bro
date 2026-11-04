@@ -19,7 +19,7 @@ const MEMBERS: TeamMember[] = [
     bio:
       "Third-year B.Tech Computer Science student specializing in interactive web engineering and real-time systems. Developed the React 19 interface, low-latency WebSocket communication client, webcam viewfinder with confidence meters, and client-side speech synthesis.",
     skills: ["React 19", "TypeScript", "WebSocket Streaming", "Vite", "UI/UX Accessibility"],
-    github: "https://github.com/Keshav-Aggarwal-2004",
+    github: "https://github.com/k-keshav-aggarwal",
   },
   {
     name: "Abhishek Srivastava",
@@ -29,7 +29,7 @@ const MEMBERS: TeamMember[] = [
     bio:
       "Computer Science undergraduate with a focus on computer vision and neural network pipelines. Built the Python image normalization workflow for 128×128 inputs, MediaPipe 21-point hand landmark extraction, and the baseline PyTorch training pipeline.",
     skills: ["Python", "PyTorch", "OpenCV", "MediaPipe", "Data Engineering"],
-    github: "https://github.com",
+    github: "https://github.com/abh1sh3k-14",
   },
   {
     name: "Harshine Singh",
@@ -39,7 +39,7 @@ const MEMBERS: TeamMember[] = [
     bio:
       "Undergraduate software engineer concentrating on backend services, concurrency, and embedded machine learning. Built the Spring Boot WebSocket inference service, DeepLearning4j JVM neural network loader, and local H2 database session persistence.",
     skills: ["Java 17", "Spring Boot", "DeepLearning4j", "ND4J", "WebSocket Protocols"],
-    github: "https://github.com",
+    github: "https://github.com/HarshineEXCELS",
   },
   {
     name: "Bhuvaneesh Singh Grewal",
@@ -49,7 +49,7 @@ const MEMBERS: TeamMember[] = [
     bio:
       "Computer Science undergraduate focusing on software engineering methodologies, formal verification, and quality assurance. Author of the IEEE 830 SRS specification, UML activity and use-case architecture diagrams, and test suite verification.",
     skills: ["IEEE 830 SRS", "Software Architecture", "UML Modeling", "LaTeX", "End-to-End QA"],
-    github: "https://github.com",
+    github: "https://https://github.com/bhuvaneeshgrewal",
   },
 ];
 
