@@ -191,43 +191,6 @@ export function Home({ onStateChange }: HomeProps = {}) {
           your machine.
         </p>
 
-        <div className="hero-cta-actions">
-          <button
-            type="button"
-            className={`btn ${cameraOn ? "btn-stop" : "btn-start"} hero-btn-primary`}
-            onClick={toggleCamera}
-            aria-label={cameraOn ? "Turn off camera" : "Turn on camera and start signing"}
-          >
-            {cameraOn ? "⏹ Turn Off Camera" : "⚡ Turn On Camera & Start Signing"}
-          </button>
-          <button
-            type="button"
-            className="btn btn-ghost"
-            onClick={openGuide}
-            aria-label="Open ASL sign guide modal"
-          >
-            📖 ASL Sign Guide
-          </button>
-          <button
-            type="button"
-            className="btn btn-ghost"
-            onClick={() => {
-              setHistoryOpen(true);
-              trackEvent("open_history");
-            }}
-            aria-label="Open translation session history"
-          >
-            🕒 Session History
-          </button>
-          <Link
-            to="/diagnostics"
-            className="btn btn-ghost"
-            aria-label="Open System Diagnostics Dashboard"
-          >
-            🩺 Diagnostics
-          </Link>
-        </div>
-
         <div className="hero-badges" aria-label="System features">
           <span className="hero-badge">🔒 100% In-Memory</span>
           <span className="hero-badge">⚡ Low-Latency Local WS</span>
@@ -250,14 +213,7 @@ export function Home({ onStateChange }: HomeProps = {}) {
 
           {!cameraOn && (
             <div className="viewfinder-empty">
-              <p>Turn on your camera to start signing.</p>
-              <button
-                className="btn btn-tiny"
-                onClick={openGuide}
-                style={{ marginTop: "12px" }}
-              >
-                📖 View ASL Sign Guide
-              </button>
+              <p>Turn on your camera below to start signing.</p>
             </div>
           )}
 
@@ -292,7 +248,7 @@ export function Home({ onStateChange }: HomeProps = {}) {
             className={cameraOn ? "btn btn-stop" : "btn btn-start"}
             onClick={toggleCamera}
           >
-            {cameraOn ? "Turn off camera" : "Turn on camera"}
+            {cameraOn ? "⏹ Turn off camera" : "⚡ Turn on camera"}
           </button>
 
           <span className={`status status-${status}`}>
@@ -310,7 +266,10 @@ export function Home({ onStateChange }: HomeProps = {}) {
             </button>
             <button
               className="btn btn-ghost btn-sm"
-              onClick={() => setHistoryOpen(true)}
+              onClick={() => {
+                setHistoryOpen(true);
+                trackEvent("open_history");
+              }}
               title="View previous translation sessions saved in database"
             >
               🕒 History

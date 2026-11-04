@@ -28,14 +28,7 @@ const ROUTES =
 
 async function main()
 {
-  execSync(`${npmCmd} run build`, 
-  { 
-    cwd: frontendDir, 
-    stdio: "inherit" 
-  });
-
-  execSync(`${npxCmd} vite build --ssr src/entry-server.tsx --outDir dist/server`, 
-  {
+  execSync(`${npmCmd} run build:ssr`, {
     cwd: frontendDir,
     stdio: "inherit",
   });

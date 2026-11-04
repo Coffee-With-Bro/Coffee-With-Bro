@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { API_URL, WS_URL } from "../lib/signTranslator";
+import { API_URL, WS_URL, FALLBACK_API_URL, FALLBACK_WS_URL } from "../lib/signTranslator";
 import { Link } from "../components/Link";
 import { TranslationAnalytics } from "../components/TranslationAnalytics";
 
@@ -47,41 +47,60 @@ export function Diagnostics() {
   useEffect(() => {
     let cancelled = false;
 
-    // 1. Probe WebSocket reachability
+    // 1. Probe WebSocket reachability (with automatic port fallback)
     const wsStartTime = performance.now();
-    try {
-      const ws = new WebSocket(WS_URL);
-      const timer = window.setTimeout(() => {
-        ws.close();
-        if (!cancelled) setWsStatus("unreachable");
-      }, 3000);
+    const probeWs = (targetUrl: string, isFallback: boolean) => {
+      try {
+        const ws = new WebSocket(targetUrl);
+        const timer = window.setTimeout(() => {
+          ws.close();
+          if (!cancelled) setWsStatus("unreachable");
+        }, 3000);
 
-      ws.onopen = () => {
-        window.clearTimeout(timer);
-        const roundtrip = Math.round(performance.now() - wsStartTime);
-        if (!cancelled) {
-          setWsLatencyMs(roundtrip);
-          setWsStatus("online");
+        ws.onopen = () => {
+          window.clearTimeout(timer);
+          const roundtrip = Math.round(performance.now() - wsStartTime);
+          if (!cancelled) {
+            setWsLatencyMs(roundtrip);
+            setWsStatus("online");
+          }
+          ws.close();
+        };
+
+        ws.onerror = () => {
+          window.clearTimeout(timer);
+          if (!isFallback && targetUrl !== FALLBACK_WS_URL) {
+            probeWs(FALLBACK_WS_URL, true);
+          } else if (!cancelled) {
+            setWsStatus("unreachable");
+          }
+        };
+      } catch {
+        if (!isFallback && targetUrl !== FALLBACK_WS_URL) {
+          probeWs(FALLBACK_WS_URL, true);
+        } else if (!cancelled) {
+          setWsStatus("unreachable");
         }
-        ws.close();
-      };
+      }
+    };
+    probeWs(WS_URL, false);
 
-      ws.onerror = () => {
-        window.clearTimeout(timer);
-        if (!cancelled) setWsStatus("unreachable");
-      };
-    } catch {
-      window.setTimeout(() => {
-        if (!cancelled) setWsStatus("unreachable");
-      }, 0);
-    }
-
-    // 2. Fetch REST API endpoints
+    // 2. Fetch REST API endpoints with automatic port fallback
     const t0 = performance.now();
+    const fetchWithFallback = async (endpoint: string) => {
+      try {
+        const res = await fetch(`${API_URL}${endpoint}`);
+        if (res.ok) return res;
+      } catch {
+        // Probe fallback port if primary is unreachable
+      }
+      return fetch(`${FALLBACK_API_URL}${endpoint}`);
+    };
+
     Promise.all([
-      fetch(`${API_URL}/status`),
-      fetch(`${API_URL}/supported-signs`),
-      fetch(`${API_URL}/dictionary/count`),
+      fetchWithFallback("/status"),
+      fetchWithFallback("/supported-signs"),
+      fetchWithFallback("/dictionary/count"),
     ])
       .then(async ([statusRes, signsRes, dictRes]) => {
         const roundtrip = Math.round(performance.now() - t0);

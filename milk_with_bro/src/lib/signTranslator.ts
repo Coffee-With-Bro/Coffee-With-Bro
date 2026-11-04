@@ -1,11 +1,23 @@
 const defaultHostname =
-  typeof window !== "undefined" ? window.location.hostname : "localhost";
+  typeof window !== "undefined" &&
+  (window.location.hostname === "localhost" ||
+    window.location.hostname === "127.0.0.1")
+    ? window.location.hostname
+    : "localhost";
 
 export const WS_URL =
   (import.meta.env.VITE_WS_URL as string | undefined) ??
-  `ws://${defaultHostname}:8080/ws/echo`;
+  `ws://${defaultHostname}:8081/ws/echo`;
 
 export const API_URL =
+  (import.meta.env.VITE_API_URL as string | undefined) ??
+  `http://${defaultHostname}:8081/api`;
+
+export const FALLBACK_WS_URL =
+  (import.meta.env.VITE_WS_URL as string | undefined) ??
+  `ws://${defaultHostname}:8080/ws/echo`;
+
+export const FALLBACK_API_URL =
   (import.meta.env.VITE_API_URL as string | undefined) ??
   `http://${defaultHostname}:8080/api`;
 

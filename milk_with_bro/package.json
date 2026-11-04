@@ -8,14 +8,20 @@
     "build": "tsc -b && vite build",
     "build:ssr": "tsc -b && vite build && vite build --ssr src/entry-server.tsx --outDir dist/server",
     "prerender": "node ../scripts/prerender.js",
+    "vercel-build": "node ../scripts/prerender.js",
     "serve:ssr": "node server.js",
     "lint": "eslint .",
     "preview": "vite preview"
   },
   "dependencies": {
+    "@supabase/ssr": "^0.12.7",
+    "@supabase/supabase-js": "^2.118.0",
+    "@vercel/analytics": "^2.0.1",
+    "@vercel/speed-insights": "^2.0.0",
     "canvas-confetti": "^1.9.4",
     "react": "^19.2.8",
-    "react-dom": "^19.2.8"
+    "react-dom": "^19.2.8",
+    "workflow": "^5.3.0"
   },
   "devDependencies": {
     "@babel/core": "^7.29.7",

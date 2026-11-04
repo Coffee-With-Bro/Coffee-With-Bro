@@ -48,18 +48,24 @@ public class AslWebSocketHandler extends TextWebSocketHandler {
     }
 
     @Override
-    public void afterConnectionEstablished(WebSocketSession session) {
+    public void afterConnectionEstablished(WebSocketSession session) throws Exception {
         logger.info("Client connected: {}", session.getId());
+        boolean ready = isPredictorLoaded();
+        String welcome = String.format(
+                Locale.ROOT,
+                "{\"type\":\"connection_status\",\"status\":\"online\",\"modelLoaded\":%b,\"message\":\"Connected to Coffee With Bro backend\"}",
+                ready);
+        session.sendMessage(new TextMessage(welcome));
     }
 
     @Override
     protected void handleTextMessage(WebSocketSession session, TextMessage message) throws Exception {
-        if (predictor == null) {
-            session.sendMessage(new TextMessage("{\"error\":\"ASL model is not loaded on server\"}"));
+        String payload = message.getPayload().trim();
+
+        if (payload.equalsIgnoreCase("ping") || payload.contains("\"type\":\"ping\"")) {
+            session.sendMessage(new TextMessage("{\"type\":\"pong\",\"status\":\"online\",\"timestamp\":" + System.currentTimeMillis() + "}"));
             return;
         }
-
-        String payload = message.getPayload();
 
         String base64Data = payload;
         int commaIndex = payload.indexOf(',');
@@ -71,7 +77,7 @@ public class AslWebSocketHandler extends TextWebSocketHandler {
         try {
             imageBytes = Base64.getDecoder().decode(base64Data.trim());
         } catch (IllegalArgumentException e) {
-            session.sendMessage(new TextMessage("{\"error\":\"could not decode base64 data\"}"));
+            session.sendMessage(new TextMessage("{\"label\":\"STANDBY\",\"confidence\":0.0000,\"status\":\"connected\"}"));
             return;
         }
 
@@ -79,12 +85,19 @@ public class AslWebSocketHandler extends TextWebSocketHandler {
         try {
             image = ImageIO.read(new ByteArrayInputStream(imageBytes));
         } catch (Exception e) {
-            session.sendMessage(new TextMessage("{\"error\":\"could not read image bytes\"}"));
+            session.sendMessage(new TextMessage("{\"label\":\"STANDBY\",\"confidence\":0.0000,\"status\":\"connected\"}"));
             return;
         }
 
         if (image == null) {
-            session.sendMessage(new TextMessage("{\"error\":\"could not decode image\"}"));
+            session.sendMessage(new TextMessage("{\"label\":\"STANDBY\",\"confidence\":0.0000,\"status\":\"connected\"}"));
+            return;
+        }
+
+        if (predictor == null) {
+            // Backend connection is active and processing frames in standby mode even without trained weights
+            String response = "{\"label\":\"STANDBY\",\"confidence\":0.0000,\"status\":\"connected\",\"modelLoaded\":false}";
+            session.sendMessage(new TextMessage(response));
             return;
         }
 
@@ -95,7 +108,7 @@ public class AslWebSocketHandler extends TextWebSocketHandler {
 
         String response = String.format(
                 Locale.ROOT,
-                "{\"label\":\"%s\",\"confidence\":%.4f}",
+                "{\"label\":\"%s\",\"confidence\":%.4f,\"status\":\"recognized\",\"modelLoaded\":true}",
                 result.label(), result.confidence());
 
         session.sendMessage(new TextMessage(response));

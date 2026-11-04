@@ -14,6 +14,8 @@ import { Diagnostics } from "./pages/Diagnostics";
 import { NotFound } from "./pages/NotFound";
 import { CookieBanner } from "./components/CookieBanner";
 import { StickyMobileCta } from "./components/StickyMobileCta";
+import { Analytics } from "@vercel/analytics/react";
+import { SpeedInsights } from "@vercel/speed-insights/react";
 import { updatePageMetadata } from "./lib/seo";
 import { trackPageView } from "./lib/analytics";
 import { getThemeColor } from "./lib/theme";
@@ -108,6 +110,12 @@ export function App({ ssrRoute }: AppProps = {}) {
 
       {/* Floating Privacy Notice / Cookie Banner */}
       <CookieBanner />
+
+      {/* Vercel Web Analytics */}
+      <Analytics />
+
+      {/* Vercel Speed Insights */}
+      <SpeedInsights />
 
       {/* Responsive Sticky Mobile Call-to-Action Bar */}
       <StickyMobileCta
