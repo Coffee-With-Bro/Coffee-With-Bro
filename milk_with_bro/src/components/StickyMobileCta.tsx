@@ -18,7 +18,7 @@ export function StickyMobileCta({
   liveGuessLabel,
   confidencePct = 0,
 }: StickyMobileCtaProps) {
-  // If not on the homepage, offer a quick jump back to the translator
+  
   if (currentRoute !== "/") {
     return (
       <div className="sticky-mobile-cta" role="complementary" aria-label="Mobile quick action">

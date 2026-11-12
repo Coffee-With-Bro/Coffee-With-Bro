@@ -25,10 +25,6 @@ import com.coffeewithbro.coffee_with_bro.entity.TranslationSession;
 import com.coffeewithbro.coffee_with_bro.repository.TranslationSessionRepository;
 import com.coffeewithbro.coffee_with_bro.websocket.AslWebSocketHandler;
 
-/**
- * REST API Controller providing system health, ASL model diagnostics,
- * supported signs metadata, and translation session history with analytics.
- */
 @RestController
 @RequestMapping("/api")
 @CrossOrigin(origins = "*")
@@ -57,9 +53,7 @@ public class SystemApiController {
         this.labelsFile = labelsFile;
     }
 
-    /**
-     * Get system telemetry, model state, and offline execution confirmation.
-     */
+    
     @GetMapping("/status")
     public ResponseEntity<SystemStatusDto> getStatus() {
         boolean modelReady = webSocketHandler.isPredictorLoaded();
@@ -67,13 +61,13 @@ public class SystemApiController {
 
         SystemStatusDto dto = new SystemStatusDto(
                 modelReady ? "ONLINE_ACTIVE" : "STANDBY_MODE",
-                "Coffee With Bro — Offline ASL Recognition",
+                "Coffee With Bro - Offline ASL Recognition",
                 modelReady,
                 modelFile != null ? modelFile.getPath() : "none",
                 labelsFile != null ? labelsFile.getPath() : "none",
                 SUPPORTED_SIGNS.size(),
                 SUPPORTED_SIGNS.subList(0, 10),
-                true, // 100% offline, no cloud telemetry
+                true, 
                 sessionCount,
                 LocalDateTime.now()
         );
@@ -81,9 +75,7 @@ public class SystemApiController {
         return ResponseEntity.ok(dto);
     }
 
-    /**
-     * List all 36 supported ASL classes grouped by category (Alphabets & Digits).
-     */
+    
     @GetMapping("/supported-signs")
     public ResponseEntity<Map<String, Object>> getSupportedSigns() {
         Map<String, Object> response = new HashMap<>();
@@ -101,17 +93,13 @@ public class SystemApiController {
         return ResponseEntity.ok(response);
     }
 
-    /**
-     * Retrieve recent translation session history.
-     */
+    
     @GetMapping("/sessions")
     public ResponseEntity<List<TranslationSession>> getRecentSessions() {
         return ResponseEntity.ok(sessionRepository.findTop20ByOrderByCreatedAtDesc());
     }
 
-    /**
-     * Retrieve aggregate diagnostic metrics across all saved sessions.
-     */
+    
     @GetMapping("/sessions/stats")
     public ResponseEntity<SessionStatsDto> getSessionStats() {
         long totalSessions = sessionRepository.count();
@@ -136,9 +124,7 @@ public class SystemApiController {
         return ResponseEntity.ok(stats);
     }
 
-    /**
-     * Record a new completed translation session.
-     */
+    
     @PostMapping("/sessions")
     public ResponseEntity<?> recordSession(@RequestBody TranslationSession session) {
         if (session == null || session.getTranscript() == null || session.getTranscript().trim().isEmpty()) {
@@ -154,9 +140,7 @@ public class SystemApiController {
         return ResponseEntity.status(HttpStatus.CREATED).body(saved);
     }
 
-    /**
-     * Delete an individual session by ID.
-     */
+    
     @DeleteMapping("/sessions/{id}")
     public ResponseEntity<?> deleteSessionById(@PathVariable("id") Long id) {
         if (!sessionRepository.existsById(id)) {
@@ -167,9 +151,7 @@ public class SystemApiController {
         return ResponseEntity.ok(Map.of("message", "Session " + id + " deleted successfully"));
     }
 
-    /**
-     * Clear session history (for testing and privacy reset).
-     */
+    
     @DeleteMapping("/sessions")
     public ResponseEntity<Map<String, String>> clearSessions() {
         sessionRepository.deleteAll();

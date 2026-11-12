@@ -47,7 +47,7 @@ export function Diagnostics() {
   useEffect(() => {
     let cancelled = false;
 
-    // 1. Probe WebSocket reachability (with automatic port fallback)
+    
     const wsStartTime = performance.now();
     const probeWs = (targetUrl: string, isFallback: boolean) => {
       try {
@@ -85,14 +85,14 @@ export function Diagnostics() {
     };
     probeWs(WS_URL, false);
 
-    // 2. Fetch REST API endpoints with automatic port fallback
+    
     const t0 = performance.now();
     const fetchWithFallback = async (endpoint: string) => {
       try {
         const res = await fetch(`${API_URL}${endpoint}`);
         if (res.ok) return res;
       } catch {
-        // Probe fallback port if primary is unreachable
+        
       }
       return fetch(`${FALLBACK_API_URL}${endpoint}`);
     };
@@ -174,7 +174,7 @@ export function Diagnostics() {
         </div>
       </header>
 
-      {/* ERROR / DISCONNECTED STATE */}
+      
       {apiError && (
         <section className="diagnostics-alert-banner" role="alert">
           <div className="alert-badge">BACKEND OFFLINE</div>
@@ -189,9 +189,9 @@ export function Diagnostics() {
         </section>
       )}
 
-      {/* CORE TELEMETRY STATUS TILES */}
+      
       <section className="diagnostics-grid" aria-label="Core Subsystem Health">
-        {/* TILE 1: Backend Server */}
+        
         <div className={`diag-card ${systemStatus ? "status-success" : "status-error"}`}>
           <div className="diag-card-top">
             <span className="diag-card-title">Spring Boot Server</span>
@@ -224,7 +224,7 @@ export function Diagnostics() {
           </div>
         </div>
 
-        {/* TILE 2: CNN Model Readiness */}
+        
         <div
           className={`diag-card ${
             systemStatus?.modelLoaded ? "status-success" : "status-warning"
@@ -258,7 +258,7 @@ export function Diagnostics() {
           </div>
         </div>
 
-        {/* TILE 3: WebSocket Transport */}
+        
         <div
           className={`diag-card ${
             wsStatus === "online"
@@ -304,7 +304,7 @@ export function Diagnostics() {
           </div>
         </div>
 
-        {/* TILE 4: In-Memory H2 Database */}
+        
         <div className={`diag-card ${systemStatus ? "status-success" : "status-error"}`}>
           <div className="diag-card-top">
             <span className="diag-card-title">H2 In-Memory DB</span>
@@ -320,7 +320,7 @@ export function Diagnostics() {
           </div>
           <div className="diag-meta-list">
             <div>
-              <strong>Console:</strong> <code>http://localhost:8080/h2-console</code>
+              <strong>Console:</strong> <code>http://localhost:8081/h2-console</code>
             </div>
             <div>
               <strong>Target:</strong> <code>jdbc:h2:mem:coffeewithbro</code>
@@ -328,7 +328,7 @@ export function Diagnostics() {
           </div>
         </div>
 
-        {/* TILE 5: Dictionary Subsystem */}
+        
         <div className={`diag-card ${dictInfo ? "status-success" : "status-error"}`}>
           <div className="diag-card-top">
             <span className="diag-card-title">Dictionary Subsystem</span>
@@ -353,7 +353,7 @@ export function Diagnostics() {
         </div>
       </section>
 
-      {/* SUPPORTED RECOGNITION CLASSES BREAKDOWN */}
+      
       {supportedSigns && (
         <section className="panel diag-classes-panel" aria-label="Supported Sign Classes">
           <div className="diag-panel-header">
@@ -368,7 +368,7 @@ export function Diagnostics() {
           </div>
 
           <div className="diag-class-group">
-            <h4 className="diag-group-title">Letters (A–Z) — {supportedSigns.letters.length} Classes</h4>
+            <h4 className="diag-group-title">Letters (A–Z) - {supportedSigns.letters.length} Classes</h4>
             <div className="diag-chips-wrap">
               {supportedSigns.letters.map((letter) => (
                 <span key={letter} className="diag-class-badge">
@@ -379,7 +379,7 @@ export function Diagnostics() {
           </div>
 
           <div className="diag-class-group" style={{ marginTop: "16px" }}>
-            <h4 className="diag-group-title">Digits (0–9) — {supportedSigns.digits.length} Classes</h4>
+            <h4 className="diag-group-title">Digits (0–9) - {supportedSigns.digits.length} Classes</h4>
             <div className="diag-chips-wrap">
               {supportedSigns.digits.map((digit) => (
                 <span key={digit} className="diag-class-badge diag-digit-badge">
@@ -391,7 +391,7 @@ export function Diagnostics() {
         </section>
       )}
 
-      {/* REAL TRANSLATION SESSION ANALYTICS */}
+      
       <TranslationAnalytics />
     </main>
   );

@@ -108,7 +108,7 @@ export function Legal() {
 
         <h3 className="sub-title">2. Where the processing happens</h3>
         <p>
-          Everything runs on machines you control — typically the backend on{" "}
+          Everything runs on machines you control - typically the backend on{" "}
           <code>localhost</code> on the same computer as the browser. The project
           has no external API dependency by design, which is the reason it works
           with no internet connection at all.
@@ -129,7 +129,7 @@ export function Legal() {
 
         <h3 className="sub-title">5. Third-party requests</h3>
         <p>
-          The interface loads two typefaces — Space Grotesk and JetBrains Mono —
+          The interface loads two typefaces - Space Grotesk and JetBrains Mono -
           from Google Fonts, which means your browser makes a request to Google's
           font servers and Google receives your IP address as part of that
           request. This is the only outbound request the page makes. Self-hosting

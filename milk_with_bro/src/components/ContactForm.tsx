@@ -50,7 +50,7 @@ export function ContactForm() {
     const nextValues = { ...values, [field]: value };
     setValues(nextValues);
 
-    // If already attempted or touched, validate in real time
+    
     if (submittedAttempt || touched[field]) {
       const fieldErrors = validate(nextValues);
       setErrors((prev) => ({
@@ -86,16 +86,16 @@ export function ContactForm() {
 
     trackEvent("contact_form_submit", { subject: values.subject.trim() });
 
-    const body = `${values.message.trim()}\n\n— ${values.name.trim()} (${values.email.trim()})`;
+    const body = `${values.message.trim()}\n\n- ${values.name.trim()} (${values.email.trim()})`;
     const href =
       `mailto:${TEAM_EMAIL}` +
       `?subject=${encodeURIComponent(values.subject.trim())}` +
       `&body=${encodeURIComponent(body)}`;
 
-    // Open mail draft
+    
     window.location.href = href;
 
-    // Direct user to Thank You page
+    
     setTimeout(() => {
       navigate("/thank-you");
     }, 400);

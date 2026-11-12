@@ -1,4 +1,4 @@
-// Privacy-preserving client analytics helper for Coffee With Bro
+
 
 export interface AnalyticsEvent {
   event: string;
@@ -28,7 +28,7 @@ export function trackPageView(path: string) {
     window.cwbAnalytics.track("page_view", { page_path: path, title: document.title });
   }
 
-  // If Google Analytics GA4 or compatible is configured
+  
   if (typeof window.gtag === "function") {
     window.gtag("event", "page_view", {
       page_path: path,

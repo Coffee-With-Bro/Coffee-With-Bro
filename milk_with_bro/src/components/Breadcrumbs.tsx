@@ -15,6 +15,7 @@ const ROUTE_NAMES: Record<string, string> = {
   "/legal": "Terms of Use",
   "/privacy": "Privacy Policy",
   "/thank-you": "Confirmation",
+  "/login": "Sign In",
 };
 
 interface BreadcrumbsProps {
@@ -23,7 +24,7 @@ interface BreadcrumbsProps {
 
 export function Breadcrumbs({ currentRoute }: BreadcrumbsProps) {
   if (!currentRoute || currentRoute === "/") {
-    return null; // No breadcrumb needed on root homepage
+    return null; 
   }
 
   const items: BreadcrumbItem[] = [

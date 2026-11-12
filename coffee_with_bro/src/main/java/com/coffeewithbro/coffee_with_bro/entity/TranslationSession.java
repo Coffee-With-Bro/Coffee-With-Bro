@@ -10,10 +10,6 @@ import jakarta.persistence.Id;
 import jakarta.persistence.PrePersist;
 import jakarta.persistence.Table;
 
-/**
- * JPA Entity to persist offline ASL translation sessions and transcripts.
- * Useful for user history review, accessibility auditing, and analytics.
- */
 @Entity
 @Table(name = "translation_sessions")
 public class TranslationSession {

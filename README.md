@@ -182,6 +182,7 @@ Built by 5th semester Computer Science students at TIET:
 
 - **Abhishek Srivastava** (1024030236) — ML Pipeline, Data Preprocessing & CNN Architecture (`ice_with_bro`)
 - **Keshav Aggarwal** (1024030234) — Frontend UI, Viewfinder & WebSocket Client (`milk_with_bro`)
+- **Karanveer Singh** (1024030240) — Systems Integration & Software Engineering (`coffee_with_bro` / `milk_with_bro`)
 - **Harshine Singh** (1024030232) — Spring Boot Backend, DL4J Integration & WebSocket Handler (`coffee_with_bro`)
 - **Bhuvaneesh Singh Grewal** (1024030235) — IEEE SRS Documentation, Diagrams & QA Testing (`cream_with_bro`)
 

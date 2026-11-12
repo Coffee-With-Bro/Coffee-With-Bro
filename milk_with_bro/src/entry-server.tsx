@@ -7,7 +7,7 @@ export function render(url: string | null) {
   const normalizedRoute = url ? ((url.replace(/\/+$/, "") || "/") as Route) : null;
   const html = renderToString(<App ssrRoute={normalizedRoute} />);
   const metadata = (normalizedRoute && ROUTE_METADATA[normalizedRoute]) || {
-    title: "404 Page Not Found — Coffee with Bro",
+    title: "404 Page Not Found - Coffee with Bro",
     description: "The requested page does not exist on the Coffee with Bro application.",
     robots: "noindex, nofollow",
   };

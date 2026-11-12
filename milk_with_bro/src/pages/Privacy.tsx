@@ -69,7 +69,7 @@ export function Privacy() {
         <h2 className="section-title">3. Network Communication</h2>
         <p>
           The web application communicates exclusively over a local WebSocket
-          connection (<code>ws://localhost:8080/ws/echo</code> or local network IP).
+          connection (<code>ws://localhost:8081/ws/echo</code>).
           No communication is dispatched across external internet servers.
         </p>
 

@@ -20,12 +20,12 @@ export function DictionaryAutocomplete({
   const [loading, setLoading] = useState(false);
   const [validatedWord, setValidatedWord] = useState<{ word: string; valid: boolean } | null>(null);
 
-  // Derived state: calculate active word prefix directly from transcript
+  
   const lastSpaceIndex = transcript.lastIndexOf(" ");
   const currentPrefix = lastSpaceIndex === -1 ? transcript : transcript.slice(lastSpaceIndex + 1);
   const activeWord = currentPrefix.trim().toUpperCase();
 
-  // Autocomplete suggestions fetch with debounce
+  
   useEffect(() => {
     if (!activeWord) {
       return;
@@ -58,7 +58,7 @@ export function DictionaryAutocomplete({
     };
   }, [activeWord]);
 
-  // Validate completed word when a space is entered
+  
   useEffect(() => {
     if (!transcript.endsWith(" ") || transcript.trim().length === 0) {
       return;
@@ -77,7 +77,7 @@ export function DictionaryAutocomplete({
         }
       })
       .catch(() => {
-        // Non-blocking error handling
+        
       });
 
     return () => {

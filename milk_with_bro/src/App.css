@@ -1,7 +1,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600&family=JetBrains+Mono:wght@400;500&display=swap");
 
 :root {
-  /* Palette values live here; components consume semantic tokens below. */
+  
   --mint-cream: #f2f7f2;
   --grey: #828489;
   --golden-orange: #e59500;
@@ -13,7 +13,7 @@
   --line: var(--grey);
   --surface-muted: color-mix(in srgb, var(--bg) 88%, var(--grey));
   --ink: var(--midnight-violet);
-  /* Exact Grey and Orange fail normal-text contrast on Mint Cream. */
+  
   --ink-dim: color-mix(in srgb, var(--grey) 70%, var(--ink));
   --accent: var(--golden-orange);
   --accent-text: var(--dark-walnut);
@@ -35,7 +35,7 @@
   --shadow: color-mix(in srgb, var(--ink) 24%, transparent);
   --shadow-soft: color-mix(in srgb, var(--ink) 3%, transparent);
 
-  /* Illustration roles keep the 404 artwork on the same palette. */
+  
   --art-stone: var(--grey);
   --art-stone-light: color-mix(in srgb, var(--grey) 75%, var(--bg));
   --art-stone-shadow: color-mix(in srgb, var(--grey) 85%, var(--ink));
@@ -470,7 +470,6 @@
   border-color: var(--accent-border);
 }
 
-/* Modals */
 .modal-backdrop {
   position: fixed;
   inset: 0;
@@ -719,9 +718,6 @@
   word-break: break-word;
 }
 
-/* ==========================================================================
-   Hero Call-To-Action (Above The Fold)
-   ========================================================================== */
 .hero-cta-section {
   display: flex;
   flex-direction: column;
@@ -781,9 +777,6 @@
   border: 1px solid var(--accent-border);
 }
 
-/* ==========================================================================
-   Cookie / Privacy Banner
-   ========================================================================== */
 .cookie-banner {
   position: fixed;
   bottom: 20px;
@@ -836,16 +829,10 @@
   flex-shrink: 0;
 }
 
-/* ==========================================================================
-   Sticky Mobile Call-To-Action (Mobile Breakpoint)
-   ========================================================================== */
 .sticky-mobile-cta {
   display: none;
 }
 
-/* ==========================================================================
-   Verified Contact Info Cards & Form Error Enhancements
-   ========================================================================== */
 .contact-details-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
@@ -921,9 +908,6 @@
   flex-wrap: wrap;
 }
 
-/* ==========================================================================
-   Responsive Mobile Breakpoints (<= 768px, <= 480px, <= 360px)
-   ========================================================================== */
 @media (max-width: 768px) {
   .sticky-mobile-cta {
     display: block;
@@ -993,7 +977,7 @@
     color: var(--ink-dim);
   }
 
-  /* Extra bottom padding to avoid overlapping sticky CTA */
+  
   #root {
     padding-bottom: 96px;
   }
@@ -1072,8 +1056,6 @@
     flex: 1 1 100%;
   }
 }
-
-
 
 .topbar-brand-title {
   display: inline-flex;

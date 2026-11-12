@@ -129,13 +129,13 @@ export function useSignTranslator() {
             error?: string;
           };
 
-          // Connection handshake response
+          
           if (data.type === "connection_status" || data.status === "online") {
             setStatus("open");
             return;
           }
 
-          // Active frame prediction or standby label
+          
           if (data.label !== undefined) {
             handlePrediction({
               label: data.label,
@@ -150,7 +150,7 @@ export function useSignTranslator() {
 
       socket.onerror = () => {
         if (!useFallback && targetUrl !== FALLBACK_WS_URL) {
-          // Attempt fallback port (e.g. fallback between 8081 and 8080)
+          
           connectSocketRef.current(true);
           return;
         }

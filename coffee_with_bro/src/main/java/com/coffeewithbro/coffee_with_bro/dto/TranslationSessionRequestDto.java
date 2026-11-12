@@ -1,8 +1,5 @@
 package com.coffeewithbro.coffee_with_bro.dto;
 
-/**
- * Request payload for recording a completed ASL translation session.
- */
 public record TranslationSessionRequestDto(
         String transcript,
         Integer letterCount,

@@ -22,6 +22,16 @@ const MEMBERS: TeamMember[] = [
     github: "https://github.com/k-keshav-aggarwal",
   },
   {
+    name: "Karanveer Singh",
+    roll: "1024030240",
+    email: "ksingh_be24@thapar.edu",
+    role: "Software Engineering & Systems Integration",
+    bio:
+      "Third-year B.Tech Computer Science student at Thapar Institute specializing in software engineering, system architecture, and cloud services integration.",
+    skills: ["Java", "Spring Boot", "TypeScript", "React", "System Integration"],
+    github: "https://github.com/k-keshav-aggarwal",
+  },
+  {
     name: "Abhishek Srivastava",
     roll: "1024030236",
     email: "asrivastava_be24@thapar.edu",
@@ -49,7 +59,7 @@ const MEMBERS: TeamMember[] = [
     bio:
       "Computer Science undergraduate focusing on software engineering methodologies, formal verification, and quality assurance. Author of the IEEE 830 SRS specification, UML activity and use-case architecture diagrams, and test suite verification.",
     skills: ["IEEE 830 SRS", "Software Architecture", "UML Modeling", "LaTeX", "End-to-End QA"],
-    github: "https://https://github.com/bhuvaneeshgrewal",
+    github: "https://github.com/bhuvaneeshgrewal",
   },
 ];
 
@@ -65,7 +75,7 @@ export function Team() {
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "AboutPage",
-    name: "Team & Author Bios — Coffee with Bro",
+    name: "Team & Author Bios - Coffee with Bro",
     description: "Meet the student engineering team at Thapar Institute of Engineering and Technology who built the Coffee with Bro offline ASL recognition system.",
     author: MEMBERS.map((member) => ({
       "@type": "Person",
@@ -89,7 +99,7 @@ export function Team() {
       />
       <header className="page-head">
         <p className="eyebrow">Team &amp; Authors</p>
-        <h1 className="page-title">Four students, one offline translator.</h1>
+        <h1 className="page-title">Five students, one offline translator.</h1>
         <p className="lede">
           We are 3rd-year B.Tech students in Computer Science at Thapar Institute
           of Engineering and Technology. Coffee with Bro was engineered for
@@ -97,7 +107,6 @@ export function Team() {
         </p>
       </header>
 
-      {/* Author Bio Cards Grid */}
       <section className="team-grid" aria-label="Author bios and team members">
         {MEMBERS.map((member) => (
           <article className="member author-card" key={member.roll}>
@@ -140,7 +149,6 @@ export function Team() {
         ))}
       </section>
 
-      {/* Real Institutional & Project Contact Card */}
       <section className="panel" id="contact-info">
         <h2 className="section-title">Verified Contact Information</h2>
         <p className="muted contact-intro">

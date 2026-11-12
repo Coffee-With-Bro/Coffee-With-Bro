@@ -16,7 +16,7 @@ services:
     volumes:
       - ./models:/app/models:ro
     healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:8080/api/system/status"]
+      test: ["CMD", "curl", "-f", "http://localhost:8080/api/status"]
       interval: 15s
       timeout: 5s
       retries: 5

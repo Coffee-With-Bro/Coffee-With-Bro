@@ -79,7 +79,7 @@ export function Home({ onStateChange }: HomeProps = {}) {
     trackEvent("open_guide");
   }, []);
 
-  // Sync state to parent for mobile sticky CTA
+  
   useEffect(() => {
     if (onStateChange) {
       onStateChange({
@@ -104,7 +104,7 @@ export function Home({ onStateChange }: HomeProps = {}) {
     }
   }, [transcript, charCount]);
 
-  // Offline Web Speech API - Speak out loud
+  
   const handleSpeak = useCallback(() => {
     if (!transcript.trim()) return;
 
@@ -131,7 +131,7 @@ export function Home({ onStateChange }: HomeProps = {}) {
     window.speechSynthesis.speak(utterance);
   }, [transcript, isSpeaking, charCount]);
 
-  // Save session to backend H2 database
+  
   const handleSaveSession = useCallback(async () => {
     if (!transcript.trim() || saving) return;
     setSaving(true);
@@ -166,7 +166,7 @@ export function Home({ onStateChange }: HomeProps = {}) {
     }
   }, [transcript, saving, liveGuess]);
 
-  // Export transcript to .txt file
+  
   const handleExportTxt = useCallback(() => {
     if (!transcript) return;
     const blob = new Blob([transcript], { type: "text/plain;charset=utf-8" });
@@ -181,7 +181,7 @@ export function Home({ onStateChange }: HomeProps = {}) {
 
   return (
     <main className="stage">
-      {/* ABOVE THE FOLD HERO & CALL-TO-ACTION */}
+      
       <section className="hero-cta-section" aria-label="Translator introduction and call to action">
         <p className="eyebrow">100% Offline · Privacy-First ASL Recognition</p>
         <h1 className="hero-cta-title">Turn Webcam Hand Signs into Live Text.</h1>
@@ -200,7 +200,7 @@ export function Home({ onStateChange }: HomeProps = {}) {
         </div>
       </section>
 
-      {/* VIEWFINDER & LIVE CAMERA SECTION */}
+      
       <section className="viewfinder-wrap" aria-label="Live camera viewfinder">
         <div className={`viewfinder ${cameraOn ? "is-live" : ""}`}>
           <video
@@ -286,7 +286,7 @@ export function Home({ onStateChange }: HomeProps = {}) {
 
         {cameraError && <p className="error" role="alert">{cameraError}</p>}
 
-        {/* Quick sign simulator bar for evaluation & testing */}
+        
         <div className="simulator-bar" aria-label="Sign test simulator bar">
           <span className="simulator-label">Quick Sign Test:</span>
           {["H", "E", "L", "L", "O", "1", "2"].map((ch, idx) => (
@@ -305,7 +305,7 @@ export function Home({ onStateChange }: HomeProps = {}) {
         </div>
       </section>
 
-      {/* TRANSCRIPT & ACTION CONTROLS SECTION */}
+      
       <section className="transcript-wrap" aria-label="Live Recognition Transcript">
         <div className="transcript-header-bar">
           <span className="transcript-label">Live Recognition Transcript</span>
@@ -325,7 +325,7 @@ export function Home({ onStateChange }: HomeProps = {}) {
           <span className="cursor" aria-hidden="true" />
         </div>
 
-        {/* Dictionary Word Autocomplete & Validation Subsystem */}
+        
         <DictionaryAutocomplete
           transcript={transcript}
           onSelectWord={(word) => {
@@ -384,7 +384,7 @@ export function Home({ onStateChange }: HomeProps = {}) {
         </div>
       </section>
 
-      {/* ASL Reference Guide Modal */}
+      
       <AslGuideModal
         isOpen={guideOpen}
         onClose={() => setGuideOpen(false)}
@@ -394,7 +394,7 @@ export function Home({ onStateChange }: HomeProps = {}) {
         }}
       />
 
-      {/* Database Session History Modal */}
+      
       <HistoryModal
         isOpen={historyOpen}
         onClose={() => setHistoryOpen(false)}

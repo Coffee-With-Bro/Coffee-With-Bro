@@ -11,7 +11,9 @@ import { Legal } from "./pages/Legal";
 import { Privacy } from "./pages/Privacy";
 import { ThankYou } from "./pages/ThankYou";
 import { Diagnostics } from "./pages/Diagnostics";
+import { Login } from "./pages/Login";
 import { NotFound } from "./pages/NotFound";
+import { AuthProvider } from "./context/AuthProvider";
 import { CookieBanner } from "./components/CookieBanner";
 import { StickyMobileCta } from "./components/StickyMobileCta";
 import { Analytics } from "@vercel/analytics/react";
@@ -44,7 +46,7 @@ export function App({ ssrRoute }: AppProps = {}) {
     const icon = document.querySelector<HTMLLinkElement>('link[rel="icon"]');
     if (!icon) return;
 
-    // A favicon is a separate document and cannot inherit the app's CSS tokens.
+    
     const svg = favicon.replace(/var\((--[\w-]+)\)/g, (_, token: string) => getThemeColor(token));
     const url = URL.createObjectURL(new Blob([svg], { type: "image/svg+xml" }));
     icon.href = url;
@@ -52,9 +54,9 @@ export function App({ ssrRoute }: AppProps = {}) {
   }, []);
 
   useEffect(() => {
-    // Update SEO meta title, description, and Open Graph tags
+    
     updatePageMetadata(route);
-    // Track page view event
+    
     trackPageView(route || "/404");
 
     const anchor = window.location.hash.slice(1);
@@ -68,65 +70,70 @@ export function App({ ssrRoute }: AppProps = {}) {
   }, [route]);
 
   return (
-    <div className="shell">
-      <NavBar current={route} />
+    <AuthProvider>
+      <div className="shell">
+        <NavBar current={route} />
 
-      {/* Breadcrumbs with JSON-LD Schema on all subpages */}
-      <Breadcrumbs currentRoute={route} />
+        
+        <Breadcrumbs currentRoute={route} />
 
-      {route === "/" && <Home onStateChange={setHomeSync} />}
-      {route === "/diagnostics" && <Diagnostics />}
-      {route === "/about" && <About />}
-      {route === "/team" && <Team />}
-      {route === "/resources" && <Resources />}
-      {route === "/legal" && <Legal />}
-      {route === "/privacy" && <Privacy />}
-      {route === "/thank-you" && <ThankYou />}
-      {route === null && <NotFound />}
+        {route === "/" && <Home onStateChange={setHomeSync} />}
+        {route === "/diagnostics" && <Diagnostics />}
+        {route === "/login" && <Login />}
+        {route === "/about" && <About />}
+        {route === "/team" && <Team />}
+        {route === "/resources" && <Resources />}
+        {route === "/legal" && <Legal />}
+        {route === "/privacy" && <Privacy />}
+        {route === "/thank-you" && <ThankYou />}
+        {route === null && <NotFound />}
 
-      {/* Complete Footer Navigation — Eliminates all orphan pages */}
-      <footer className="footer" role="contentinfo">
-        <div className="footer-line">
-          <span>UCS503 Software Engineering · Thapar Institute · 2026–27</span>
-        </div>
-        <div className="footer-links">
-          <Link to="/">Translator</Link>
-          <span aria-hidden="true">·</span>
-          <Link to="/diagnostics">System Diagnostics</Link>
-          <span aria-hidden="true">·</span>
-          <Link to="/about">About</Link>
-          <span aria-hidden="true">·</span>
-          <Link to="/team">Team &amp; Contact</Link>
-          <span aria-hidden="true">·</span>
-          <Link to="/resources">Resources</Link>
-          <span aria-hidden="true">·</span>
-          <Link to="/legal">Terms of Use</Link>
-          <span aria-hidden="true">·</span>
-          <Link to="/privacy">Privacy Policy</Link>
-          <span aria-hidden="true">·</span>
-          <Link to="/thank-you">Status</Link>
-        </div>
-      </footer>
+        
+        <footer className="footer" role="contentinfo">
+          <div className="footer-line">
+            <span>UCS503 Software Engineering · Thapar Institute · 2026–27</span>
+          </div>
+          <div className="footer-links">
+            <Link to="/">Translator</Link>
+            <span aria-hidden="true">·</span>
+            <Link to="/diagnostics">System Diagnostics</Link>
+            <span aria-hidden="true">·</span>
+            <Link to="/about">About</Link>
+            <span aria-hidden="true">·</span>
+            <Link to="/team">Team &amp; Contact</Link>
+            <span aria-hidden="true">·</span>
+            <Link to="/resources">Resources</Link>
+            <span aria-hidden="true">·</span>
+            <Link to="/legal">Terms of Use</Link>
+            <span aria-hidden="true">·</span>
+            <Link to="/privacy">Privacy Policy</Link>
+            <span aria-hidden="true">·</span>
+            <Link to="/thank-you">Status</Link>
+            <span aria-hidden="true">·</span>
+            <Link to="/login">Sign In</Link>
+          </div>
+        </footer>
 
-      {/* Floating Privacy Notice / Cookie Banner */}
-      <CookieBanner />
+        
+        <CookieBanner />
 
-      {/* Vercel Web Analytics */}
-      <Analytics />
+        
+        <Analytics />
 
-      {/* Vercel Speed Insights */}
-      <SpeedInsights />
+        
+        <SpeedInsights />
 
-      {/* Responsive Sticky Mobile Call-to-Action Bar */}
-      <StickyMobileCta
-        currentRoute={route}
-        cameraOn={homeSync?.cameraOn}
-        onToggleCamera={homeSync?.toggleCamera}
-        onOpenGuide={homeSync?.openGuide}
-        liveGuessLabel={homeSync?.liveGuessLabel}
-        confidencePct={homeSync?.confidencePct}
-      />
-    </div>
+        
+        <StickyMobileCta
+          currentRoute={route}
+          cameraOn={homeSync?.cameraOn}
+          onToggleCamera={homeSync?.toggleCamera}
+          onOpenGuide={homeSync?.openGuide}
+          liveGuessLabel={homeSync?.liveGuessLabel}
+          confidencePct={homeSync?.confidencePct}
+        />
+      </div>
+    </AuthProvider>
   );
 }
 

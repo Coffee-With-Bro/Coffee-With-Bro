@@ -1,6 +1,7 @@
 import { Link } from "./Link";
 import BoostConfetti from "../Confetti/BoostIconConfetti";
 import type { Route } from "../lib/useRoute";
+import { useAuth } from "../context/AuthContext";
 
 const LINKS: { route: Route; label: string }[] = [
   { route: "/", label: "Translator" },
@@ -13,6 +14,8 @@ const LINKS: { route: Route; label: string }[] = [
 ];
 
 export function NavBar({ current }: { current: Route | null }) {
+  const { user } = useAuth();
+
   return (
     <header className="topbar">
       <Link className="topbar-brand" to="/">
@@ -41,6 +44,15 @@ export function NavBar({ current }: { current: Route | null }) {
               </li>
             );
           })}
+          <li key="/login">
+            <Link
+              className={`nav-link ${current === "/login" ? "is-current" : ""}`}
+              to="/login"
+              aria-current={current === "/login" ? "page" : undefined}
+            >
+              {user ? `👤 ${user.email?.split("@")[0] ?? "Account"}` : "Sign In"}
+            </Link>
+          </li>
         </ul>
       </nav>
     </header>

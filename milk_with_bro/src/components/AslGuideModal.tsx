@@ -13,7 +13,7 @@ interface SignInfo {
 }
 
 const SIGNS_DATA: SignInfo[] = [
-  // Digits
+  
   { char: "0", category: "Digit", hint: "O-shape fist, fingers touching thumb tip" },
   { char: "1", category: "Digit", hint: "Index finger straight up, other fingers curled" },
   { char: "2", category: "Digit", hint: "Index and middle finger up in V-shape" },
@@ -25,7 +25,7 @@ const SIGNS_DATA: SignInfo[] = [
   { char: "8", category: "Digit", hint: "Middle finger touched by thumb, 3 fingers up" },
   { char: "9", category: "Digit", hint: "Index touched by thumb, 3 fingers up (OK sign)" },
 
-  // Letters A-Z
+  
   { char: "A", category: "Letter", hint: "Compact fist, thumb straight alongside index" },
   { char: "B", category: "Letter", hint: "Flat palm, 4 fingers upright, thumb across palm" },
   { char: "C", category: "Letter", hint: "Curved hand forming a C silhouette" },

@@ -51,10 +51,6 @@ export async function sendOnboardingEmail(user: UserRecord) {
   return { delivered: true, template: "onboarding", timestamp: new Date().toISOString() };
 }
 
-/**
- * Durable workflow orchestrating the user signup lifecycle.
- * Utilizes "use workflow" and zero-compute sleep().
- */
 export async function handleUserSignup(email: string) {
   "use workflow";
 

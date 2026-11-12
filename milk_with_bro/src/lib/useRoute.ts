@@ -9,6 +9,7 @@ export const ROUTES = [
   "/privacy",
   "/thank-you",
   "/diagnostics",
+  "/login",
 ] as const;
 
 export type Route = (typeof ROUTES)[number];

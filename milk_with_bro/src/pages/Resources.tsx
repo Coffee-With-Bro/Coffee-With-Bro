@@ -137,7 +137,7 @@ const GROUPS: Group[] = [
       {
         name: "ASL-HG hand gesture image dataset",
         license: "See dataset source",
-        what: "~36,000 labelled photographs across 36 classes — A–Z and 0–9. Roughly 1,000 images per class.",
+        what: "~36,000 labelled photographs across 36 classes - A–Z and 0–9. Roughly 1,000 images per class.",
         href: "https://www.kaggle.com/datasets",
       },
     ],
@@ -188,7 +188,7 @@ export function Resources() {
         <h1 className="page-title">What we built on.</h1>
         <p className="lede">
           Every library, dataset and tool this project depends on, and what each
-          one actually does here. The model itself is trained from scratch — no
+          one actually does here. The model itself is trained from scratch - no
           pretrained weights are downloaded or used.
         </p>
       </header>
@@ -225,7 +225,7 @@ export function Resources() {
         <p className="muted">
           Licences above are listed for attribution and are correct to the best of
           our knowledge at the time of writing. This is student coursework, not a
-          distributed product — if you intend to reuse any part of it, check each
+          distributed product - if you intend to reuse any part of it, check each
           project's own licence text first.
         </p>
       </section>

@@ -10,7 +10,7 @@ export function About() {
         <p className="lede">
           Coffee with Bro reads American Sign Language hand signs from a webcam and
           turns them into text on screen. No API keys, no cloud service, and no
-          pretrained model downloaded from anyone else — the model is trained from
+          pretrained model downloaded from anyone else - the model is trained from
           scratch, and every frame stays on your device.
         </p>
       </header>
@@ -25,13 +25,13 @@ export function About() {
           is a questionable default.
         </p>
         <p>
-          So we set a harder constraint on ourselves: the whole pipeline — dataset
-          preparation, CNN training, and live webcam recognition — has to run locally,
+          So we set a harder constraint on ourselves: the whole pipeline - dataset
+          preparation, CNN training, and live webcam recognition - has to run locally,
           using only libraries we can vendor and a model we trained ourselves.
         </p>
       </section>
 
-      {/* Zero CLS System Architecture Media with WebP */}
+      
       <section className="panel">
         <h2 className="section-title">System Architecture</h2>
         <div className="about-media-wrap">
@@ -102,7 +102,7 @@ export function About() {
       <section className="panel">
         <h2 className="section-title">Scope &amp; Recognized Signs</h2>
         <p>
-          The system recognizes <strong>36 static signs</strong> — the 26 ASL
+          The system recognizes <strong>36 static signs</strong> - the 26 ASL
           alphabet letters and the digits 0–9. Static means the sign is a held
           hand shape rather than a movement through space; recognizing motion
           signs requires multi-frame temporal modeling, which is out of scope for
@@ -110,7 +110,7 @@ export function About() {
         </p>
       </section>
 
-      {/* Interactive FAQ Section with Schema.org JSON-LD */}
+      
       <FaqSection />
 
       <section className="panel">
@@ -118,7 +118,7 @@ export function About() {
         <dl className="facts">
           <div>
             <dt>Course</dt>
-            <dd>UCS503 — Software Engineering</dd>
+            <dd>UCS503 - Software Engineering</dd>
           </div>
           <div>
             <dt>Programme</dt>

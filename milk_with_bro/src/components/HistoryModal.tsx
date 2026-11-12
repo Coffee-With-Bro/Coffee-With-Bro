@@ -72,7 +72,7 @@ export function HistoryModal({ isOpen, onClose, onRestoreTranscript }: HistoryMo
           </button>
         </div>
 
-        {/* Aggregated Analytics Banner */}
+        
         <div style={{ marginBottom: "16px" }}>
           <TranslationAnalytics compact={true} />
         </div>

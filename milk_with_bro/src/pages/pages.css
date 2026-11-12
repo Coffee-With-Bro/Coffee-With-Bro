@@ -549,9 +549,6 @@ textarea.field-input {
   object-fit: cover;
 }
 
-/* ==========================================================================
-   Breadcrumbs Navigation
-   ========================================================================== */
 .breadcrumbs {
   margin-top: -12px;
   margin-bottom: 2px;
@@ -597,9 +594,6 @@ textarea.field-input {
   font-weight: 500;
 }
 
-/* ==========================================================================
-   Author Bios & Skills
-   ========================================================================== */
 .author-card {
   display: flex;
   flex-direction: column;
@@ -652,9 +646,6 @@ textarea.field-input {
   text-decoration: underline;
 }
 
-/* ==========================================================================
-   FAQ Accordion Section
-   ========================================================================== */
 .faq-list {
   display: flex;
   flex-direction: column;
@@ -747,11 +738,6 @@ textarea.field-input {
   }
 }
 
-
-
-/* ==========================================================================
-   DICTIONARY AUTOCOMPLETE & VALIDATION
-   ========================================================================== */
 .dictionary-autocomplete-bar {
   display: flex;
   flex-direction: column;
@@ -852,9 +838,6 @@ textarea.field-input {
   border: 1px solid var(--line);
 }
 
-/* ==========================================================================
-   TRANSLATION SESSION ANALYTICS
-   ========================================================================== */
 .analytics-container {
   display: flex;
   flex-direction: column;
@@ -994,9 +977,6 @@ textarea.field-input {
   margin-top: 2px;
 }
 
-/* ==========================================================================
-   SYSTEM DIAGNOSTICS DASHBOARD
-   ========================================================================== */
 .diagnostics-page {
   gap: 24px;
 }

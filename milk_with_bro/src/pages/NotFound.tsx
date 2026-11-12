@@ -50,8 +50,8 @@ export function NotFound(): React.ReactElement {
       });
       oscillator.start();
       oscillator.stop(context.currentTime + 0.12);
-    } catch {
-      // Audio is an optional enhancement and may be blocked by the browser.
+    } catch (e) {
+      void e;
     }
   }
 

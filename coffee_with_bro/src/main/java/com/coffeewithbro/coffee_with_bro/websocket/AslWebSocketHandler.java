@@ -95,15 +95,21 @@ public class AslWebSocketHandler extends TextWebSocketHandler {
         }
 
         if (predictor == null) {
-            // Backend connection is active and processing frames in standby mode even without trained weights
+            
             String response = "{\"label\":\"STANDBY\",\"confidence\":0.0000,\"status\":\"connected\",\"modelLoaded\":false}";
             session.sendMessage(new TextMessage(response));
             return;
         }
 
         PredictionResult result;
-        synchronized (predictor) {
-            result = predictor.predict(image);
+        try {
+            synchronized (predictor) {
+                result = predictor.predict(image);
+            }
+        } catch (Exception e) {
+            logger.warn("Prediction failed on frame: {}", e.getMessage());
+            session.sendMessage(new TextMessage("{\"label\":\"STANDBY\",\"confidence\":0.0000,\"status\":\"connected\",\"modelLoaded\":true}"));
+            return;
         }
 
         String response = String.format(

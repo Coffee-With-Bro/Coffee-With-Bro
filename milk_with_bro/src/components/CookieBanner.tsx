@@ -10,20 +10,20 @@ export function CookieBanner() {
     try {
       const consent = localStorage.getItem(STORAGE_KEY);
       if (!consent) {
-        // Small delay so it transitions in smoothly
+        
         const timer = setTimeout(() => setVisible(true), 600);
         return () => clearTimeout(timer);
       }
-    } catch {
-      // Storage access blocked
+    } catch (e) {
+      void e;
     }
   }, []);
 
   function handleAccept() {
     try {
       localStorage.setItem(STORAGE_KEY, "accepted");
-    } catch {
-      // localStorage may fail in restricted sandboxes
+    } catch (e) {
+      void e;
     }
     setVisible(false);
   }

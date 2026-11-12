@@ -23,6 +23,7 @@ const ROUTES =
   "/legal",
   "/privacy",
   "/thank-you",
+  "/login",
   "/404",
 ];
 
