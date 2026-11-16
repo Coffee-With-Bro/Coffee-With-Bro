@@ -22,6 +22,7 @@ import { updatePageMetadata } from "./lib/seo";
 import { trackPageView } from "./lib/analytics";
 import { getThemeColor } from "./lib/theme";
 import favicon from "./assets/favicon.svg?raw";
+import { CLOUD_FEATURES_ENABLED } from "./lib/offline";
 import "./App.css";
 import "./pages/pages.css";
 
@@ -118,10 +119,10 @@ export function App({ ssrRoute }: AppProps = {}) {
         <CookieBanner />
 
         
-        <Analytics />
+        {CLOUD_FEATURES_ENABLED && <Analytics />}
 
         
-        <SpeedInsights />
+        {CLOUD_FEATURES_ENABLED && <SpeedInsights />}
 
         
         <StickyMobileCta

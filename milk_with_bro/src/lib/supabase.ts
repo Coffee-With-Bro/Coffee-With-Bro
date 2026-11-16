@@ -1,4 +1,5 @@
 import { createClient } from "@supabase/supabase-js";
+import { CLOUD_FEATURES_ENABLED } from "./offline";
 
 function getEnv(key: string): string | undefined {
   if (typeof import.meta !== "undefined" && import.meta.env && import.meta.env[key]) {
@@ -18,5 +19,8 @@ const supabaseKey =
   getEnv("VITE_SUPABASE_ANON_KEY") ||
   "sb_publishable_AX8ZJ49rZjs4BcNcrcNtZA_1KN0-5FL";
 
-export const supabase = createClient(supabaseUrl, supabaseKey);
+export const supabase = createClient(supabaseUrl, supabaseKey, CLOUD_FEATURES_ENABLED ? undefined : {
+  auth: { autoRefreshToken: false, detectSessionInUrl: false, persistSession: false },
+  global: { fetch: async () => { throw new Error("Cloud sign-in is disabled in offline mode"); } },
+});
 export default supabase;

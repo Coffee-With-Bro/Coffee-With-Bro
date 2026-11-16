@@ -2,6 +2,7 @@ import { useEffect, useState, type ReactNode } from "react";
 import type { User, Session } from "@supabase/supabase-js";
 import { supabase } from "../lib/supabase";
 import { AuthContext } from "./AuthContext";
+import { CLOUD_FEATURES_ENABLED } from "../lib/offline";
 
 function checkInitialRecovery(): boolean {
   if (typeof window === "undefined") return false;
@@ -11,10 +12,11 @@ function checkInitialRecovery(): boolean {
 export function AuthProvider({ children }: { children: ReactNode }) {
   const [user, setUser] = useState<User | null>(null);
   const [session, setSession] = useState<Session | null>(null);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(CLOUD_FEATURES_ENABLED);
   const [isPasswordRecovery, setIsPasswordRecovery] = useState(checkInitialRecovery);
 
   useEffect(() => {
+    if (!CLOUD_FEATURES_ENABLED) return;
     let mounted = true;
 
     

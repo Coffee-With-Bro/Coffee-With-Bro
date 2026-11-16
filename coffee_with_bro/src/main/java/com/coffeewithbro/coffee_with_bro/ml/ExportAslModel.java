@@ -22,15 +22,15 @@ public class ExportAslModel {
                 backendModelsDir.mkdirs();
             }
 
-            File modelOutput = new File(backendModelsDir, "asl_cnn_model.zip");
+            File modelOutput = new File(backendModelsDir, "untrained_asl_cnn_model.zip");
             System.out.println("Serializing model weights to: " + modelOutput.getAbsolutePath());
             ModelSerializer.writeModel(model, modelOutput, true);
 
-            File rootModelOutput = new File(rootModelsDir, "asl_cnn_model.zip");
+            File rootModelOutput = new File(rootModelsDir, "untrained_asl_cnn_model.zip");
             System.out.println("Copying model weights to root: " + rootModelOutput.getAbsolutePath());
             ModelSerializer.writeModel(model, rootModelOutput, true);
 
-            System.out.println("Successfully generated ASL CNN model weights!");
+            System.out.println("Exported UNTRAINED diagnostic weights. Run TrainAslCnn for a usable model.");
         } catch (Exception e) {
             System.err.println("Error exporting model: " + e.getMessage());
             e.printStackTrace();

@@ -64,7 +64,7 @@ public class AslCnnModel {
                         .activation(Activation.SOFTMAX)
                         .build())
 
-                .setInputType(InputType.convolutionalFlat(imageSize, imageSize, CHANNELS))
+                .setInputType(InputType.convolutional(imageSize, imageSize, CHANNELS))
                 .build();
 
         return new MultiLayerNetwork(config);

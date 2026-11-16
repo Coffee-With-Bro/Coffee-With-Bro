@@ -2,6 +2,7 @@ import { useState, type FormEvent } from "react";
 import { useAuth } from "../context/AuthContext";
 import { navigate } from "../lib/useRoute";
 import { Link } from "../components/Link";
+import { CLOUD_FEATURES_ENABLED } from "../lib/offline";
 
 type AuthMode = "signin" | "signup" | "forgot" | "reset";
 
@@ -28,6 +29,8 @@ export function Login() {
   const [submitting, setSubmitting] = useState(false);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const [successMessage, setSuccessMessage] = useState<string | null>(null);
+
+  if (!CLOUD_FEATURES_ENABLED) return <main className="stage"><h1>You’re working offline.</h1><p>The translator and your personal symbol library work without an account.</p><Link to="/">Open the translator</Link></main>;
 
   const handleOAuth = async (provider: "google" | "github") => {
     setErrorMessage(null);

@@ -92,7 +92,7 @@ export function Diagnostics() {
         const res = await fetch(`${API_URL}${endpoint}`);
         if (res.ok) return res;
       } catch {
-        
+        // Try the fallback endpoint when the primary server is unreachable.
       }
       return fetch(`${FALLBACK_API_URL}${endpoint}`);
     };

@@ -35,7 +35,7 @@ export const createClient = (cookieStore?: CookieStoreLike) => {
             cookieStore?.set?.(name, value, options)
           );
         } catch {
-          
+          // Some rendering contexts expose a read-only cookie store.
         }
       },
     },

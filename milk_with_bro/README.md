@@ -79,6 +79,25 @@ milk_with_bro/
 
 ## Configuration & Environment Variables
 
+### Local recognition and personal vocabulary
+
+The translator needs no account. Cloud auth and Vercel telemetry are opt-in with
+`VITE_ENABLE_CLOUD_FEATURES=true`; they are disabled by default. Hand tracking
+loads its model and WASM from `public/mediapipe/`, with no runtime CDN requests.
+Refresh these assets after installation with `node scripts/setup-hand-assets.mjs`
+from the repository root.
+
+Select **My symbols & gestures**, turn on the camera and name your symbol.
+Record the same shape or short movement three to five times, then use
+**Recognize my gesture**. Confirmation adds it to the transcript and strengthens
+the local library; correction teaches the selected symbol and rejects a wrong
+match. Symbols and feedback survive backend restarts. The library can hold up
+to 64 symbols with 20 examples each. No neural network retraining is required.
+
+The default local endpoints are `http://localhost:8081/api` and
+`ws://localhost:8081/ws/echo`. Override them with `VITE_API_URL` and `VITE_WS_URL`.
+The 8080 endpoints shown below are supported fallback/custom settings.
+
 The backend WebSocket address defaults to:
 ```
 ws://<hostname>:8080/ws/echo

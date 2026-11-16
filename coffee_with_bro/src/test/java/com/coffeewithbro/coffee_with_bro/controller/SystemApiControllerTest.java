@@ -19,7 +19,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import java.util.List;
 import java.util.Map;
 
-@SpringBootTest
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 public class SystemApiControllerTest {
 
     @Autowired
@@ -41,7 +41,7 @@ public class SystemApiControllerTest {
 
         SystemStatusDto status = response.getBody();
         assertNotNull(status);
-        assertEquals("Coffee With Bro — Offline ASL Recognition", status.appName());
+        assertEquals("Coffee With Bro - Offline ASL Recognition", status.appName());
         assertTrue(status.offlineOnly());
         assertEquals(36, status.supportedClassesCount());
         assertNotNull(status.status());

@@ -12,6 +12,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.web.socket.TextMessage;
 import org.springframework.web.socket.WebSocketSession;
 import org.springframework.web.socket.handler.TextWebSocketHandler;
@@ -24,26 +25,34 @@ public class AslWebSocketHandler extends TextWebSocketHandler {
 
     private static final Logger logger = LoggerFactory.getLogger(AslWebSocketHandler.class);
 
-    private final AslPredictor predictor;
+    private volatile AslPredictor predictor;
+    private final File modelFile;
+    private final File labelsFile;
+    private long loadedMetadataTimestamp;
 
     public AslWebSocketHandler(
             @Value("${asl.model-path}") File modelFile,
             @Value("${asl.labels-path}") File labelsFile) {
 
-        if (modelFile != null && modelFile.isFile() && labelsFile != null && labelsFile.isFile()) {
-            AslPredictor loadedPredictor = null;
-            try {
-                loadedPredictor = new AslPredictor(modelFile, labelsFile);
-                logger.info("Loaded ASL model from: {}", modelFile.getAbsolutePath());
-            } catch (Exception e) {
-                logger.error("Failed to initialize ASL predictor from {}: {}", modelFile.getAbsolutePath(), e.getMessage(), e);
-            }
-            this.predictor = loadedPredictor;
-        } else {
-            this.predictor = null;
-            logger.warn("ASL model or labels not found at '{}' / '{}'. Handler running in standby mode.",
-                    modelFile != null ? modelFile.getPath() : "null",
-                    labelsFile != null ? labelsFile.getPath() : "null");
+        this.modelFile = modelFile;
+        this.labelsFile = labelsFile;
+        refreshTrainedModel();
+        if (predictor == null) logger.warn("No verified trained ASL model at '{}'. Personal gestures remain available.", modelFile);
+    }
+
+    @Scheduled(fixedDelay = 10000)
+    public synchronized void refreshTrainedModel() {
+        if (modelFile == null || labelsFile == null) return;
+        File metadata = new File(modelFile + ".training.properties");
+        if (!modelFile.isFile() || !labelsFile.isFile() || !metadata.isFile()
+                || metadata.lastModified() == loadedMetadataTimestamp) return;
+        try {
+            AslPredictor loaded = new AslPredictor(modelFile, labelsFile);
+            predictor = loaded;
+            loadedMetadataTimestamp = metadata.lastModified();
+            logger.info("Loaded verified trained ASL model: {}", modelFile.getAbsolutePath());
+        } catch (Exception e) {
+            logger.warn("Trained model could not be loaded: {}", e.getMessage());
         }
     }
 
@@ -94,7 +103,8 @@ public class AslWebSocketHandler extends TextWebSocketHandler {
             return;
         }
 
-        if (predictor == null) {
+        AslPredictor current = predictor;
+        if (current == null) {
             
             String response = "{\"label\":\"STANDBY\",\"confidence\":0.0000,\"status\":\"connected\",\"modelLoaded\":false}";
             session.sendMessage(new TextMessage(response));
@@ -103,8 +113,8 @@ public class AslWebSocketHandler extends TextWebSocketHandler {
 
         PredictionResult result;
         try {
-            synchronized (predictor) {
-                result = predictor.predict(image);
+            synchronized (current) {
+                result = current.predict(image);
             }
         } catch (Exception e) {
             logger.warn("Prediction failed on frame: {}", e.getMessage());

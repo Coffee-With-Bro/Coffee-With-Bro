@@ -1,1 +1,6 @@
 data/
+manifests/
+runs/
+*.pt
+venv/
+.venv/

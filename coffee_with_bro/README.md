@@ -63,6 +63,30 @@ coffee_with_bro/
 
 ## Configuration & Environment Variables
 
+The model needs a matching `asl_cnn_model.zip.training.properties` sidecar.
+Train, evaluate and install it with `python ice_with_bro/train_model.py 350 50 100 12`
+from the repository root. The backend checks every 10 seconds for a newly installed
+verified model. `ExportAslModel` produces explicitly untrained diagnostic weights,
+which the webcam predictor refuses.
+
+The personal gesture API works independently of the ASL classifier:
+
+- `GET /api/gestures` lists symbols, example counts and readiness.
+- `POST /api/gestures/examples` accepts `{ "label": "Water", "frames": [...] }`.
+- `POST /api/gestures/recognize` accepts `{ "frames": [...] }` and returns a feedback ID.
+- `POST /api/gestures/feedback` accepts `{ "predictionId": "...", "correct": true }`,
+  or `correct: false` with an optional existing symbol in `correction`.
+- `DELETE /api/gestures/{label}` removes a symbol.
+- `DELETE /api/gestures?label=...` also supports names containing `/` or other symbols.
+
+Recordings contain 6–60 frames of 132 features. Three examples are required before
+recognition. Feedback IDs expire after ten minutes and can only be used once.
+Templates and negative examples persist in `data/personal-gestures.bin`; configure
+`gestures.path` to choose another file. No camera images are saved.
+
+The default development port in the actual configuration is **8081**; `PORT`
+overrides it. The frontend uses 8081 with a fallback to 8080.
+
 Key configuration options can be configured via `src/main/resources/application.properties` or overridden via environment variables:
 
 | Variable | Description | Default |

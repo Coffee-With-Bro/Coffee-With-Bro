@@ -6,6 +6,7 @@ import { HistoryModal } from "../components/HistoryModal";
 import { DictionaryAutocomplete } from "../components/DictionaryAutocomplete";
 import { Link } from "../components/Link";
 import { trackEvent } from "../lib/analytics";
+import { PersonalGestures } from "../components/PersonalGestures";
 
 const STATUS_COPY: Record<ConnectionStatus, string> = {
   idle: "Camera off",
@@ -41,6 +42,11 @@ export function Home({ onStateChange }: HomeProps = {}) {
     clearTranscript,
     setTranscript,
     commitLetter,
+    mode,
+    setMode,
+    modelReady,
+    trackingStatus,
+    getLandmarkSample,
   } = useSignTranslator();
 
   const [copied, setCopied] = useState(false);
@@ -138,7 +144,7 @@ export function Home({ onStateChange }: HomeProps = {}) {
 
     const durationSeconds = sessionStartRef.current
       ? Math.max(1, Math.round((Date.now() - sessionStartRef.current) / 1000))
-      : 5;
+      : 0;
 
     try {
       const res = await fetch(`${API_URL}/sessions`, {
@@ -146,8 +152,8 @@ export function Home({ onStateChange }: HomeProps = {}) {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           transcript: transcript.trim(),
-          letterCount: transcript.replace(" ", "").length,
-          avgConfidence: liveGuess ? liveGuess.confidence : 0.92,
+          letterCount: transcript.replace(/\s/g, "").length,
+          avgConfidence: liveGuess ? liveGuess.confidence : 0,
           durationSeconds,
         }),
       });
@@ -192,7 +198,7 @@ export function Home({ onStateChange }: HomeProps = {}) {
         </p>
 
         <div className="hero-badges" aria-label="System features">
-          <span className="hero-badge">🔒 100% In-Memory</span>
+          <span className="hero-badge">🔒 Local processing</span>
           <span className="hero-badge">⚡ Low-Latency Local WS</span>
           <span className="hero-badge">🎯 36 Static Signs</span>
           <span className="hero-badge">📚 Dictionary Assist</span>
@@ -202,6 +208,10 @@ export function Home({ onStateChange }: HomeProps = {}) {
 
       
       <section className="viewfinder-wrap" aria-label="Live camera viewfinder">
+        <div className="recognition-mode" role="group" aria-label="Recognition mode">
+          <button className={`btn ${mode === "asl" ? "btn-start" : "btn-ghost"}`} aria-pressed={mode === "asl"} onClick={() => setMode("asl")}>ASL alphabet & digits</button>
+          <button className={`btn ${mode === "personal" ? "btn-start" : "btn-ghost"}`} aria-pressed={mode === "personal"} onClick={() => setMode("personal")}>My symbols & gestures</button>
+        </div>
         <div className={`viewfinder ${cameraOn ? "is-live" : ""}`}>
           <video
             ref={videoRef}
@@ -285,6 +295,8 @@ export function Home({ onStateChange }: HomeProps = {}) {
         </div>
 
         {cameraError && <p className="error" role="alert">{cameraError}</p>}
+        <p className="tracking-status" role="status">{trackingStatus}{cameraOn && mode === "asl" && !modelReady ? " · Trained ASL model unavailable. It loads automatically when training finishes; personal gestures work independently." : ""}</p>
+        {cameraOn && mode === "asl" && <p className="tracking-status">Hold each sign until it is added. Lower your hand briefly to repeat the same letter.</p>}
 
         
         <div className="simulator-bar" aria-label="Sign test simulator bar">
@@ -306,6 +318,8 @@ export function Home({ onStateChange }: HomeProps = {}) {
       </section>
 
       
+      {mode === "personal" && <PersonalGestures cameraOn={cameraOn} getSample={getLandmarkSample} onCommit={text => setTranscript(previous => `${previous}${previous && !previous.endsWith(" ") ? " " : ""}${text} `)} />}
+
       <section className="transcript-wrap" aria-label="Live Recognition Transcript">
         <div className="transcript-header-bar">
           <span className="transcript-label">Live Recognition Transcript</span>

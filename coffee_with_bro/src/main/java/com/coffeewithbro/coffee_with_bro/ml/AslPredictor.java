@@ -11,6 +11,7 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.nio.file.Files;
 import java.util.List;
+import java.util.Properties;
 
 public class AslPredictor {
 
@@ -23,8 +24,19 @@ public class AslPredictor {
     private final DataNormalization scaler;
 
     public AslPredictor(File modelFile, File labelsFile) throws Exception {
+        Properties metadata = new Properties();
+        try (var in = Files.newInputStream(java.nio.file.Path.of(modelFile + ".training.properties"))) {
+            metadata.load(in);
+        }
+        if (!"true".equals(metadata.getProperty("trained")) ||
+                !TrainAslCnn.sha256(modelFile.toPath()).equals(metadata.getProperty("modelSha256"))) {
+            throw new IllegalArgumentException("Model has no matching evaluated training metadata");
+        }
         this.model = ModelSerializer.restoreMultiLayerNetwork(modelFile);
         this.labels = Files.readAllLines(labelsFile.toPath());
+        if (!labels.equals(TrainAslCnn.LABELS)) throw new IllegalArgumentException("Labels must match the training order (0-9, A-Z)");
+        if (model.getOutputLayer().conf().getLayer() instanceof org.deeplearning4j.nn.conf.layers.OutputLayer output
+                && output.getNOut() != labels.size()) throw new IllegalArgumentException("Model output/label count mismatch");
         this.imageLoader = new NativeImageLoader(IMAGE_SIZE, IMAGE_SIZE, CHANNELS);
         this.scaler = new ImagePreProcessingScaler(0, 1);
     }
