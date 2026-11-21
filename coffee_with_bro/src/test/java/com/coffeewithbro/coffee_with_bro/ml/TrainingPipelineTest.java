@@ -46,6 +46,8 @@ class TrainingPipelineTest {
         var result = predictor.predict(ImageIO.read(directory.resolve("test/A/sample.png").toFile()));
         assertTrue(TrainAslCnn.LABELS.contains(result.label()));
         assertTrue(Double.isFinite(result.confidence()) && result.confidence() >= 0 && result.confidence() <= 1);
+        predictor.close();
+        assertThrows(IllegalStateException.class, () -> predictor.predict(new BufferedImage(32, 32, BufferedImage.TYPE_INT_RGB)));
         Files.delete(Path.of(model + ".training.properties"));
         assertThrows(Exception.class, () -> new AslPredictor(model.toFile(), run.resolve("labels.txt").toFile()));
     }

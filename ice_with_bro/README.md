@@ -1,5 +1,9 @@
 # ice_with_bro — ASL model training
 
+For the **Java-only CUDA candidate workflow** and its memory-policy gate, see
+[JAVA_GPU.md](JAVA_GPU.md). Python is confined to preprocessing in that workflow.
+The commands below describe the existing legacy CPU workflow.
+
 The production classifier is trained directly in Java/DeepLearning4j and loaded by
 `coffee_with_bro`. Python orchestrates dataset selection, training and installation;
 it needs only the Python standard library. PyTorch weights are not used by the Java app.
@@ -108,8 +112,11 @@ python ice_with_bro/train_model.py --deploy-only ice_with_bro/runs/asl-350-50-10
 ```
 
 Start the app with `npm.cmd start` from the repository root. Open the local
-frontend, select **ASL alphabet & digits**, and turn on the camera. Keep one hand
-large and centered against a simple background, in good light. Hold a sign until
+frontend, select **ASL alphabet & digits**, and turn on the camera. Frame the
+signing hand or hands large and centered against a simple background, in good light. The dataset uses
+a two-hand zero to distinguish `0` from the one-hand letter `O`; follow that
+dataset convention when using these classes. [Dataset paper](https://pubmed.ncbi.nlm.nih.gov/41657401/).
+Hold a sign until
 it is stable; low-confidence predictions are not added to the transcript.
 
 Image preprocessing is shared between training and Java inference: resize to

@@ -16,7 +16,7 @@
     "prerender": "node scripts/prerender.js",
     "serve:ssr": "npm --prefix milk_with_bro run serve:ssr",
     "dev:frontend": "npm --prefix milk_with_bro run dev",
-    "dev:server": "cd coffee_with_bro && .\\mvnw.cmd spring-boot:run",
+    "dev:server": "cd coffee_with_bro && .\\mvnw.cmd -Pcuda spring-boot:run",
     "dev:all": "node scripts/start-both.js",
     "start": "node scripts/start-both.js"
   },

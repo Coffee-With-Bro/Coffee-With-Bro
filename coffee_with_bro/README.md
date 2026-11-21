@@ -64,8 +64,9 @@ coffee_with_bro/
 ## Configuration & Environment Variables
 
 The model needs a matching `asl_cnn_model.zip.training.properties` sidecar.
-Train, evaluate and install it with `python ice_with_bro/train_model.py 350 50 100 12`
-from the repository root. The backend checks every 10 seconds for a newly installed
+The Java CUDA training workflow and its native-allocation gate are documented in
+[JAVA_GPU.md](../ice_with_bro/JAVA_GPU.md). Python is used only for preprocessing
+in that workflow. The backend checks every 10 seconds for a newly installed
 verified model. `ExportAslModel` produces explicitly untrained diagnostic weights,
 which the webcam predictor refuses.
 

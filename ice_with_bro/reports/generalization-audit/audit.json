@@ -1,0 +1,461 @@
+{
+  "audit_date": "2026-11-17",
+  "run": "ice_with_bro\\runs\\asl-350-50-100-14",
+  "splits": {
+    "train": {
+      "images": 12600,
+      "subjects": {
+        "P1": 1254,
+        "P10": 1267,
+        "P2": 1237,
+        "P3": 1300,
+        "P4": 1245,
+        "P5": 1251,
+        "P6": 1256,
+        "P7": 1246,
+        "P8": 1280,
+        "P9": 1264
+      },
+      "subject_class_groups": 360
+    },
+    "fine-tune": {
+      "images": 1800,
+      "subjects": {
+        "P1": 194,
+        "P10": 200,
+        "P2": 153,
+        "P3": 193,
+        "P4": 211,
+        "P5": 159,
+        "P6": 167,
+        "P7": 172,
+        "P8": 168,
+        "P9": 183
+      },
+      "subject_class_groups": 353
+    },
+    "validation": {
+      "images": 2841,
+      "subjects": {
+        "P1": 273,
+        "P10": 286,
+        "P2": 276,
+        "P3": 293,
+        "P4": 286,
+        "P5": 307,
+        "P6": 292,
+        "P7": 273,
+        "P8": 277,
+        "P9": 278
+      },
+      "subject_class_groups": 360
+    },
+    "test": {
+      "images": 3600,
+      "subjects": {
+        "P1": 347,
+        "P10": 334,
+        "P2": 371,
+        "P3": 360,
+        "P4": 374,
+        "P5": 350,
+        "P6": 336,
+        "P7": 380,
+        "P8": 372,
+        "P9": 376
+      },
+      "subject_class_groups": 358
+    }
+  },
+  "exact_content_overlap": {
+    "train / fine-tune": 0,
+    "train / validation": 0,
+    "train / test": 0,
+    "fine-tune / validation": 0,
+    "fine-tune / test": 0,
+    "validation / test": 0
+  },
+  "test_subjects_seen_in_training": 3600,
+  "test_subject_class_groups_seen_in_training": 3600,
+  "index_adjacency": {
+    "median_gap": 1.0,
+    "maximum_gap": 18,
+    "counts_within_gap": {
+      "1": 2099,
+      "2": 2952,
+      "3": 3295,
+      "5": 3523,
+      "10": 3592
+    }
+  },
+  "perceptual_audit": {
+    "method": "64-bit horizontal dHash and 9x8 grayscale MAE; nearest same-class same-prefix training candidate",
+    "threshold_hamming": 2,
+    "threshold_gray_mae": 0.02,
+    "candidate_test_images": 965,
+    "examples": [
+      {
+        "test": "C:/Users/abhis/OneDrive/Desktop/ENGINEERING/5th sem/java/prozect/ice_with_bro/data/test/5/P7_5_700.jpg",
+        "train": "C:/Users/abhis/OneDrive/Desktop/ENGINEERING/5th sem/java/prozect/ice_with_bro/data/train/5/P7_5_699.jpg",
+        "label": "5",
+        "subject": "P7",
+        "hamming": 1,
+        "gray_mae": 0.003867102396514161,
+        "index_gap": 1
+      },
+      {
+        "test": "C:/Users/abhis/OneDrive/Desktop/ENGINEERING/5th sem/java/prozect/ice_with_bro/data/test/8/P6_8_539.jpg",
+        "train": "C:/Users/abhis/OneDrive/Desktop/ENGINEERING/5th sem/java/prozect/ice_with_bro/data/train/8/P6_8_540.jpg",
+        "label": "8",
+        "subject": "P6",
+        "hamming": 1,
+        "gray_mae": 0.004084967320261438,
+        "index_gap": 1
+      },
+      {
+        "test": "C:/Users/abhis/OneDrive/Desktop/ENGINEERING/5th sem/java/prozect/ice_with_bro/data/test/L/P2_L_185.jpg",
+        "train": "C:/Users/abhis/OneDrive/Desktop/ENGINEERING/5th sem/java/prozect/ice_with_bro/data/train/L/P2_L_184.jpg",
+        "label": "L",
+        "subject": "P2",
+        "hamming": 1,
+        "gray_mae": 0.004139433551198257,
+        "index_gap": 1
+      },
+      {
+        "test": "C:/Users/abhis/OneDrive/Desktop/ENGINEERING/5th sem/java/prozect/ice_with_bro/data/test/4/P7_4_688.jpg",
+        "train": "C:/Users/abhis/OneDrive/Desktop/ENGINEERING/5th sem/java/prozect/ice_with_bro/data/train/4/P7_4_689.jpg",
+        "label": "4",
+        "subject": "P7",
+        "hamming": 2,
+        "gray_mae": 0.004357298474945534,
+        "index_gap": 1
+      },
+      {
+        "test": "C:/Users/abhis/OneDrive/Desktop/ENGINEERING/5th sem/java/prozect/ice_with_bro/data/test/N/P4_N_359.jpg",
+        "train": "C:/Users/abhis/OneDrive/Desktop/ENGINEERING/5th sem/java/prozect/ice_with_bro/data/train/N/P4_N_360.jpg",
+        "label": "N",
+        "subject": "P4",
+        "hamming": 2,
+        "gray_mae": 0.004411764705882353,
+        "index_gap": 1
+      },
+      {
+        "test": "C:/Users/abhis/OneDrive/Desktop/ENGINEERING/5th sem/java/prozect/ice_with_bro/data/test/H/P2_H_154.jpg",
+        "train": "C:/Users/abhis/OneDrive/Desktop/ENGINEERING/5th sem/java/prozect/ice_with_bro/data/train/H/P2_H_155.jpg",
+        "label": "H",
+        "subject": "P2",
+        "hamming": 1,
+        "gray_mae": 0.004466230936819172,
+        "index_gap": 1
+      }
+    ],
+    "caution": "Candidates are not proven duplicate photographs. Filename indexes are not verified timestamps."
+  },
+  "architecture": {
+    "layers": [
+      {
+        "index": 0,
+        "kind": "ConvolutionLayer",
+        "n_in": 3,
+        "n_out": 32,
+        "parameter_slots": 896,
+        "macs": 14155776,
+        "activation": "ActivationSigmoid",
+        "dropout": null,
+        "regularization": []
+      },
+      {
+        "index": 1,
+        "kind": "BatchNormalization",
+        "n_in": 32,
+        "n_out": 32,
+        "parameter_slots": 128,
+        "macs": 0,
+        "activation": "ActivationSigmoid",
+        "dropout": null,
+        "regularization": []
+      },
+      {
+        "index": 2,
+        "kind": "ActivationLayer",
+        "n_in": null,
+        "n_out": null,
+        "parameter_slots": 0,
+        "macs": 0,
+        "activation": "ActivationReLU",
+        "dropout": null,
+        "regularization": null
+      },
+      {
+        "index": 3,
+        "kind": "SubsamplingLayer",
+        "n_in": null,
+        "n_out": null,
+        "parameter_slots": 0,
+        "macs": 0,
+        "activation": "",
+        "dropout": null,
+        "regularization": null
+      },
+      {
+        "index": 4,
+        "kind": "ConvolutionLayer",
+        "n_in": 32,
+        "n_out": 64,
+        "parameter_slots": 18496,
+        "macs": 75497472,
+        "activation": "ActivationSigmoid",
+        "dropout": null,
+        "regularization": []
+      },
+      {
+        "index": 5,
+        "kind": "BatchNormalization",
+        "n_in": 64,
+        "n_out": 64,
+        "parameter_slots": 256,
+        "macs": 0,
+        "activation": "ActivationSigmoid",
+        "dropout": null,
+        "regularization": []
+      },
+      {
+        "index": 6,
+        "kind": "ActivationLayer",
+        "n_in": null,
+        "n_out": null,
+        "parameter_slots": 0,
+        "macs": 0,
+        "activation": "ActivationReLU",
+        "dropout": null,
+        "regularization": null
+      },
+      {
+        "index": 7,
+        "kind": "SubsamplingLayer",
+        "n_in": null,
+        "n_out": null,
+        "parameter_slots": 0,
+        "macs": 0,
+        "activation": "",
+        "dropout": null,
+        "regularization": null
+      },
+      {
+        "index": 8,
+        "kind": "ConvolutionLayer",
+        "n_in": 64,
+        "n_out": 128,
+        "parameter_slots": 73856,
+        "macs": 75497472,
+        "activation": "ActivationSigmoid",
+        "dropout": null,
+        "regularization": []
+      },
+      {
+        "index": 9,
+        "kind": "BatchNormalization",
+        "n_in": 128,
+        "n_out": 128,
+        "parameter_slots": 512,
+        "macs": 0,
+        "activation": "ActivationSigmoid",
+        "dropout": null,
+        "regularization": []
+      },
+      {
+        "index": 10,
+        "kind": "ActivationLayer",
+        "n_in": null,
+        "n_out": null,
+        "parameter_slots": 0,
+        "macs": 0,
+        "activation": "ActivationReLU",
+        "dropout": null,
+        "regularization": null
+      },
+      {
+        "index": 11,
+        "kind": "SubsamplingLayer",
+        "n_in": null,
+        "n_out": null,
+        "parameter_slots": 0,
+        "macs": 0,
+        "activation": "",
+        "dropout": null,
+        "regularization": null
+      },
+      {
+        "index": 12,
+        "kind": "DenseLayer",
+        "n_in": 32768,
+        "n_out": 256,
+        "parameter_slots": 8388864,
+        "macs": 8388608,
+        "activation": "ActivationReLU",
+        "dropout": {
+          "@class": "org.deeplearning4j.nn.conf.dropout.Dropout",
+          "p": 0.6,
+          "helperAllowFallback": true,
+          "pschedule": null
+        },
+        "regularization": []
+      },
+      {
+        "index": 13,
+        "kind": "OutputLayer",
+        "n_in": 256,
+        "n_out": 36,
+        "parameter_slots": 9252,
+        "macs": 9216,
+        "activation": "ActivationSoftmax",
+        "dropout": null,
+        "regularization": []
+      }
+    ],
+    "parameter_slots_including_bn_stats": 8492260,
+    "dense_parameters": 8388864,
+    "dense_fraction": 0.9878246780009091,
+    "estimated_forward_macs": 173548544,
+    "convolution_macs": 165150720,
+    "convolution_mac_fraction": 0.9516110950490025,
+    "gap_128_to_64_candidate_parameter_slots": 104740,
+    "caution": "Parameter/MAC counts derived from serialized dimensions. MACs omit normalization, activations and pooling; not wall-clock latency.",
+    "checkpoint_bytes": 90975760
+  },
+  "history": [
+    {
+      "epoch": 1,
+      "phase": "train",
+      "seconds": 1174.416,
+      "train_loss": 1.970388,
+      "validation_accuracy": 0.997888
+    },
+    {
+      "epoch": 2,
+      "phase": "train",
+      "seconds": 1202.452,
+      "train_loss": 0.02189,
+      "validation_accuracy": 1.0
+    },
+    {
+      "epoch": 3,
+      "phase": "train",
+      "seconds": 1224.897,
+      "train_loss": 0.003579,
+      "validation_accuracy": 1.0
+    },
+    {
+      "epoch": 4,
+      "phase": "train",
+      "seconds": 1243.944,
+      "train_loss": 0.013843,
+      "validation_accuracy": 1.0
+    },
+    {
+      "epoch": 5,
+      "phase": "train",
+      "seconds": 1221.892,
+      "train_loss": 0.000503,
+      "validation_accuracy": 1.0
+    },
+    {
+      "epoch": 6,
+      "phase": "train",
+      "seconds": 1229.606,
+      "train_loss": 0.000251,
+      "validation_accuracy": 1.0
+    },
+    {
+      "epoch": 7,
+      "phase": "train",
+      "seconds": 1221.421,
+      "train_loss": 0.000168,
+      "validation_accuracy": 1.0
+    },
+    {
+      "epoch": 8,
+      "phase": "train",
+      "seconds": 1228.478,
+      "train_loss": 0.000116,
+      "validation_accuracy": 1.0
+    },
+    {
+      "epoch": 9,
+      "phase": "train",
+      "seconds": 1224.159,
+      "train_loss": 8.5e-05,
+      "validation_accuracy": 1.0
+    },
+    {
+      "epoch": 10,
+      "phase": "train",
+      "seconds": 1525.845,
+      "train_loss": 7.2e-05,
+      "validation_accuracy": 1.0
+    },
+    {
+      "epoch": 11,
+      "phase": "train",
+      "seconds": 1750.053,
+      "train_loss": 0.193576,
+      "validation_accuracy": 0.935938
+    },
+    {
+      "epoch": 12,
+      "phase": "train",
+      "seconds": 1685.792,
+      "train_loss": 0.03374,
+      "validation_accuracy": 1.0
+    },
+    {
+      "epoch": 13,
+      "phase": "train",
+      "seconds": 1718.01,
+      "train_loss": 0.00422,
+      "validation_accuracy": 1.0
+    },
+    {
+      "epoch": 14,
+      "phase": "train",
+      "seconds": 1589.288,
+      "train_loss": 0.000775,
+      "validation_accuracy": 1.0
+    },
+    {
+      "epoch": 15,
+      "phase": "fine-tune",
+      "seconds": 452.744,
+      "train_loss": 0.007589,
+      "validation_accuracy": 1.0
+    },
+    {
+      "epoch": 16,
+      "phase": "fine-tune",
+      "seconds": 325.11,
+      "train_loss": 0.005752,
+      "validation_accuracy": 1.0
+    }
+  ],
+  "main_phase_seconds": 19240.253,
+  "post_epoch2_main_seconds": 16863.385000000002,
+  "fine_tune_seconds": 777.854,
+  "test_errors": [
+    {
+      "actual": "I",
+      "predicted": "E",
+      "count": "1"
+    }
+  ],
+  "camera_fixture": {
+    "filename": "P10_0_1000.jpg",
+    "selected_split_membership": []
+  },
+  "provenance": {
+    "history.csv": "ca05e085acadedce450e15797a4c008767ea259506a901cb7a4eadf64768c1c5",
+    "config.json": "618f6a9a0b688453465398e1f80ad71b6b6168c887c48f642cb4d7e89720a5cb",
+    "confusion.csv": "8c4f92567a3510ff84e7a9ac6bddb49f0f2c043d5c1477ae1816bca8aa71e39a",
+    "asl_cnn_model.zip.training.properties": "21fb076866a1f336f37a5be5b8ccd6dde7dd3b9b7d2c086e5c55c1838016676f",
+    "model_sha256": "c3486e06c1e330c6d457c7b9977897d470de48bbf04222d1936d91b0edfaf2ba"
+  }
+}

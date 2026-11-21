@@ -105,20 +105,25 @@ A dedicated diagnostic center accessible via the top navigation bar or directly 
 
 ### Train ASL and add personal symbols
 
-The production training command uses the existing ASL-HG splits and accepts four
+The Java CUDA candidate workflow uses acquisition-group-disjoint splits and accepts four
 values: training images per class, fine-tuning images per class, test images per
 class, and main epochs.
 
 ```powershell
-python ice_with_bro/train_model.py 350 50 100 12
+powershell -NoProfile -ExecutionPolicy Bypass -File ice_with_bro/train_java_gpu.ps1 350 50 100 12 -AllowNativeAllocations -VerifyAndInstall
 ```
 
-This runs 12 main epochs and 2 additional fine-tuning epochs at `0.0001`, with a
-separate validation set. Exact duplicates are excluded through generated
-manifests; source images remain unchanged. CPU training is projected to take
-approximately four hours. It saves resumable checkpoints and measured test
-results, then installs the best evaluated model automatically. The backend
-detects installation without restarting and refuses untrained diagnostic weights.
+Use that acceptance flag only after explicitly accepting native CUDA/cuDNN
+allocations outside fixed ND4J workspaces; the stricter global fixed-pool
+requirement is not verified. The user accepted native allocations and authorized
+the prepared Java CUDA retraining run; its configuration records that policy.
+See [the Java GPU guide](./ice_with_bro/JAVA_GPU.md) for proof and limitations.
+The prepared schedule is 12 main epochs plus 2 fine-tuning epochs at `0.0001`,
+with separate validation and fresh initial weights. Python performs preprocessing
+only. Source images remain unchanged. New candidates are evaluated before any
+production model replacement. `-VerifyAndInstall` installs only after CUDA tests,
+predictor parity and camera-fixture checks pass, keeping backups. The verified
+spatial CUDA model is now installed; see the report for measured accuracy and coverage.
 
 In the webcam app, **My symbols & gestures** records 3–5 examples of personal
 static or dynamic symbols. Local hand landmarks and DTW provide recognition;

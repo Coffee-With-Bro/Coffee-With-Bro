@@ -42,7 +42,7 @@ console.log(`  ➜  Network Device URL:  \x1b[32m${networkUrl}\x1b[0m`);
 console.log(`  ➜  Spring Boot Server:  \x1b[33mhttp://localhost:8081/\x1b[0m`);
 console.log(`  ➜  WebSocket Endpoint:  \x1b[35m${backendWsUrl}\x1b[0m`);
 console.log("===============================================================");
-console.log("  Starting backend and frontend services...\n");
+console.log("  Starting Java CUDA backend and frontend services...\n");
 
 const frontend = spawn(npmCmd, ["run", "dev", "--", "--host"], {
   cwd: frontendDir,
@@ -50,7 +50,7 @@ const frontend = spawn(npmCmd, ["run", "dev", "--", "--host"], {
   stdio: "inherit",
 });
 
-const server = spawn(mavenCmd, ["spring-boot:run"], {
+const server = spawn(mavenCmd, ["-Pcuda", "spring-boot:run"], {
   cwd: backendDir,
   shell: isWindows,
   stdio: "inherit",

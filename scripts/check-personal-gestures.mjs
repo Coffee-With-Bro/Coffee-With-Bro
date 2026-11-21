@@ -28,10 +28,12 @@ async function waitFor(address) {
 }
 
 try {
-  const cp = path.join(root, "coffee_with_bro/target/classes") + path.delimiter + fs.readFileSync(path.join(root, "coffee_with_bro/target/training-classpath.txt"), "utf8").trim();
+  const cuda = process.argv.includes("--cuda");
+  const cp = path.join(root, "coffee_with_bro/target/classes") + path.delimiter + fs.readFileSync(path.join(root, cuda ? "coffee_with_bro/target/cuda-classpath.txt" : "coffee_with_bro/target/training-classpath.txt"), "utf8").trim();
   const javaArgs = ["--enable-native-access=ALL-UNNAMED", "-Xmx1g", "-cp", cp,
     "com.coffeewithbro.coffee_with_bro.CoffeeWithBroApplication", "--server.address=127.0.0.1", "--server.port=8185",
     "--gestures.path=" + path.join(run, "test-library.bin")];
+  if (cuda) javaArgs.splice(1, 0, "-Dasl.cuda.required=true");
   const argfile = path.join(run, "server-args.txt");
   fs.writeFileSync(argfile, javaArgs.map(a => '"' + a.replaceAll("\\", "/") + '"').join("\n"));
   start("java", ["@" + argfile], { cwd: path.join(root, "coffee_with_bro"), env: { ...process.env, OMP_NUM_THREADS: "2", OPENBLAS_NUM_THREADS: "2" } }, "backend.log");

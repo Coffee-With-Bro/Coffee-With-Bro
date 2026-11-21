@@ -48,9 +48,11 @@ public class AslWebSocketHandler extends TextWebSocketHandler {
                 || metadata.lastModified() == loadedMetadataTimestamp) return;
         try {
             AslPredictor loaded = new AslPredictor(modelFile, labelsFile);
+            AslPredictor previous = predictor;
             predictor = loaded;
             loadedMetadataTimestamp = metadata.lastModified();
-            logger.info("Loaded verified trained ASL model: {}", modelFile.getAbsolutePath());
+            logger.info("Loaded verified trained ASL model on {}: {}", loaded.backendName(), modelFile.getAbsolutePath());
+            if (previous != null) previous.close();
         } catch (Exception e) {
             logger.warn("Trained model could not be loaded: {}", e.getMessage());
         }

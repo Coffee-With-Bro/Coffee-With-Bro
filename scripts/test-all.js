@@ -42,7 +42,7 @@ async function main() {
     await runCommand(npmCmd, ["run", "build"], frontendDir);
     console.log("✓ Frontend TypeScript build passed successfully!");
 
-    await runCommand(mavenCmd, ["test"], backendDir);
+    await runCommand(mavenCmd, ["-Pcuda", "-Dasl.gpu.tests=true", "test"], backendDir);
     console.log("✓ Backend Spring Boot tests passed successfully!");
 
     console.log("\n==================================================");
